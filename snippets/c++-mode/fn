@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Function definition
+# key: fn
+# --
+${1:type} ${2:Name}(${3:args})
+{
+    $0
+}

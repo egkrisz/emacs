@@ -1,0 +1,1082 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Krisztián Egervári
+#+EMAIL: egkrisz@gmail.com
+
+* Dependencies
+  This config is mostly portable thanks to the =straight.el= package manager, but there are some requirements to bootstrap things. 
+  These packages should be installed from CLI before starting Emacs:
+** For =straight.el=
+   - =git=
+** For =vterm=
+  - =cmake=
+  - =libtool=
+  - =libvterm=
+** For =flyspell=
+   - aspell
+   - aspell-ru
+   - aspell-en
+   - aspell-hu
+   - aspell-de
+** CLI Commands for bootstrapping
+  All commands are for =Arch Linux= with =zsh=.
+#+BEGIN_SRC bash
+sudo pacman -Syu git cmake libtool libvterm aspell aspell-ru aspell-en aspell-hu aspell-de
+#+END_SRC
+*** Copy this function to .zshrc
+#+BEGIN_SRC bash
+    function vterm_printf(){
+    if [ -n "$TMUX" ]; then
+        # Tell tmux to pass the escape sequences through
+        # (Source: http://permalink.gmane.org/gmane.comp.terminal-emulators.tmux.user/1324)
+        printf "\ePtmux;\e\e]%s\007\e\\" "$1"
+    elif [ "${TERM%%-*}" = "screen" ]; then
+        # GNU screen (screen, screen-256color, screen-256color-bce)
+        printf "\eP\e]%s\007\e\\" "$1"
+    else
+        printf "\e]%s\e\\" "$1"
+    fi
+}
+#+END_SRC
+* Package Management
+  Package management is handled by =straight.el= and =use-package=. =package.el= is disabled.
+  =use-package= is set to always ensure package download.
+  To use =use-package= as a config wrapper without downloading anything, add parameter =:straight nil= to =use-package= template.
+  Also adding lisp directory for custom packages!
+#+BEGIN_SRC emacs-lisp
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+(add-to-list 'load-path "~/.emacs.d/lisp")
+#+END_SRC
+* Basic settings
+  These should work out of the box, whitout downloading anything.
+** More sane defaults
+   + Ignore bell notifications;
+   + Follow syslinks without asking;
+   + Quicker feedback after keychords;
+   + Disable auto-save and backups.
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :straight nil
+  :custom
+  (ring-bell-function 'ignore)
+  (vc-follow-symlinks t)
+  (echo-keystrokes 0.25)
+  ;; (default-input-method "russian")
+  (make-backup-files nil)
+  (auto-save-default nil)
+  (find-file-visit-truename t)
+  :config
+  (prefer-coding-system 'utf-8)
+  (defalias 'yes-or-no-p 'y-or-n-p))
+#+END_SRC
+** Startup settings
+   + Disable default splash screen and startup message, show buffer in title;
+   + Start maximalized;
+   + Disable menu-bar, scroll-bar and tool-bar.
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :straight nil
+  :custom
+  (inhibit-startup-message t)
+  (inhibit-splash-screen t)
+  (frame-title-format '("%b %& Emacs"))
+  :config
+  (custom-set-variables
+    '(initial-frame-alist (quote ((fullscreen . maximized)))))
+  (scroll-bar-mode -1)
+  (menu-bar-mode -1)
+  (tool-bar-mode -1))
+#+END_SRC
+** Font
+   Using Source Code Pro font.
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :straight nil
+  :config
+  (set-face-attribute 'default nil :family "Source Code Pro" :height 140))
+#+END_SRC
+** Editor settings
+   + Disable tabs;
+   + Use tab as 4 spaces;
+   + Toggle line numbering in prog-mode;
+   + Wrap text at 80th line;
+   + A point ends a sentence (not a double space);
+   + Preserve system clipboard content;
+   + Toggle paranthesis matching.
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :straight nil
+  :init 
+  (setq-default tab-always-indent 'complete)
+  (setq-default tab-width 4)
+  (setq-default indent-tabs-mode nil)
+  :custom
+  (default-fill-column 80)
+  (sentence-end-double-space nil)
+  (save-interprogram-paste-before-kill t)
+  :config
+  (global-visual-line-mode t)
+  (show-paren-mode 1)
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode))
+#+END_SRC
+** Scrolling
+   + Scroll without emacs-like recentering;
+   + Toggle column and line number modes.
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :straight nil
+  :custom
+  (scroll-step 1)
+  (scroll-conservatively 10000)
+  (scroll-preserve-screen-position t)
+  :config
+  (line-number-mode t)
+  (column-number-mode t))
+#+END_SRC
+** Mouse
+   + Hide pointer while typing.
+   + Enable mouse scroll.
+#+BEGIN_SRC emacs-lisp
+(use-package mouse
+  :straight nil
+  :init
+  (setq mouse-drag-copy-region t)
+  (setq make-pointer-invisible t)
+  (setq mouse-wheel-progressive-speed nil)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+  :config
+  (mouse-wheel-mode 1))
+#+END_SRC
+** Performance boost
+   Some performance tweaks. This makes language servers run more smoothly:
+   + Modify garbage collection threshold;
+   + Read process output max: 1mb.
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :straight nil
+  :custom
+  (gc-cons-threshold 100000000)
+  (read-process-output-max (* 1024 1024)))
+#+END_SRC
+** Path
+
+Uses terminal path.
+#+BEGIN_SRC emacs-lisp
+(use-package exec-path-from-shell
+  :init
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+#+END_SRC
+* Custom functions
+  Some custom functions that build on basic emacs functionality.
+** Config file actions
+   + Reload config file;
+   + Go to config file.
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :straight nil
+  :config
+  (defun apex/config-reload ()
+	"Reloads ~/.emacs.d/config.org at runtime"
+	(interactive)
+	(org-babel-load-file (expand-file-name "~/.emacs.d/config.org")))
+    
+  (defun apex/config-visit ()
+    (interactive)
+    (find-file "~/.emacs.d/config.org")))
+#+END_SRC
+** Toggle text editor functionality
+   + Toggle line numbering;
+   + Toggle whitespace finder.
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :straight nil
+  :config
+  (defun apex/toggle-line-numbers ()
+    (interactive)
+    (if (bound-and-true-p display-line-numbers-mode)
+         (global-display-line-numbers-mode -1)
+       (global-display-line-numbers-mode)))
+        
+  (defun apex/toggle-whitespace ()
+    (interactive)
+    (if (bound-and-true-p whitespace-mode)
+         (whitespace-mode -1)
+       (whitespace-mode))))
+#+END_SRC
+** Manupulate font size
+   + Increase and decrease defaut font size with functions.
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :straight nil
+  :config
+  (defun apex/font-name-replace-size (font-name new-size)
+     (let ((parts (split-string font-name "-")))
+      (setcar (nthcdr 7 parts) (format "%d" new-size))
+      (mapconcat 'identity parts "-")))
+  
+  (defun apex/increment-default-font-height (delta)
+    "Adjust the default font height by DELTA on every frame.
+    The pixel size of the frame is kept (approximately) the same.
+    DELTA should be a multiple of 10, in the units used by the
+    :height face attribute."
+    (let* ((new-height (+ (face-attribute 'default :height) delta))
+           (new-point-height (/ new-height 10)))
+      (dolist (f (frame-list))
+        (with-selected-frame f
+          ;; Latest 'set-frame-font supports a "frames" arg, but
+          ;; we cater to Emacs 23 by looping instead.
+          (set-frame-font (apex/font-name-replace-size (face-font 'default)
+                                                  new-point-height)
+                          t)))
+      (set-face-attribute 'default nil :height new-height)
+      (message "default font size is now %d" new-point-height)))
+  
+  (defun apex/increase-default-font-height ()
+    (interactive)
+    (apex/increment-default-font-height 10))
+  
+  (defun apex/decrease-default-font-height ()
+    (interactive)
+    (apex/increment-default-font-height -10)))
+#+END_SRC
+* Appearance
+  Some solely aesthetic modifications.
+  No keybindings involved.
+** Org-bullets
+#+BEGIN_SRC emacs-lisp
+(use-package org-bullets
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
+#+END_SRC
+** Pretty icons
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons
+  :config
+  (use-package all-the-icons-ivy
+    :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
+    (setq all-the-icons-ivy-file-commands
+      '(counsel-find-file counsel-file-jump counsel-recentf counsel-projectile-find-file counsel-projectile-find-dir)))
+  (use-package all-the-icons-dired
+    :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)))
+#+END_SRC
+** Beacon
+   Highlight cursor when switching buffers
+#+BEGIN_SRC emacs-lisp
+(use-package beacon
+  :init
+  (beacon-mode 1))
+#+END_SRC
+** Theme
+#+BEGIN_SRC emacs-lisp
+(use-package doom-themes
+  :init
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-one t)
+  :config
+  (doom-themes-org-config))
+#+END_SRC
+** Modeline
+   Using doom modeline and enabling battery and time modes.
+#+BEGIN_SRC emacs-lisp
+(use-package doom-modeline
+  :init 
+  (doom-modeline-mode 1)
+  
+  :config
+  (setq doom-modeline-minor-modes nil)
+  (setq doom-modeline-buffer-encoding t)
+  (setq doom-modeline-lsp t)
+  (setq doom-modeline-modal-icon t)
+  
+  ;; HEIGHT is defined by icon hight, so to change height, change font height!
+  (setq doom-modeline-height 35)
+  (set-face-attribute 'mode-line nil :family "Source Code Pro" :height 130)
+  (set-face-attribute 'mode-line-inactive nil :family "Source Code Pro" :height 130))
+  
+(use-package time
+  :straight nil
+  :config
+  (setq display-time-24hr-format t)
+  ;; (setq display-time-day-and-date t)
+  (setq display-time-interval 60)
+  (setq display-time-mail-directory nil)
+  (setq display-time-default-load-average nil)
+  (display-time-mode 1))
+  
+(use-package battery
+  :straight nil
+  :config
+  (setq battery-mode-line-format " [%b%p%%]")
+  (setq battery-mode-line-limit 100)
+  (setq battery-update-interval 60)
+  (setq battery-load-low 20)
+  (setq battery-load-critical 10)
+  (display-battery-mode 1))
+#+END_SRC
+** Dashboard
+   New fancy welcome screen!
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard
+    :config
+      (dashboard-setup-startup-hook)
+      (setq dashboard-startup-banner "~/.emacs.d/img/dashLogo.png")
+      (setq dashboard-items '((recents  . 5)
+                              (projects . 5)))
+      (setq dashboard-banner-logo-title ""))
+#+END_SRC
+** Page-break-lines
+#+BEGIN_SRC emacs-lisp
+(use-package page-break-lines
+  :init (turn-on-page-break-lines-mode))
+#+END_SRC
+* Navigation
+  Tools enhancing basic movement and custom keybindings.
+** General
+ A wrapper to handle keybindings.
+ #+BEGIN_SRC emacs-lisp
+(use-package general
+    :config
+    (general-override-mode 1)
+    (general-auto-unbind-keys)
+    (general-create-definer override-def
+        :states '(normal visual emacs)
+        :keymaps 'override)
+    (general-create-definer myspace-def
+        :states '(normal visual emacs)
+        :keymaps 'override
+        :prefix "SPC"
+        :non-normal-prefix "C-SPC")
+    (general-create-definer progtools-def
+        :states '(normal visual emacs)
+        :prefix "í"
+        :non-normal-prefix "C-í"))
+ #+END_SRC
+** Evil
+   =Evil= provides vim-like keybindings and states globally.
+   Added additional packages to tweak basic evil behaviour to be more "vim-like".
+   =Evil= now can be used with Russian keyboard layout.
+ #+BEGIN_SRC emacs-lisp
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (add-hook 'evil-mode-hook
+                      (lambda ()
+                      (require 'evil-for-russian)
+                      (evil-for-russian)))
+  :config
+  (evil-set-initial-state 'dired-mode 'emacs)
+  (evil-set-initial-state 'magit 'emacs)
+  (evil-mode 1)
+  
+  (use-package evil-collection
+    :after evil
+    :custom
+    (evil-collection-company-use-tng t)
+    :config
+    (evil-collection-init))
+    
+  (use-package evil-org
+    :after org
+    :config
+    (add-hook 'org-mode-hook 'evil-org-mode)
+    (add-hook 'evil-org-mode-hook
+                      (lambda ()
+    (evil-org-set-key-theme)))))
+ #+END_SRC
+** Which key
+   To give visual hints on keybindings.
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :init
+  (setq which-key-idle-delay 0.2)
+  (setq which-key-popup-type 'side-window)
+  (setq which-key-side-window-location 'bottom)
+  (setq which-key-side-window-max-height 0.25)
+  (setq which-key-add-column-padding 1)
+  :config
+  (which-key-mode))
+#+END_SRC
+** Hydra
+#+BEGIN_SRC emacs-lisp
+(use-package hydra)
+#+END_SRC
+** Window management
+#+BEGIN_SRC emacs-lisp
+(use-package window
+  :straight nil
+  :init
+  (setq window-combination-resize t)
+  (setq fit-window-to-buffer-horizontally t)
+  (setq even-window-sizes 'height-only)
+  (setq window-sides-vertical nil)
+  (setq display-buffer-alist
+        '(;; bottom side-windows
+          ("^\\(\\*compilation\\*\\|\\*Racket REPL\\|\\/bin\\/zsh.*\\|VTerm\\|\\*Python\\*\\).*"
+           (display-buffer-in-side-window)
+           (window-height . 0.25)
+           (side . bottom)
+           (slot . 0))
+           
+          ;; left side window
+          ("\\*Help.*"
+           (display-buffer-in-side-window)
+           (window-width . 0.35)
+           (side . left)
+           (slot . 0))))
+           
+  (add-hook 'help-mode-hook #'(lambda () (setq mode-line-format nil)))
+  (add-hook 'inferior-python-mode-hook #'(lambda () (setq mode-line-format nil)))
+  :general
+  (override-def
+    :states '(normal visual insert motion emacs)
+    :keymaps 'override
+    "s-o" 'split-window-vertically
+    "s-i" 'split-window-horizontally
+    "s-w" 'delete-window
+    "s-W" 'delete-other-windows
+    "s-Q" 'delete-frame
+    "<f1>" 'window-toggle-side-windows
+  
+    ;; Movement
+    "s-k" 'evil-window-up
+    "s-j" 'evil-window-down
+    "s-h" 'evil-window-left
+    "s-l" 'evil-window-right
+  
+    ;; Buffers
+    "s-n" 'next-buffer
+    "s-p" 'previous-buffer
+    
+    ;; Coding
+    "s-x" 'comment-or-uncomment-region))
+    
+;; Centered window mode
+(use-package centered-window)
+  
+#+END_SRC
+** Space-menu keybindings
+   Press =SPC= or =C SPC= to access the menu.
+*** Buffers
+#+BEGIN_SRC emacs-lisp
+(myspace-def
+    "B" 'ibuffer
+    "b" '(:ignore t :which-key "buffers")
+    "bc" 'evil-buffer-new
+    "bw" 'kill-actual-buffer
+    "bn" 'next-buffer
+    "bp" 'previous-buffer
+    "bs" 'save-buffer
+    "bb" 'ivy-switch-buffer)
+#+END_SRC
+*** Window management
+#+BEGIN_SRC emacs-lisp
+(myspace-def
+    "w" '(:ignore t :which-key "windows")
+    "wb" 'balance-windows-area
+    "wo" '(split-window-vertically :which-key "vertical split")
+    "wi" '(split-window-horizontally :which-key "horizontal split")
+    "ww" 'delete-window
+    "wk" '(evil-window-up :which-key "up")
+    "wj" '(evil-window-down :which-key "down")
+    "wh" '(evil-window-left :which-key "left")
+    "wl" '(evil-window-right :which-key "right")
+    "wf" '(centered-window-mode :which-key "centered"))
+#+END_SRC
+*** Editor tools
+#+BEGIN_SRC emacs-lisp
+(myspace-def
+    "e" '(:ignore t :which-key "editor")
+    "el" '(apex/toggle-line-numbers :which-key "toggle line numbers")
+    "ew" '(apex/toggle-whitespace :which-key "toggle whitespace")
+    "ed" '(delete-trailing-whitespace :which-key "remove whitespace"))
+#+END_SRC
+*** Settings
+#+BEGIN_SRC emacs-lisp
+(defhydra apex/hydra-zoom (:color pink)
+  "Change font size"
+  ("+" apex/increase-default-font-height "increase")
+  ("-" apex/decrease-default-font-height "decrease")
+  ("<escape>" nil "cancel" :color blue))
+(myspace-def
+    "c"  '(:ignore t :which-key "config")
+    "cr" '(apex/config-reload :which-key "reload config")
+    "cf" '(apex/config-visit :which-key "goto config")
+    "cu" '(straight-normalize-all :which-key "update packages")
+    "cs" '(apex/hydra-zoom/body :which-key "font size"))
+#+END_SRC
+** Ivy
+   A convenient and fast completion framework and search tool.
+   Also added =counsel= and =swiper= for more functionality.
+#+BEGIN_SRC emacs-lisp
+(use-package ivy
+  :init
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-height-alist '((t . 6)))
+  (setq ivy-wrap t)
+  :config
+  (ivy-mode 1)
+  (use-package swiper
+    :general
+    (override-def
+      "C-s" 'swiper-isearch))
+  (use-package counsel
+    :general
+    (override-def
+      "M-x" 'counsel-M-x)
+    (myspace-def
+      "SPC" '(counsel-find-file :which-key "find file")
+      "F" '(counsel-recentf :which-key "recent files")
+      
+      ;; Help menu
+      "h" '(:ignore t :which-key "help")
+      "hu" '(counsel-unicode-char :which-key "unicode char")
+      "hs" '(counsel-set-variable :which-key "set variable")
+      "hi" '(counsel-imenu :which-key "imenu")
+      "hd" '(counsel-describe-function :which-key "describe function")
+      "hv" '(counsel-describe-variable :which-key "describe variable"))))
+#+END_SRC
+** Avy
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :general
+  (general-define-key
+    :prefix "f" 
+    :states 'normal
+    :keymaps 'override
+    "f" 'avy-goto-char
+    "r" 'avy-goto-char-2
+    "d" 'avy-goto-word-1
+    "SPC" 'avy-goto-line))
+#+END_SRC
+** Ace-window
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq aw-ignore-current nil)
+  (setq aw-background nil)
+  :general
+  (myspace-def
+  "a" 'ace-window))
+   #+END_SRC
+** fzf
+
+#+BEGIN_SRC emacs-lisp
+(use-package fzf
+  :general
+  (myspace-def
+    "f" 'counsel-fzf))
+#+END_SRC
+
+** Dired
+   Some functional and aesthetical modifications on the default file manager.
+#+BEGIN_SRC emacs-lisp
+(use-package dired
+  :straight nil
+  :hook
+  (dired-mode . dired-hide-details-mode)
+  (dired-mode . hl-line-mode)
+  :custom
+  (dired-recursive-copies 'always)
+  (dired-recursive-deletes 'always)
+  (delete-by-moving-to-trash t)
+  (dired-dwim-target t)
+  :general
+  (myspace-def
+  "d" 'dired))
+#+END_SRC
+* Programming
+** Electric
+   Automatic indentation and parenthesis pairing.
+#+BEGIN_SRC emacs-lisp
+(use-package electric
+  :straight nil
+  :init
+  (setq electric-pair-pairs '(
+                           (?\{ . ?\})
+                           (?\( . ?\))
+                           (?\[ . ?\])
+                           (?\" . ?\")
+                           ))
+  (setq electric-pair-skip-self 'electric-pair-default-skip-self)
+  (setq electric-quote-context-sensitive t)
+  (setq electric-quote-paragraph t)
+  (setq electric-quote-string nil)
+  :config
+  (electric-indent-mode 1)
+  (electric-pair-mode t))
+#+END_SRC
+** Company
+   =Company= is an auto complete mechanism which integrates with most programming languages.
+   - Pop up immediately;
+   - Give suggestion after the first chr;
+   - Wrap after last suggestion;
+   - Use tab key to cycle through suggestions.
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :init
+  (setq company-idle-delay 0.0)
+  (setq company-minimum-prefix-length 1)
+  (setq company-selection-wrap-around t)
+  (setq company-clang-executable 'clang++)
+  (setq lsp-prefer-capf t)
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+#+END_SRC
+** Flycheck
+   Global syntax checking.
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :init
+  (global-flycheck-mode)
+  :config
+  (defun apex/flycheck-list-errors-toggle ()
+    "Toggle the display of `flycheck-mode' diagnostics' buffer."
+    (interactive)
+    (let ((diagnostics (get-buffer-window flycheck-error-list-buffer)))
+      (unless flycheck-mode
+        (user-error "Flycheck mode not enabled"))
+      (if diagnostics
+          (delete-window diagnostics)
+      (flycheck-list-errors))))
+
+  (defhydra apex/hydra-flycheck (:color pink :hint nil)
+    "
+   ^Actions^             ^Helpers^
+---^^--------------------^^-----------------
+_n_: Next error       _c_: Check buffer
+_p_: Previous error   _l_: List diagnostics
+_e_: Explain error    _x_: Disable checker
+_d_: Display error
+"
+    ("l" apex/flycheck-list-errors-toggle)
+    ("c" flycheck-buffer)
+    ("n" flycheck-next-error)
+    ("p" flycheck-previous-error)
+    ("e" flycheck-explain-error-at-point)
+    ("d" flycheck-display-error-at-point)
+    ("x" flycheck-disable-checker :color blue)
+    ("<escape>" nil "cancel" :color blue))
+  :bind-keymap
+  ("s-c" . flycheck-command-map)
+  :general 
+  (myspace-def
+    :keymaps 'prog-mode-map
+    "<tab>" '(apex/hydra-flycheck/body :which-key "flycheck")))
+#+END_SRC
+** Snippets
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :config
+  (yas-reload-all)
+  (add-hook 'prog-mode-hook #'yas-minor-mode))
+#+END_SRC
+** LSP (C/C++/Java)
+*** LSP
+   =LSP= handles most of the programming languages with automatic flycheck and company integration.
+   It has some issues with Python. Used as a replacement of =lsp-mode=.
+#+BEGIN_SRC emacs-lisp
+(use-package eglot
+    :disabled
+    :hook
+    (c++-mode . eglot-ensure)
+    (c-mode . eglot-ensure)
+    (java-mode . eglot-ensure)
+    :init  
+    (defun project-root (project) (car (project-roots project)))
+    :config
+    (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+    :general
+    (progtools-def
+        :keymaps 'prog-mode-map
+        "f" '(:ignore t :which-key "find")
+        "ff" '(xref-find-definitions :wk "find definition")
+        "fF" '(xref-find-definitions-other-window :wk "find definition other win")
+        "fr" '(eglot-find-references :wk "find references")
+        "fd" '(eglot-find-declaration :wk "find declaration")
+        "fD" '(eglot-find-declaration-other-window :wk "find declaration other win")
+        "ft" '(eglot-find-typeDefinition :wk "find typedef")
+        "fi" '(eglot-find-implementation :wk "find implementation")
+        "SPC" '(eglot-format-buffer :wk "format buffer")
+        "c" '(eglot-completion-at-point :wk "complete")
+        "h" '(eglot-help-at-point :wk "help")
+        "r" '(eglot-rename :wk "rename")
+        "a" '(eglot-code-actions :wk "code actions")))
+        
+(use-package lsp-mode
+  :commands lsp
+  :hook ((c++-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :init
+  (defun project-root (project) (car (project-roots project)))
+  (setq lsp-keymap-prefix "s-,")
+  :config
+  (define-key lsp-mode-map (kbd "s-,") lsp-command-map)
+  (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-completion-provider :capf)
+  :general
+  (progtools-def
+    :keymaps 'prog-mode-map
+         "f" '(:ignore t :which-key "find")
+        "ff" '(xref-find-definitions :wk "find definition")
+        "fF" '(xref-find-definitions-other-window :wk "find definition other win")
+        "fr" '(xref-find-references :wh "find references")
+         "r" '(lsp-restart :wk "restart")))
+ 
+(use-package ccls)
+ 
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :config
+  (setq lsp-ui-doc-enable nil)
+  (setq lsp-ui-sideline-show-hover t
+        lsp-ui-sideline-show-symbol t
+        lsp-ui-sideline-update-mode 'point)
+  (lsp-ui-peek-enable t)
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  (lsp-ui-imenu-enable t))
+
+(use-package lsp-ivy
+  :commands lsp-ivy-workspace-symbol)
+  
+(use-package lsp-treemacs
+  :commands lsp-treemacs-errors-list
+  :config
+  (lsp-treemacs-sync-mode 1))
+  
+#+END_SRC
+*** Header and other integration
+    
+#+BEGIN_SRC emacs-lisp
+(use-package company-c-headers
+  :config
+  (add-to-list 'company-backends 'company-c-headers))
+    (defun maybe-add-newline-at-buf-start ()
+    (if (and (char-equal (char-after (point-min)) ?\n)
+             (char-equal (char-after (1+ (point-min))) ?\n))
+        ""
+      "\n"))
+  (defun maybe-add-newline-at-buf-end ()
+    (if (and (char-equal (char-before (point-max)) ?\n)
+             (char-equal (char-before (1- (point-max))) ?\n))
+        ""
+      "\n"))
+      
+(use-package auto-insert-mode
+  :straight nil
+  :general
+  (progtools-def
+    :keymaps '(c++-mode-map 
+                 c-mode-map)
+    "<tab>" '(auto-insert :wk "Add header guards"))
+  :init
+    ;; autoinsert C/C++ header
+    (define-auto-insert
+      (cons "\\.\\([Hh]\\|hh\\|hpp\\)\\'" "My C / C++ header")
+      '(nil
+    	"// " (file-name-nondirectory buffer-file-name) "\n"
+    	"//\n"
+    	"// last-edit-by: <> \n"
+    	"//\n"
+    	"// Description:\n"
+    	"//\n"
+    	(make-string 70 ?/) "\n\n"
+    	(let* ((noext (substring buffer-file-name 0 (match-beginning 0)))
+    		   (nopath (file-name-nondirectory noext))
+    		   (ident (concat (upcase nopath) "_H")))
+    	  (concat "#ifndef " ident "\n"
+    			  "#define " ident  " 1\n\n\n"
+    			  "\n\n#endif // " ident "\n"))
+    	(make-string 70 ?/) "\n"
+    	"// $Log:$\n"
+    	"//\n"
+    	))
+    
+    ;; auto insert C/C++
+    (define-auto-insert
+      (cons "\\.\\([Cc]\\|cc\\|cpp\\)\\'" "My C++ implementation")
+      '(nil
+    	"// " (file-name-nondirectory buffer-file-name) "\n"
+    	"//\n"
+    	"// last-edit-by: <> \n"
+    	"// \n"
+    	"// Description:\n"
+    	"//\n"
+    	(make-string 70 ?/) "\n\n"
+    	(let* ((noext (substring buffer-file-name 0 (match-beginning 0)))
+    		   (nopath (file-name-nondirectory noext))
+    		   (ident (concat nopath ".h")))
+    	  (if (file-exists-p ident)
+    		  (concat "#include \"" ident "\"\n")))
+    	(make-string 70 ?/) "\n"
+    	"// $Log:$\n"
+    	"//\n"
+    	)))
+#+END_SRC
+*** CPP format
+
+#+BEGIN_SRC emacs-lisp
+(use-package modern-cpp-font-lock
+  :hook
+  (c++-mode . modern-c++-font-lock-mode))
+  
+(use-package rainbow-mode)
+
+(setq c-default-style "linux")
+(setq-default c-basic-offset 4)
+(c-set-offset 'case-label '+)
+(add-hook 'c-mode-hook (lambda () (c-toggle-comment-style 1)))
+(add-hook 'c-mode-hook (lambda () (require 'ppindent)))
+#+END_SRC
+*** Tags
+
+#+BEGIN_SRC emacs-lisp
+(use-package ivy-xref
+  :config
+  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+#+END_SRC
+** Python
+   
+Python IDE with =elpy= and =company=.
+#+BEGIN_SRC emacs-lisp
+(use-package elpy
+  :init
+  (add-to-list 'exec-path "~/.local/bin/")
+  (elpy-enable)
+  :config
+  (when (load "flycheck" t t)
+   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+   (add-hook 'elpy-mode-hook 'flycheck-mode)))
+#+END_SRC
+** Racket
+   
+#+BEGIN_SRC emacs-lisp
+(use-package racket-mode
+  :init
+  (add-hook 'racket-mode-hook      #'racket-unicode-input-method-enable)
+  (add-hook 'racket-repl-mode-hook #'(lambda () (setq mode-line-format nil)))
+  (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable))
+#+END_SRC
+** CFG-mode
+   
+Custom mode to handle Context Free Grammars (CFGs).
+#+BEGIN_SRC emacs-lisp
+(require 'cfg-mode)
+(add-to-list 'auto-mode-alist '("\\.cfg\\'" . cfg-mode))
+#+END_SRC
+** Nix-mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package nix-mode
+  :mode "\\.nix\\'")
+#+END_SRC
+** Cmake-mode
+   
+#+BEGIN_SRC emacs-lisp
+(require 'cmake-mode)
+#+END_SRC
+* Userland tools
+** Org
+#+BEGIN_SRC emacs-lisp
+(use-package org
+  :straight nil
+  :init
+  (require 'ox-latex)
+  (setq org-latex-inputenc-alist '(("utf8" . "utf8x"))))
+#+END_SRC
+** FlySpell
+   Spell checking for English and Russian. Hungarian can be toggled manually. For portability download dict from arch repo.
+#+BEGIN_SRC emacs-lisp
+(use-package flyspell
+  :straight nil
+  :hook
+  (text-mode . flyspell-mode)
+  (prog-mode . flyspell-prog-mode)
+  :config
+  (setq ispell-program-name "aspell")
+  (setq ispell-extra-args '("--sug-mode=fast"))
+  (setq ispell-dictionary "en")
+  (defhydra apex/hydra-flyspell (:color pink :hint nil)
+    "
+   ^Actions^                 ^Languages^
+---^^-------------------------^^---------------------
+_n_: Next error               _0_: English
+_<tab>_: Correct actual word  _1_: Russian
+_f_: Correct selected word    _2_: Hungarian
+_a_: Auto correct word        _3_: German
+_r_: Check region             _SPC_: Toggle Spellcheck
+"
+    ("n" flyspell-goto-next-error)
+    ("f" flyspell-correct-word)
+    ("<tab>" flyspell-correct-word-before-point)
+    ("r" flyspell-region)
+    ("a" flyspell-auto-correct-word)
+    ("SPC" flyspell-mode)
+    ("0" (lambda () (interactive)
+                    (ispell-change-dictionary "en")))
+    ("1" (lambda () (interactive)
+                    (ispell-change-dictionary "ru-yeyo")))
+    ("2" (lambda () (interactive)
+                    (ispell-change-dictionary "hu")))
+    ("3" (lambda () (interactive) 
+                    (ispell-change-dictionary "de_DE")))
+    ("<escape>" nil "cancel" :color blue))
+  :general
+  (myspace-def
+    :keymaps 'text-mode-map
+    "<tab>" '(apex/hydra-flyspell/body :which-key "flyspell")))
+#+END_SRC
+** magit
+   Powerful =Git= integration.
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :config
+  (setq magit-push-always-verify nil)
+  (setq git-commit-summary-max-length 50)
+  :general
+  (myspace-def
+  "g" 'magit))
+#+END_SRC
+** Projectile
+   Projectile is an awesome project manager, mostly because it recognizes directories
+   with a =.git= directory as projects and helps you manage them accordingly.
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :init
+  (projectile-mode 1)
+  :config
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-project-search-path '("~/dev/"))
+  :general
+  ("<f4>" 'projectile-compile-project)
+  ("<f5>" 'projectile-run-project)
+  (myspace-def
+    "p" '(:keymap projectile-command-map :package projectile :which-key "projectile")))
+#+END_SRC
+** Treemacs
+   
+#+BEGIN_SRC emacs-lisp
+(use-package treemacs
+  :defer t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :config
+  (progn
+    (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
+          treemacs-deferred-git-apply-delay      0.5
+          treemacs-directory-name-transformer    #'identity
+          treemacs-display-in-side-window        t
+          treemacs-eldoc-display                 t
+          treemacs-file-event-delay              5000
+          treemacs-file-extension-regex          treemacs-last-period-regex-value
+          treemacs-file-follow-delay             0.2
+          treemacs-file-name-transformer         #'identity
+          treemacs-follow-after-init             t
+          treemacs-git-command-pipe              ""
+          treemacs-goto-tag-strategy             'refetch-index
+          treemacs-indentation                   2
+          treemacs-indentation-string            " "
+          treemacs-is-never-other-window         nil
+          treemacs-max-git-entries               5000
+          treemacs-missing-project-action        'ask
+          treemacs-move-forward-on-expand        nil
+          treemacs-no-png-images                 nil
+          treemacs-no-delete-other-windows       t
+          treemacs-project-follow-cleanup        nil
+          treemacs-persist-file                  (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+          treemacs-position                      'left
+          treemacs-recenter-distance             0.1
+          treemacs-recenter-after-file-follow    nil
+          treemacs-recenter-after-tag-follow     nil
+          treemacs-recenter-after-project-jump   'always
+          treemacs-recenter-after-project-expand 'on-distance
+          treemacs-show-cursor                   nil
+          treemacs-show-hidden-files             t
+          treemacs-silent-filewatch              nil
+          treemacs-silent-refresh                nil
+          treemacs-sorting                       'alphabetic-asc
+          treemacs-space-between-root-nodes      t
+          treemacs-tag-follow-cleanup            t
+          treemacs-tag-follow-delay              1.5
+          treemacs-user-mode-line-format         nil
+          treemacs-user-header-line-format       nil
+          treemacs-width                         25)
+
+    ;; The default width and height of the icons is 22 pixels. If you are
+    ;; using a Hi-DPI display, uncomment this to double the icon size.
+    ;;(treemacs-resize-icons 44)
+
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple))))
+  :general
+  (myspace-def
+    "t" '(:ignore t :which-key "treemacs")
+    "t0"    'treemacs-select-window
+    "t1"    'treemacs-delete-other-windows
+    "tt"    'treemacs
+    "tb"    'treemacs-bookmark
+    "tf"    'treemacs-find-file
+    "tF"    'treemacs-find-tag))
+
+(use-package treemacs-evil
+  :after treemacs evil)
+
+(use-package treemacs-projectile
+  :after treemacs projectile)
+
+(use-package treemacs-icons-dired
+  :after treemacs dired
+  :config (treemacs-icons-dired-mode))
+
+(use-package treemacs-magit
+  :after treemacs magit)
+#+END_SRC
+
+** Vterm
+   Probably the most advanced terminal for emacs. Set to default shell.
+   Currently installed with NIX package manager.
+#+BEGIN_SRC emacs-lisp
+(use-package vterm
+  :init
+  (add-hook 'vterm-mode-hook #'(lambda () (setq mode-line-format nil)))
+  :config
+  (defvar my-term-shell "/bin/zsh")
+  (defadvice vterm (before force-bash)
+  (interactive (list my-term-shell)))
+  (ad-activate 'vterm)
+  :general
+  (myspace-def
+    "1" '(vterm :which-key "vterm full")))
+  
+(use-package vterm-toggle
+  :init
+  (setq vterm-toggle-fullscreen-p nil)
+  :general
+  (myspace-def
+    "0" '(vterm-toggle-cd :which-key "vterm")))
+#+END_SRC
+** PDF-Tools
+#+BEGIN_SRC emacs-lisp
+(use-package pdf-tools
+  :init
+  (pdf-loader-install)
+  :config
+  (add-hook 'pdf-view-mode-hook
+      (lambda ()
+	          (progn
+	          (blink-cursor-mode -1)
+	          (set (make-local-variable 'evil-normal-state-cursor) (list nil))))))
+#+END_SRC

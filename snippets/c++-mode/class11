@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: class11
+# key: cls11
+# group: c++11
+# --
+class ${1:Name}
+{
+public:
+  //! Default constructor
+  $1();
+  //! Copy constructor
+  $1(const $1 &other);
+  //! Move constructor
+  $1($1 &&other) noexcept;
+  //! Destructor
+  virtual ~$1() noexcept;
+  //! Copy assignment operator
+  $1& operator=(const $1 &other);
+  //! Move assignment operator
+  $1& operator=($1 &&other) noexcept;
+
+$0
+private:
+};

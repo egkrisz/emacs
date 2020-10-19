@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: lambda
+# key: lambda
+# --
+[${1:capture}](${2:param}){ return ${3:body}; }$0
