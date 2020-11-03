@@ -154,9 +154,9 @@ sudo pacman -Syu git cmake libtool libvterm aspell aspell-ru aspell-en aspell-hu
 #+BEGIN_SRC emacs-lisp
 (use-package emacs
   :straight nil
-  :custom
-  (gc-cons-threshold 100000000)
-  (read-process-output-max (* 1024 1024)))
+  :config
+  (setq gc-cons-threshold (* 100 1024 1024))
+  (setq read-process-output-max (* 1024 1024)))
 #+END_SRC
 ** Path
 
@@ -283,12 +283,12 @@ Uses terminal path.
 (use-package doom-modeline
   :init 
   (doom-modeline-mode 1)
-  
   :config
   (setq doom-modeline-minor-modes nil)
   (setq doom-modeline-buffer-encoding t)
-  (setq doom-modeline-lsp t)
   (setq doom-modeline-modal-icon t)
+  (setq doom-modeline-buffer-file-name-style 'relative-to-project)
+  (setq doom-modeline-lsp t)
   
   ;; HEIGHT is defined by icon hight, so to change height, change font height!
   (setq doom-modeline-height 35)
@@ -347,11 +347,11 @@ Uses terminal path.
         :states '(normal visual emacs)
         :keymaps 'override
         :prefix "SPC"
-        :non-normal-prefix "C-SPC")
-    (general-create-definer progtools-def
-        :states '(normal visual emacs)
-        :prefix "í"
-        :non-normal-prefix "C-í"))
+        :non-normal-prefix "C-SPC"))
+    ;;(general-create-definer progtools-def
+        ;;:states '(normal visual emacs)
+        ;;:prefix "í"
+        ;;:non-normal-prefix "C-í"))
  #+END_SRC
 ** Evil
    =Evil= provides vim-like keybindings and states globally.
@@ -537,7 +537,11 @@ Uses terminal path.
       "hs" '(counsel-set-variable :which-key "set variable")
       "hi" '(counsel-imenu :which-key "imenu")
       "hd" '(counsel-describe-function :which-key "describe function")
-      "hv" '(counsel-describe-variable :which-key "describe variable"))))
+      "hv" '(counsel-describe-variable :which-key "describe variable")))
+  (use-package ivy-xref
+    :config
+    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)))
+
 #+END_SRC
 ** Avy
 #+BEGIN_SRC emacs-lisp
@@ -707,35 +711,43 @@ _d_: Display error
         "r" '(eglot-rename :wk "rename")
         "a" '(eglot-code-actions :wk "code actions")))
         
+(use-package ccls)
 (use-package lsp-mode
   :commands lsp
   :hook ((c++-mode . lsp)
+         (c-mode . lsp)
+         (python-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :init
   (defun project-root (project) (car (project-roots project)))
-  (setq lsp-keymap-prefix "s-,")
   :config
-  (define-key lsp-mode-map (kbd "s-,") lsp-command-map)
-  (setq lsp-enable-on-type-formatting nil)
-  (setq lsp-completion-provider :capf)
+  (setq lsp-keymap-prefix "í"                  ;; keymap prefix
+        lsp-enable-on-type-formatting nil      ;; smth
+        lsp-completion-provider :capf          ;; uses capf automatically
+        lsp-enable-symbol-highlighting nil     ;; select all instances of a symbol
+        lsp-headerline-breadcrumb-enable t     ;; displays ugly headline
+        lsp-modeline-code-actions-enable t     ;; modeline actions
+        lsp-signature-auto-activate t          ;; show function signatures
+        lsp-signature-render-documentation nil ;; give function docs
+        lsp-completion-show-detail nil         ;; detailed completion
+        lsp-completion-show-kind nil           ;; show item type in compl
+        lsp-idle-delay 0.1)                    ;; update intervals
+
   :general
-  (progtools-def
-    :keymaps 'prog-mode-map
-         "f" '(:ignore t :which-key "find")
-        "ff" '(xref-find-definitions :wk "find definition")
-        "fF" '(xref-find-definitions-other-window :wk "find definition other win")
-        "fr" '(xref-find-references :wh "find references")
-         "r" '(lsp-restart :wk "restart")))
- 
-(use-package ccls)
+  (general-define-key
+    :states '(normal visual emacs)
+    :keymaps '(prog-mode-map)
+    "í" '(:keymap lsp-command-map)))
  
 (use-package lsp-ui
   :commands lsp-ui-mode
   :config
-  (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-sideline-show-hover t
+  (setq lsp-ui-sideline-enable t
+        lsp-ui-doc-enable nil
+        lsp-ui-sideline-show-hover t
         lsp-ui-sideline-show-symbol t
-        lsp-ui-sideline-update-mode 'point)
+        lsp-ui-sideline-update-mode 'point
+        lsp-ui-sideline-show-code-actions t)
   (lsp-ui-peek-enable t)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
@@ -766,57 +778,6 @@ _d_: Display error
              (char-equal (char-before (1- (point-max))) ?\n))
         ""
       "\n"))
-      
-(use-package auto-insert-mode
-  :straight nil
-  :general
-  (progtools-def
-    :keymaps '(c++-mode-map 
-                 c-mode-map)
-    "<tab>" '(auto-insert :wk "Add header guards"))
-  :init
-    ;; autoinsert C/C++ header
-    (define-auto-insert
-      (cons "\\.\\([Hh]\\|hh\\|hpp\\)\\'" "My C / C++ header")
-      '(nil
-    	"// " (file-name-nondirectory buffer-file-name) "\n"
-    	"//\n"
-    	"// last-edit-by: <> \n"
-    	"//\n"
-    	"// Description:\n"
-    	"//\n"
-    	(make-string 70 ?/) "\n\n"
-    	(let* ((noext (substring buffer-file-name 0 (match-beginning 0)))
-    		   (nopath (file-name-nondirectory noext))
-    		   (ident (concat (upcase nopath) "_H")))
-    	  (concat "#ifndef " ident "\n"
-    			  "#define " ident  " 1\n\n\n"
-    			  "\n\n#endif // " ident "\n"))
-    	(make-string 70 ?/) "\n"
-    	"// $Log:$\n"
-    	"//\n"
-    	))
-    
-    ;; auto insert C/C++
-    (define-auto-insert
-      (cons "\\.\\([Cc]\\|cc\\|cpp\\)\\'" "My C++ implementation")
-      '(nil
-    	"// " (file-name-nondirectory buffer-file-name) "\n"
-    	"//\n"
-    	"// last-edit-by: <> \n"
-    	"// \n"
-    	"// Description:\n"
-    	"//\n"
-    	(make-string 70 ?/) "\n\n"
-    	(let* ((noext (substring buffer-file-name 0 (match-beginning 0)))
-    		   (nopath (file-name-nondirectory noext))
-    		   (ident (concat nopath ".h")))
-    	  (if (file-exists-p ident)
-    		  (concat "#include \"" ident "\"\n")))
-    	(make-string 70 ?/) "\n"
-    	"// $Log:$\n"
-    	"//\n"
-    	)))
 #+END_SRC
 *** CPP format
 
@@ -833,18 +794,12 @@ _d_: Display error
 (add-hook 'c-mode-hook (lambda () (c-toggle-comment-style 1)))
 (add-hook 'c-mode-hook (lambda () (require 'ppindent)))
 #+END_SRC
-*** Tags
-
-#+BEGIN_SRC emacs-lisp
-(use-package ivy-xref
-  :config
-  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-#+END_SRC
 ** Python
    
 Python IDE with =elpy= and =company=.
 #+BEGIN_SRC emacs-lisp
 (use-package elpy
+  :disabled
   :init
   (add-to-list 'exec-path "~/.local/bin/")
   (elpy-enable)
@@ -852,6 +807,27 @@ Python IDE with =elpy= and =company=.
   (when (load "flycheck" t t)
    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
    (add-hook 'elpy-mode-hook 'flycheck-mode)))
+   
+(use-package lsp-pyright
+  :straight (lsp-pyright :type git :host github :repo "emacs-lsp/lsp-pyright")
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+                          
+(use-package lsp-jedi
+  :disabled
+  :config
+  (with-eval-after-load "lsp-mode"
+    (add-to-list 'lsp-disabled-clients 'pyls)
+    (add-to-list 'lsp-enabled-clients 'jedi))
+    
+  (use-package company-jedi
+    :config
+    (defun my/python-mode-hook ()
+    (add-to-list 'company-backends 'company-jedi))
+    (add-hook 'python-mode-hook 'my/python-mode-hook)))
+
+
 #+END_SRC
 ** Racket
    
@@ -879,6 +855,11 @@ Custom mode to handle Context Free Grammars (CFGs).
    
 #+BEGIN_SRC emacs-lisp
 (require 'cmake-mode)
+#+END_SRC
+** GLSL-mode
+   
+#+BEGIN_SRC emacs-lisp
+(require 'glsl-mode)
 #+END_SRC
 * Userland tools
 ** Org
