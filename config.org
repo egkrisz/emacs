@@ -87,14 +87,6 @@ sudo pacman -Syu git cmake libtool libvterm aspell aspell-ru aspell-en aspell-hu
   (menu-bar-mode -1)
   (tool-bar-mode -1))
 #+END_SRC
-** Font
-   Using Source Code Pro font.
-#+BEGIN_SRC emacs-lisp
-(use-package emacs
-  :straight nil
-  :config
-  (set-face-attribute 'default nil :family "Source Code Pro" :height 140))
-#+END_SRC
 ** Editor settings
    + Disable tabs;
    + Use tab as 4 spaces;
@@ -243,29 +235,13 @@ Uses terminal path.
 * Appearance
   Some solely aesthetic modifications.
   No keybindings involved.
-** Org-bullets
+** Font
+   Using Source Code Pro font.
 #+BEGIN_SRC emacs-lisp
-(use-package org-bullets
+(use-package emacs
+  :straight nil
   :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
-#+END_SRC
-** Pretty icons
-#+BEGIN_SRC emacs-lisp
-(use-package all-the-icons
-  :config
-  (use-package all-the-icons-ivy
-    :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
-    (setq all-the-icons-ivy-file-commands
-      '(counsel-find-file counsel-file-jump counsel-recentf counsel-projectile-find-file counsel-projectile-find-dir)))
-  (use-package all-the-icons-dired
-    :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)))
-#+END_SRC
-** Beacon
-   Highlight cursor when switching buffers
-#+BEGIN_SRC emacs-lisp
-(use-package beacon
-  :init
-  (beacon-mode 1))
+  (set-face-attribute 'default nil :family "Source Code Pro" :height 140))
 #+END_SRC
 ** Theme
 #+BEGIN_SRC emacs-lisp
@@ -314,6 +290,30 @@ Uses terminal path.
   (setq battery-load-low 20)
   (setq battery-load-critical 10)
   (display-battery-mode 1))
+#+END_SRC
+** Org-bullets
+#+BEGIN_SRC emacs-lisp
+(use-package org-bullets
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
+#+END_SRC
+** Pretty icons
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons
+  :config
+  (use-package all-the-icons-ivy
+    :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
+    (setq all-the-icons-ivy-file-commands
+      '(counsel-find-file counsel-file-jump counsel-recentf counsel-projectile-find-file counsel-projectile-find-dir)))
+  (use-package all-the-icons-dired
+    :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)))
+#+END_SRC
+** Beacon
+   Highlight cursor when switching buffers
+#+BEGIN_SRC emacs-lisp
+(use-package beacon
+  :init
+  (beacon-mode 1))
 #+END_SRC
 ** Dashboard
    New fancy welcome screen!
@@ -796,8 +796,14 @@ _d_: Display error
 #+END_SRC
 ** Python
    
-Python IDE with =elpy= and =company=.
+Python IDE with =lsp-pyright= and =elpy= as a fallback option.
 #+BEGIN_SRC emacs-lisp
+(use-package lsp-pyright
+  :straight (lsp-pyright :type git :host github :repo "emacs-lsp/lsp-pyright")
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+                          
 (use-package elpy
   :disabled
   :init
@@ -807,27 +813,6 @@ Python IDE with =elpy= and =company=.
   (when (load "flycheck" t t)
    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
    (add-hook 'elpy-mode-hook 'flycheck-mode)))
-   
-(use-package lsp-pyright
-  :straight (lsp-pyright :type git :host github :repo "emacs-lsp/lsp-pyright")
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred
-                          
-(use-package lsp-jedi
-  :disabled
-  :config
-  (with-eval-after-load "lsp-mode"
-    (add-to-list 'lsp-disabled-clients 'pyls)
-    (add-to-list 'lsp-enabled-clients 'jedi))
-    
-  (use-package company-jedi
-    :config
-    (defun my/python-mode-hook ()
-    (add-to-list 'company-backends 'company-jedi))
-    (add-hook 'python-mode-hook 'my/python-mode-hook)))
-
-
 #+END_SRC
 ** Racket
    
@@ -847,17 +832,20 @@ Custom mode to handle Context Free Grammars (CFGs).
 #+END_SRC
 ** Nix-mode
 
+For Nix operating system configuration files.
 #+BEGIN_SRC emacs-lisp
 (use-package nix-mode
   :mode "\\.nix\\'")
 #+END_SRC
 ** Cmake-mode
    
+Parse Cmake files.
 #+BEGIN_SRC emacs-lisp
 (require 'cmake-mode)
 #+END_SRC
 ** GLSL-mode
    
+Parse glsl shaders.
 #+BEGIN_SRC emacs-lisp
 (require 'glsl-mode)
 #+END_SRC
@@ -1061,3 +1049,9 @@ _r_: Check region             _SPC_: Toggle Spellcheck
 	          (blink-cursor-mode -1)
 	          (set (make-local-variable 'evil-normal-state-cursor) (list nil))))))
 #+END_SRC
+** csv-mode
+   
+#+BEGIN_SRC emacs-lisp
+(use-package csv-mode)
+#+END_SRC
+
