@@ -197,7 +197,7 @@ Uses terminal path.
        (whitespace-mode))))
 #+END_SRC
 ** Manupulate font size
-   + Increase and decrease defaut font size with functions.
+   + Increase and decrease default font size with functions.
 #+BEGIN_SRC emacs-lisp
 (use-package emacs
   :straight nil
@@ -232,16 +232,32 @@ Uses terminal path.
     (interactive)
     (apex/increment-default-font-height -10)))
 #+END_SRC
+** Toggle transparency
+#+BEGIN_SRC emacs-lisp
+ (defun apex/toggle-transparency ()
+   (interactive)
+   (let ((alpha (frame-parameter nil 'alpha)))
+     (set-frame-parameter
+      nil 'alpha
+      (if (eql (cond ((numberp alpha) alpha)
+                     ((numberp (cdr alpha)) (cdr alpha))
+                     ;; Also handle undocumented (<active> <inactive>) form.
+                     ((numberp (cadr alpha)) (cadr alpha)))
+               100)
+          '(90 . 50) '(100 . 100)))))
+#+END_SRC
 * Appearance
   Some solely aesthetic modifications.
   No keybindings involved.
 ** Font
-   Using Source Code Pro font.
 #+BEGIN_SRC emacs-lisp
+(defvar apex/def-font "Iosevka")
+(defvar apex/def-font-size "15")
 (use-package emacs
   :straight nil
   :config
-  (set-face-attribute 'default nil :family "Source Code Pro" :height 140))
+  (when (member apex/def-font (font-family-list))
+      (set-frame-font (concat apex/def-font "-" apex/def-font-size) nil t)))
 #+END_SRC
 ** Theme
 #+BEGIN_SRC emacs-lisp
@@ -268,8 +284,8 @@ Uses terminal path.
   
   ;; HEIGHT is defined by icon hight, so to change height, change font height!
   (setq doom-modeline-height 35)
-  (set-face-attribute 'mode-line nil :family "Source Code Pro" :height 130)
-  (set-face-attribute 'mode-line-inactive nil :family "Source Code Pro" :height 130))
+  (set-face-attribute 'mode-line nil :family apex/def-font :height 140)
+  (set-face-attribute 'mode-line-inactive nil :family apex/def-font :height 140))
   
 (use-package time
   :straight nil
@@ -362,6 +378,7 @@ Uses terminal path.
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-tree)
   (add-hook 'evil-mode-hook
                       (lambda ()
                       (require 'evil-for-russian)
@@ -385,6 +402,11 @@ Uses terminal path.
     (add-hook 'evil-org-mode-hook
                       (lambda ()
     (evil-org-set-key-theme)))))
+    
+ (use-package undo-tree
+   :config
+   (global-undo-tree-mode))
+
  #+END_SRC
 ** Which key
    To give visual hints on keybindings.
@@ -504,6 +526,7 @@ Uses terminal path.
     "c"  '(:ignore t :which-key "config")
     "cr" '(apex/config-reload :which-key "reload config")
     "cf" '(apex/config-visit :which-key "goto config")
+    "ct" '(apex/toggle-transparency :which-key "toggle transparency")
     "cu" '(straight-normalize-all :which-key "update packages")
     "cs" '(apex/hydra-zoom/body :which-key "font size"))
 #+END_SRC
@@ -522,7 +545,7 @@ Uses terminal path.
   (use-package swiper
     :general
     (override-def
-      "C-s" 'swiper-isearch))
+      "C-f" 'swiper-isearch))
   (use-package counsel
     :general
     (override-def
@@ -787,6 +810,7 @@ _d_: Display error
   (c++-mode . modern-c++-font-lock-mode))
   
 (use-package rainbow-mode)
+(use-package ppindent)
 
 (setq c-default-style "linux")
 (setq-default c-basic-offset 4)

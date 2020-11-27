@@ -1,5 +1,8 @@
+;;; init.el --- the heart of the beast -*- lexical-binding: t; -*-
 
 ;;; Code:
+
+;;; Bootstrap staight.el package manager
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -18,3 +21,17 @@
 (org-babel-load-file (expand-file-name "~/.emacs.d/config.org"))
 
 ;;;;;
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-undo-system 'undo-tree)
+ '(initial-frame-alist '((fullscreen . maximized))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(fringe ((t (:background "#282c34")))))
+
