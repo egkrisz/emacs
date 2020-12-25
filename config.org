@@ -109,7 +109,8 @@ sudo pacman -Syu git cmake libtool libvterm aspell aspell-ru aspell-en aspell-hu
   :config
   (global-visual-line-mode t)
   (show-paren-mode 1)
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode))
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+  (add-hook 'text-mode-hook 'display-line-numbers-mode))
 #+END_SRC
 ** Scrolling
    + Scroll without emacs-like recentering;
@@ -175,7 +176,11 @@ Uses terminal path.
     
   (defun apex/config-visit ()
     (interactive)
-    (find-file "~/.emacs.d/config.org")))
+    (find-file "~/.emacs.d/config.org"))
+
+  (defun apex/notes-visit ()
+    (interactive)
+    (find-file "~/notes/todo.org")))
 #+END_SRC
 ** Toggle text editor functionality
    + Toggle line numbering;
@@ -307,6 +312,53 @@ Uses terminal path.
   (setq battery-load-critical 10)
   (display-battery-mode 1))
 #+END_SRC
+** Dashboard
+   New fancy welcome screen!
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard
+    :config
+    (dashboard-setup-startup-hook)
+    ;; Set logo
+    (setq dashboard-startup-banner "~/.emacs.d/img/dashLogo.png")
+    ;; (setq dashboard-startup-banner 1)
+    ;; Items shown by dashboard
+    (setq dashboard-items '((recents  . 3)
+                            (projects . 3)
+                            (bookmarks . 3)
+                            (agenda . 3)))
+    ;; Welcome tests below the image
+    (setq dashboard-banner-logo-title "")
+    ;; Content is not centered by default. To center, set
+    (setq dashboard-center-content t)
+    ;; To disable shortcut "jump" indicators for each section, set
+    (setq dashboard-show-shortcuts t)
+    ;; Show navigator below banner
+    (setq dashboard-set-navigator t)        
+    ;; Info about package loading
+    (setq dashboard-set-init-info t)
+    ;; Set icons
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t)
+    (dashboard-modify-heading-icons '((recents . "file-text")
+                                      (bookmarks . "book")))
+                                      
+    ;; Format: "(icon title help action face prefix suffix)"
+    (setq dashboard-navigator-buttons
+      `( ;; line1
+        ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+           "Github"
+           "Browse homepage"
+           (lambda (&rest _) (browse-url "https://github.com/egkrisz")))
+         (,(all-the-icons-material "event" :height 1.1 :v-adjust -0.2)
+           "Notes"
+           ""
+          (lambda (&rest _) (find-file "~/notes/todo.org")))
+         (,(all-the-icons-octicon "settings" :height 1.1 :v-adjust 0.0)
+           "Config"
+           "Show stars" 
+           (lambda (&rest _) (find-file "~/.emacs.d/config.org")) warning)
+         ("⚑" nil "Show flags" (lambda (&rest _) (message "Hello b0s$")) error)))))
+#+END_SRC
 ** Org-bullets
 #+BEGIN_SRC emacs-lisp
 (use-package org-bullets
@@ -331,21 +383,15 @@ Uses terminal path.
   :init
   (beacon-mode 1))
 #+END_SRC
-** Dashboard
-   New fancy welcome screen!
-#+BEGIN_SRC emacs-lisp
-(use-package dashboard
-    :config
-      (dashboard-setup-startup-hook)
-      (setq dashboard-startup-banner "~/.emacs.d/img/dashLogo.png")
-      (setq dashboard-items '((recents  . 5)
-                              (projects . 5)))
-      (setq dashboard-banner-logo-title ""))
-#+END_SRC
 ** Page-break-lines
 #+BEGIN_SRC emacs-lisp
 (use-package page-break-lines
   :init (turn-on-page-break-lines-mode))
+#+END_SRC
+** Rainbow mode
+#+BEGIN_SRC emacs-lisp
+(use-package rainbow-mode
+  :init (rainbow-mode 1))
 #+END_SRC
 * Navigation
   Tools enhancing basic movement and custom keybindings.
@@ -364,10 +410,6 @@ Uses terminal path.
         :keymaps 'override
         :prefix "SPC"
         :non-normal-prefix "C-SPC"))
-    ;;(general-create-definer progtools-def
-        ;;:states '(normal visual emacs)
-        ;;:prefix "í"
-        ;;:non-normal-prefix "C-í"))
  #+END_SRC
 ** Evil
    =Evil= provides vim-like keybindings and states globally.
@@ -405,7 +447,7 @@ Uses terminal path.
     
  (use-package undo-tree
    :config
-   (global-undo-tree-mode))
+   (global-undo-tree-mode 1))
 
  #+END_SRC
 ** Which key
@@ -455,18 +497,22 @@ Uses terminal path.
   (override-def
     :states '(normal visual insert motion emacs)
     :keymaps 'override
-    "s-o" 'split-window-vertically
-    "s-i" 'split-window-horizontally
-    "s-w" 'delete-window
-    "s-W" 'delete-other-windows
-    "s-Q" 'delete-frame
-    "<f1>" 'window-toggle-side-windows
+    "s-o" #'split-window-vertically
+    "s-i" #'split-window-horizontally
+    "s-w" #'delete-window
+    "s-W" #'delete-other-windows
+    "s-Q" #'delete-frame
+    "<f1>" #'window-toggle-side-windows
   
     ;; Movement
-    "s-k" 'evil-window-up
-    "s-j" 'evil-window-down
-    "s-h" 'evil-window-left
-    "s-l" 'evil-window-right
+    "s-k" #'evil-window-up
+    "s-j" #'evil-window-down
+    "s-h" #'evil-window-left
+    "s-l" #'evil-window-right
+    "s-e" #'enlarge-window-horizontally
+    "s-s" #'shrink-window-horizontally
+    "s-E" #'enlarge-window
+    "s-S" #'shrink-window
   
     ;; Buffers
     "s-n" 'next-buffer
@@ -545,7 +591,7 @@ Uses terminal path.
   (use-package swiper
     :general
     (override-def
-      "C-f" 'swiper-isearch))
+      "C-s" 'swiper-isearch))
   (use-package counsel
     :general
     (override-def
@@ -617,6 +663,16 @@ Uses terminal path.
   "d" 'dired))
 #+END_SRC
 * Programming
+** Global
+   
+#+BEGIN_SRC emacs-lisp
+(use-package prog-mode
+  :straight nil
+  :hook
+  (prog-mode . display-fill-column-indicator-mode)
+  (prog-mode . rainbow-mode))
+#+END_SRC
+
 ** Electric
    Automatic indentation and parenthesis pairing.
 #+BEGIN_SRC emacs-lisp
@@ -627,8 +683,7 @@ Uses terminal path.
                            (?\{ . ?\})
                            (?\( . ?\))
                            (?\[ . ?\])
-                           (?\" . ?\")
-                           ))
+                           (?\" . ?\")))
   (setq electric-pair-skip-self 'electric-pair-default-skip-self)
   (setq electric-quote-context-sensitive t)
   (setq electric-quote-paragraph t)
@@ -809,7 +864,6 @@ _d_: Display error
   :hook
   (c++-mode . modern-c++-font-lock-mode))
   
-(use-package rainbow-mode)
 (use-package ppindent)
 
 (setq c-default-style "linux")
@@ -817,6 +871,14 @@ _d_: Display error
 (c-set-offset 'case-label '+)
 (add-hook 'c-mode-hook (lambda () (c-toggle-comment-style 1)))
 (add-hook 'c-mode-hook (lambda () (require 'ppindent)))
+#+END_SRC
+*** Debugger
+    
+#+BEGIN_SRC emacs-lisp
+(use-package dap-mode
+  :config
+  (setq dap-auto-configure-features '(sessions locals controls tooltip))
+)
 #+END_SRC
 ** Python
    
@@ -827,7 +889,6 @@ Python IDE with =lsp-pyright= and =elpy= as a fallback option.
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp))))  ; or lsp-deferred
-                          
 (use-package elpy
   :disabled
   :init
@@ -880,7 +941,31 @@ Parse glsl shaders.
   :straight nil
   :init
   (require 'ox-latex)
-  (setq org-latex-inputenc-alist '(("utf8" . "utf8x"))))
+  (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
+  :config
+  (setq org-directory "~/notes")
+  (setq org-default-notes-file "~/notes/todo.org")
+  (setq org-agenda-files (list "~/notes/todo.org"))
+  ;; Set default column view headings: Task Total-Time Time-Stamp
+  (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
+  ;; Start capture mode.
+  (global-set-key (kbd "C-c c") 'org-capture)
+  ;; Define the custum capture templates
+  (setq org-capture-templates
+    '(("t" "todo" entry (file org-default-notes-file)
+	   "* TODO %?\n%u\n%a\n" :clock-in t :clock-resume t)
+	  ("m" "Meeting" entry (file org-default-notes-file)
+	   "* MEETING with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+	  ("b" "Bookmark" entry (file "~/notes/bookmarks.org")
+	   "* %? :IDEA: \n%t" :clock-in t :clock-resume t)
+	  ("d" "Dictionary" entry (file "~/notes/dict.org")
+	   "* %? :DICT: \n%t" :clock-in t :clock-resume t)
+	  ("n" "Next Task" entry (file+headline org-default-notes-file "Tasks")
+	   "** NEXT %? \nDEADLINE: %t")))
+  :general
+  (myspace-def
+    "A" '(org-agenda :wk "agenda")
+    "ef" '(apex/notes-visit :wk "visit notes")))
 #+END_SRC
 ** FlySpell
    Spell checking for English and Russian. Hungarian can be toggled manually. For portability download dict from arch repo.
