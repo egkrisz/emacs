@@ -255,14 +255,26 @@ Uses terminal path.
   Some solely aesthetic modifications.
   No keybindings involved.
 ** Font
+   
 #+BEGIN_SRC emacs-lisp
-(defvar apex/def-font "Iosevka")
-(defvar apex/def-font-size "15")
+
 (use-package emacs
-  :straight nil
   :config
-  (when (member apex/def-font (font-family-list))
-      (set-frame-font (concat apex/def-font "-" apex/def-font-size) nil t)))
+  (defvar apex/def-font-size "15")
+  (if (memq window-system '(w32))
+    (defvar apex/def-font "Consolas")
+    (defvar apex/def-font "Iosevka"))
+
+  (if (> (display-pixel-width) 1024)
+      (progn
+        (set-face-attribute 'default nil :font (concat apex/def-font "-" apex/def-font-size))
+        (set-face-attribute 'fixed-pitch nil :font (concat apex/def-font "-" apex/def-font-size))
+        (set-face-attribute 'variable-pitch nil :font (concat apex/def-font "-" apex/def-font-size)))
+    (progn
+      (set-face-attribute 'default nil :font "Dejavu Sans Mono-12")
+      (set-face-attribute 'fixed-pitch nil :font "Dejavu Sans Mono-12")
+      (set-face-attribute 'variable-pitch nil :font "Liberation Serif-12"))
+    ))
 #+END_SRC
 ** Theme
 #+BEGIN_SRC emacs-lisp
@@ -790,7 +802,6 @@ _d_: Display error
         "r" '(eglot-rename :wk "rename")
         "a" '(eglot-code-actions :wk "code actions")))
         
-(use-package ccls)
 (use-package lsp-mode
   :commands lsp
   :hook ((c++-mode . lsp)
@@ -839,6 +850,10 @@ _d_: Display error
   :commands lsp-treemacs-errors-list
   :config
   (lsp-treemacs-sync-mode 1))
+  
+(use-package ccls
+  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+         (lambda () (require 'ccls) (lsp))))
   
 #+END_SRC
 *** Header and other integration
