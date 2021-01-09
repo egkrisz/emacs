@@ -386,6 +386,7 @@ Uses terminal path.
 ** Page-break-lines
 #+BEGIN_SRC emacs-lisp
 (use-package page-break-lines
+  :disabled
   :init (turn-on-page-break-lines-mode))
 #+END_SRC
 ** Rainbow mode
@@ -884,8 +885,14 @@ _d_: Display error
    
 Python IDE with =lsp-pyright= and =elpy= as a fallback option.
 #+BEGIN_SRC emacs-lisp
-(use-package lsp-pyright
-  :straight (lsp-pyright :type git :host github :repo "emacs-lsp/lsp-pyright")
+; (use-package lsp-pyright
+  ; :straight (lsp-pyright :type git :host github :repo "emacs-lsp/lsp-pyright")
+  ; :hook (python-mode . (lambda ()
+                          ; (require 'lsp-pyright)
+                          ; (lsp))))  ; or lsp-deferred
+                          
+ (use-package lsp-pyright
+  :ensure t
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp))))  ; or lsp-deferred
