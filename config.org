@@ -278,13 +278,35 @@ Uses terminal path.
 #+END_SRC
 ** Theme
 #+BEGIN_SRC emacs-lisp
+(defvar apex/dark-theme 'doom-one)
+(defvar apex/light-theme 'doom-one-light)
+(defvar apex/current-theme apex/light-theme)
 (use-package doom-themes
   :init
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-one t)
   :config
-  (doom-themes-org-config))
+  (doom-themes-org-config) 
+  
+  (defun apex/set-theme (theme)
+    (progn (load-theme theme t))
+    (setq apex/current-theme theme))
+    
+  (defun apex/synchronize-theme ()
+    (interactive)
+    (setq hour 
+        (string-to-number 
+            (substring (current-time-string) 11 13)))
+    (if (member hour (number-sequence 6 18))
+        (apex/set-theme apex/light-theme)
+        (apex/set-theme apex/dark-theme)))
+        
+  (apex/synchronize-theme)
+
+  (defun apex/switch-theme ()
+    (interactive)
+    (cond ((eq apex/current-theme apex/dark-theme)  (apex/set-theme apex/light-theme))
+          ((eq apex/current-theme apex/light-theme) (apex/set-theme apex/dark-theme)))))
 #+END_SRC
 ** Modeline
    Using doom modeline and enabling battery and time modes.
@@ -585,7 +607,7 @@ Uses terminal path.
     "c"  '(:ignore t :which-key "config")
     "cr" '(apex/config-reload :which-key "reload config")
     "cf" '(apex/config-visit :which-key "goto config")
-    "ct" '(apex/toggle-transparency :which-key "toggle transparency")
+    "ct" '(apex/switch-theme :which-key "toggle dark/light theme")
     "cu" '(straight-normalize-all :which-key "update packages")
     "cs" '(apex/hydra-zoom/body :which-key "font size"))
 #+END_SRC
@@ -768,7 +790,13 @@ _d_: Display error
 (use-package yasnippet
   :config
   (yas-reload-all)
-  (add-hook 'prog-mode-hook #'yas-minor-mode))
+  :hook
+  (prog-mode . yas-minor-mode)
+  (tex-mode . yas-minor-mode)
+  :general
+  (myspace-def
+    "i" '(yas-insert-snippet :wk "insert snippet"))
+ )
 #+END_SRC
 ** LSP (C/C++/Java)
 *** LSP
@@ -929,6 +957,19 @@ Python IDE with =lsp-pyright= and =elpy= as a fallback option.
   (add-hook 'racket-mode-hook      #'racket-unicode-input-method-enable)
   (add-hook 'racket-repl-mode-hook #'(lambda () (setq mode-line-format nil)))
   (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable))
+#+END_SRC
+** Tex
+#+BEGIN_SRC emacs-lisp
+(use-package tex-mode
+  :ensure auctex
+  :config
+  (setq TeX-auto-save t))
+  
+(use-package latex-preview-pane
+  ;; :config
+  ;;   (latex-preview-pane-enable)
+)
+ 
 #+END_SRC
 ** CFG-mode
    
