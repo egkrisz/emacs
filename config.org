@@ -257,24 +257,25 @@ Uses terminal path.
 ** Font
    
 #+BEGIN_SRC emacs-lisp
+  (use-package emacs
+    :config
+    (defvar apex/def-font-size "12")
+    (if (memq window-system '(w32))
+      (defvar apex/def-font "Consolas")
+      (defvar apex/def-font "Iosevka"))
+      (defvar apex/font (concat apex/def-font "-" apex/def-font-size))
 
-(use-package emacs
-  :config
-  (defvar apex/def-font-size "15")
-  (if (memq window-system '(w32))
-    (defvar apex/def-font "Consolas")
-    (defvar apex/def-font "Iosevka"))
-
-  (if (> (display-pixel-width) 1024)
+    (if (> (display-pixel-width) 1024)
+        (progn
+          (set-face-attribute 'default nil :font apex/font)
+          (set-face-attribute 'fixed-pitch nil :font apex/font)
+          (set-face-attribute 'variable-pitch nil :font apex/font)
+          (setq default-frame-alist '((font . "Iosevka-12"))))
       (progn
-        (set-face-attribute 'default nil :font (concat apex/def-font "-" apex/def-font-size))
-        (set-face-attribute 'fixed-pitch nil :font (concat apex/def-font "-" apex/def-font-size))
-        (set-face-attribute 'variable-pitch nil :font (concat apex/def-font "-" apex/def-font-size)))
-    (progn
-      (set-face-attribute 'default nil :font "Dejavu Sans Mono-12")
-      (set-face-attribute 'fixed-pitch nil :font "Dejavu Sans Mono-12")
-      (set-face-attribute 'variable-pitch nil :font "Liberation Serif-12"))
-    ))
+        (set-face-attribute 'default nil :font "Dejavu Sans Mono-12")
+        (set-face-attribute 'fixed-pitch nil :font "Dejavu Sans Mono-12")
+        (set-face-attribute 'variable-pitch nil :font "Liberation Serif-12"))
+      ))
 #+END_SRC
 ** Theme
 #+BEGIN_SRC emacs-lisp
@@ -323,8 +324,8 @@ Uses terminal path.
   
   ;; HEIGHT is defined by icon hight, so to change height, change font height!
   (setq doom-modeline-height 35)
-  (set-face-attribute 'mode-line nil :family apex/def-font :height 140)
-  (set-face-attribute 'mode-line-inactive nil :family apex/def-font :height 140))
+  (set-face-attribute 'mode-line nil :family apex/def-font :height 130)
+  (set-face-attribute 'mode-line-inactive nil :family apex/def-font :height 130))
   
 (use-package time
   :straight nil
@@ -352,6 +353,8 @@ Uses terminal path.
 (use-package dashboard
     :config
     (dashboard-setup-startup-hook)
+    ; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+
     ;; Set logo
     (setq dashboard-startup-banner "~/.emacs.d/img/dashLogo.png")
     ;; (setq dashboard-startup-banner 1)
@@ -375,7 +378,7 @@ Uses terminal path.
     (setq dashboard-set-file-icons t)
     (dashboard-modify-heading-icons '((recents . "file-text")
                                       (bookmarks . "book")))
-                                      
+
     ;; Format: "(icon title help action face prefix suffix)"
     (setq dashboard-navigator-buttons
       `( ;; line1
