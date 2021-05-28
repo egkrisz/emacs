@@ -255,14 +255,27 @@ Uses terminal path.
   Some solely aesthetic modifications.
   No keybindings involved.
 ** Font
+   
 #+BEGIN_SRC emacs-lisp
-(defvar apex/def-font "Iosevka")
-(defvar apex/def-font-size "15")
-(use-package emacs
-  :straight nil
-  :config
-  (when (member apex/def-font (font-family-list))
-      (set-frame-font (concat apex/def-font "-" apex/def-font-size) nil t)))
+  (use-package emacs
+    :config
+    (defvar apex/def-font-size "12")
+    (if (memq window-system '(w32))
+      (defvar apex/def-font "Consolas")
+      (defvar apex/def-font "Iosevka"))
+      (defvar apex/font (concat apex/def-font "-" apex/def-font-size))
+
+    (if (> (display-pixel-width) 1024)
+        (progn
+          (set-face-attribute 'default nil :font apex/font)
+          (set-face-attribute 'fixed-pitch nil :font apex/font)
+          (set-face-attribute 'variable-pitch nil :font apex/font)
+          (setq default-frame-alist '((font . "Iosevka-12"))))
+      (progn
+        (set-face-attribute 'default nil :font "Dejavu Sans Mono-12")
+        (set-face-attribute 'fixed-pitch nil :font "Dejavu Sans Mono-12")
+        (set-face-attribute 'variable-pitch nil :font "Liberation Serif-12"))
+      ))
 #+END_SRC
 ** Theme
 #+BEGIN_SRC emacs-lisp
@@ -312,8 +325,8 @@ Uses terminal path.
   
   ;; HEIGHT is defined by icon hight, so to change height, change font height!
   (setq doom-modeline-height 35)
-  (set-face-attribute 'mode-line nil :family apex/def-font :height 140)
-  (set-face-attribute 'mode-line-inactive nil :family apex/def-font :height 140))
+  (set-face-attribute 'mode-line nil :family apex/def-font :height 130)
+  (set-face-attribute 'mode-line-inactive nil :family apex/def-font :height 130))
   
 (use-package time
   :straight nil
@@ -341,6 +354,8 @@ Uses terminal path.
 (use-package dashboard
     :config
     (dashboard-setup-startup-hook)
+    ; (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+
     ;; Set logo
     (setq dashboard-startup-banner "~/.emacs.d/img/dashLogo.png")
     ;; (setq dashboard-startup-banner 1)
@@ -364,7 +379,7 @@ Uses terminal path.
     (setq dashboard-set-file-icons t)
     (dashboard-modify-heading-icons '((recents . "file-text")
                                       (bookmarks . "book")))
-                                      
+
     ;; Format: "(icon title help action face prefix suffix)"
     (setq dashboard-navigator-buttons
       `( ;; line1
@@ -409,6 +424,7 @@ Uses terminal path.
 ** Page-break-lines
 #+BEGIN_SRC emacs-lisp
 (use-package page-break-lines
+  :disabled
   :init (turn-on-page-break-lines-mode))
 #+END_SRC
 ** Rainbow mode
@@ -818,7 +834,6 @@ _d_: Display error
         "r" '(eglot-rename :wk "rename")
         "a" '(eglot-code-actions :wk "code actions")))
         
-(use-package ccls)
 (use-package lsp-mode
   :commands lsp
   :hook ((c++-mode . lsp)
@@ -868,6 +883,10 @@ _d_: Display error
   :config
   (lsp-treemacs-sync-mode 1))
   
+(use-package ccls
+  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+         (lambda () (require 'ccls) (lsp))))
+  
 #+END_SRC
 *** Header and other integration
     
@@ -913,8 +932,14 @@ _d_: Display error
    
 Python IDE with =lsp-pyright= and =elpy= as a fallback option.
 #+BEGIN_SRC emacs-lisp
-(use-package lsp-pyright
-  :straight (lsp-pyright :type git :host github :repo "emacs-lsp/lsp-pyright")
+; (use-package lsp-pyright
+  ; :straight (lsp-pyright :type git :host github :repo "emacs-lsp/lsp-pyright")
+  ; :hook (python-mode . (lambda ()
+                          ; (require 'lsp-pyright)
+                          ; (lsp))))  ; or lsp-deferred
+                          
+ (use-package lsp-pyright
+  :ensure t
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp))))  ; or lsp-deferred
