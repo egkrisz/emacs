@@ -277,6 +277,7 @@ Uses terminal path.
   (doom-themes-org-config) 
   
   (defun apex/set-theme (theme)
+    (interactive)
     (progn (load-theme theme t))
     (setq apex/current-theme theme))
     
@@ -285,7 +286,7 @@ Uses terminal path.
     (setq hour 
         (string-to-number 
             (substring (current-time-string) 11 13)))
-    (if (member hour (number-sequence 6 18))
+    (if (member hour (number-sequence 9 18))
         (apex/set-theme apex/light-theme)
         (apex/set-theme apex/dark-theme)))
         
