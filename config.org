@@ -75,17 +75,17 @@ sudo pacman -Syu git cmake libtool libvterm aspell aspell-ru aspell-en aspell-hu
    + Disable menu-bar, scroll-bar and tool-bar.
 #+BEGIN_SRC emacs-lisp
 (use-package emacs
-  :straight nil
-  :custom
-  (inhibit-startup-message t)
-  (inhibit-splash-screen t)
-  (frame-title-format '("%b %& Emacs"))
-  :config
-  (custom-set-variables
-    '(initial-frame-alist (quote ((fullscreen . maximized)))))
-  (scroll-bar-mode -1)
-  (menu-bar-mode -1)
-  (tool-bar-mode -1))
+    :straight nil
+    :custom
+    (inhibit-startup-message t)
+    (inhibit-splash-screen t)
+    (frame-title-format '("%b %& Emacs"))
+    :config
+    ;; (custom-set-variables
+    ;;   '(initial-frame-alist (quote ((fullscreen . maximized)))))
+    (scroll-bar-mode -1)
+    (menu-bar-mode -1)
+    (tool-bar-mode -1))
 #+END_SRC
 ** Editor settings
    + Disable tabs;
@@ -454,39 +454,34 @@ Uses terminal path.
    Added additional packages to tweak basic evil behaviour to be more "vim-like".
    =Evil= now can be used with Russian keyboard layout.
  #+BEGIN_SRC emacs-lisp
-(use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-undo-system 'undo-tree)
-  (add-hook 'evil-mode-hook
-                      (lambda ()
-                      (require 'evil-for-russian)
-                      (evil-for-russian)))
-  :config
-  (evil-set-initial-state 'dired-mode 'emacs)
-  (evil-set-initial-state 'magit 'emacs)
-  (evil-mode 1)
+   (use-package evil
+     :init
+     (setq evil-want-integration t)
+     (setq evil-want-keybinding nil)
+     (setq evil-undo-system 'undo-tree)
+     (add-hook 'evil-mode-hook
+                         (lambda ()
+                         (require 'evil-for-russian)
+                         (evil-for-russian)))
+     :config
+     (evil-set-initial-state 'dired-mode 'emacs)
+     (evil-set-initial-state 'magit 'emacs)
+     (evil-mode 1)
   
-  (use-package evil-collection
-    :after evil
-    :custom
-    (evil-collection-company-use-tng t)
-    :config
-    (evil-collection-init))
+     (use-package evil-collection
+       :after evil
+       :custom
+       (evil-collection-company-use-tng t)
+       :config
+       (evil-collection-init))
     
-  (use-package evil-org
-    :after org
-    :config
-    (add-hook 'org-mode-hook 'evil-org-mode)
-    (add-hook 'evil-org-mode-hook
-                      (lambda ()
-    (evil-org-set-key-theme)))))
-    
- (use-package undo-tree
-   :config
-   (global-undo-tree-mode 1))
-
+     (use-package evil-org
+       :after org
+       :config
+       (add-hook 'org-mode-hook 'evil-org-mode)
+       (add-hook 'evil-org-mode-hook
+                         (lambda ()
+       (evil-org-set-key-theme)))))
  #+END_SRC
 ** Which key
    To give visual hints on keybindings.
@@ -501,6 +496,12 @@ Uses terminal path.
   :config
   (which-key-mode))
 #+END_SRC
+** Undo tree
+#+begin_src emacs-lisp
+   (use-package undo-tree
+     :config
+     (global-undo-tree-mode 1))
+#+end_src
 ** Hydra
 #+BEGIN_SRC emacs-lisp
 (use-package hydra)
@@ -535,29 +536,26 @@ Uses terminal path.
   (override-def
     :states '(normal visual insert motion emacs)
     :keymaps 'override
-    "s-o" #'split-window-vertically
-    "s-i" #'split-window-horizontally
-    "s-w" #'delete-window
-    "s-W" #'delete-other-windows
-    "s-Q" #'delete-frame
+    "s-o"  #'split-window-vertically
+    "s-i"  #'split-window-horizontally
+    "s-w"  #'delete-window
+    "s-W"  #'delete-other-windows
+    "s-Q"  #'delete-frame
     "<f1>" #'window-toggle-side-windows
   
     ;; Movement
-    "s-k" #'evil-window-up
-    "s-j" #'evil-window-down
-    "s-h" #'evil-window-left
-    "s-l" #'evil-window-right
-    "s-e" #'enlarge-window-horizontally
-    "s-s" #'shrink-window-horizontally
-    "s-E" #'enlarge-window
-    "s-S" #'shrink-window
+    "s-k"  #'evil-window-up
+    "s-j"  #'evil-window-down
+    "s-h"  #'evil-window-left
+    "s-l"  #'evil-window-right
+    "s-e"  #'enlarge-window-horizontally
+    "s-s"  #'shrink-window-horizontally
+    "s-E"  #'enlarge-window
+    "s-S"  #'shrink-window
   
     ;; Buffers
-    "s-n" 'next-buffer
-    "s-p" 'previous-buffer
-    
-    ;; Coding
-    "s-x" 'comment-or-uncomment-region))
+    "s-n"  #'next-buffer
+    "s-p"  #'previous-buffer))
     
 ;; Centered window mode
 (use-package centered-window)
@@ -700,15 +698,36 @@ Uses terminal path.
   (myspace-def
   "d" 'dired))
 #+END_SRC
+** IBrowse
+    #+begin_src emacs-lisp
+      (use-package eyebrowse
+          :bind (:map override-global-map
+                      ("C-M-1"     . #'eyebrowse-switch-to-window-config-1)
+                      ("C-M-2"     . #'eyebrowse-switch-to-window-config-2)
+                      ("C-M-3"     . #'eyebrowse-switch-to-window-config-3)
+                      ("C-M-4"     . #'eyebrowse-switch-to-window-config-4)
+                      ("C-M-5"     . #'eyebrowse-switch-to-window-config-5)
+                      ("C-M-6"     . #'eyebrowse-switch-to-window-config-6)
+                      ("C-M-7"     . #'eyebrowse-switch-to-window-config-7)
+                      ("C-M-8"     . #'eyebrowse-switch-to-window-config-8)
+                      ("C-M-9"     . #'eyebrowse-switch-to-window-config-9)
+                      ("C-c C-w q" . #'eyebrowse-prev-window-config)
+                      ("C-c C-w e" . #'eyebrowse-next-window-config))
+        :config
+        (setq eyebrowse-new-workspace t)
+        (eyebrowse-mode t))
+    #+end_src
 * Programming
 ** Global
    
 #+BEGIN_SRC emacs-lisp
-(use-package prog-mode
-  :straight nil
-  :hook
-  (prog-mode . display-fill-column-indicator-mode)
-  (prog-mode . rainbow-mode))
+  (use-package prog-mode
+    :straight nil
+    :hook
+    (prog-mode . display-fill-column-indicator-mode)
+    (prog-mode . rainbow-mode)
+    :config
+    (define-key prog-mode-map [remap comment-region] #'comment-or-uncomment-region))
 #+END_SRC
 
 ** Electric
@@ -1010,8 +1029,8 @@ Parse glsl shaders.
   (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
   :config
   (setq org-directory "~/notes")
-  (setq org-default-notes-file "~/notes/todo.org")
-  (setq org-agenda-files (list "~/notes/todo.org"))
+  (setq org-default-notes-file "~/.eamcs.d/notes/todo.org")
+  (setq org-agenda-files (list "~/.emacs.d/notes/todo.org"))
   ;; Set default column view headings: Task Total-Time Time-Stamp
   (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
   ;; Start capture mode.
@@ -1229,4 +1248,12 @@ _r_: Check region             _SPC_: Toggle Spellcheck
 #+BEGIN_SRC emacs-lisp
 (use-package csv-mode)
 #+END_SRC
-
+* TODO
+** awesome tab
+   #+begin_src emacs-lisp
+     (use-package awesome-tab
+       :disabled
+       :config
+       (awesome-tab-mode t))
+   #+end_src
+   

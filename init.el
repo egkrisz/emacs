@@ -28,7 +28,8 @@
  ;; If there is more than one, they won't work right.
  '(evil-undo-system 'undo-tree)
  '(initial-frame-alist '((fullscreen . maximized)))
- '(org-agenda-files nil))
+ '(org-agenda-files nil)
+ '(org-export-backends '(ascii html icalendar latex md odt)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
