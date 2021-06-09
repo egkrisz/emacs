@@ -279,8 +279,8 @@ Uses terminal path.
 #+END_SRC
 ** Theme
 #+BEGIN_SRC emacs-lisp
-(defvar apex/dark-theme 'doom-one)
-(defvar apex/light-theme 'doom-one-light)
+(defvar apex/dark-theme 'doom-material)
+(defvar apex/light-theme 'doom-tomorrow-day)
 (defvar apex/current-theme apex/light-theme)
 (use-package doom-themes
   :init
@@ -290,6 +290,7 @@ Uses terminal path.
   (doom-themes-org-config) 
   
   (defun apex/set-theme (theme)
+    (interactive)
     (progn (load-theme theme t))
     (setq apex/current-theme theme))
     
@@ -298,7 +299,7 @@ Uses terminal path.
     (setq hour 
         (string-to-number 
             (substring (current-time-string) 11 13)))
-    (if (member hour (number-sequence 6 18))
+    (if (member hour (number-sequence 9 18))
         (apex/set-theme apex/light-theme)
         (apex/set-theme apex/dark-theme)))
         
@@ -884,14 +885,13 @@ _d_: Display error
   :config
   (setq lsp-ui-sideline-enable t
         lsp-ui-doc-enable nil
+        lsp-ui-sideline-show-diagnostics t
+        lsp-ui-sideline-show-code-actions t
         lsp-ui-sideline-show-hover t
-        lsp-ui-sideline-show-symbol t
-        lsp-ui-sideline-update-mode 'point
-        lsp-ui-sideline-show-code-actions t)
+        lsp-ui-sideline-update-mode 'point)
   (lsp-ui-peek-enable t)
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-  (lsp-ui-imenu-enable t))
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 
 (use-package lsp-ivy
   :commands lsp-ivy-workspace-symbol)
