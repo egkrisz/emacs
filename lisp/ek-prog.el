@@ -105,7 +105,6 @@
   :straight t
   :init
   (setq projectile-completion-system 'ivy)
-  (setq projectile-project-search-path '("~/dev/"))
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-.") 'projectile-command-map))
