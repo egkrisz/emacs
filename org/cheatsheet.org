@@ -1,0 +1,160 @@
+* Key Binding Conventions
+
+   • Sequences consisting of ‘C-c’ and a letter (either upper or lower case)
+     are reserved for users.
+
+   • Function keys <F5> through <F9> without modifier keys are also
+     reserved for users to define.
+
+   • Sequences consisting of ‘C-c’ followed by a control character or a
+     digit are reserved for major modes.
+
+   • Sequences consisting of ‘C-c’ followed by ‘{’, ‘}’, ‘<’, ‘>’, ‘:’
+     or ‘;’ are also reserved for major modes.
+
+   • Sequences consisting of ‘C-c’ followed by any other ASCII
+     punctuation or symbol character are allocated for minor modes.
+     Using them in a major mode is not absolutely prohibited, but if you
+     do that, the major mode binding may be shadowed from time to time
+     by minor modes.
+
+   • Don’t bind ‘C-h’ following any prefix character (including ‘C-c’).
+     If you don’t bind ‘C-h’, it is automatically available as a help
+     character for listing the subcommands of the prefix character.
+
+   • Don’t bind a key sequence ending in <ESC> except following another
+     <ESC>.  (That is, it is OK to bind a sequence ending in ‘<ESC>
+     <ESC>’.)
+
+     The reason for this rule is that a non-prefix binding for <ESC> in
+     any context prevents recognition of escape sequences as function
+     keys in that context.
+
+   • Similarly, don’t bind a key sequence ending in ‘C-g’, since that is
+     commonly used to cancel a key sequence.
+
+   • Anything that acts like a temporary mode or state that the user can
+     enter and leave should define ‘<ESC> <ESC>’ or ‘<ESC> <ESC> <ESC>’
+     as a way to escape.
+
+     For a state that accepts ordinary Emacs commands, or more generally
+     any kind of state in which <ESC> followed by a function key or
+     arrow key is potentially meaningful, then you must not define
+     ‘<ESC> <ESC>’, since that would preclude recognizing an escape
+     sequence after <ESC>.  In these states, you should define ‘<ESC>
+     <ESC> <ESC>’ as the way to escape.  Otherwise, define ‘<ESC> <ESC>’
+     instead.
+
+* Navigation
+
+key             binding
+---             -------
+
+C-n             next-line
+C-p             prev-line
+C-f             forward
+C-b             back
+M-f             next-word
+M-b             prev-word
+C-M-n           next-block
+C-M-p           prev-block
+C-j             newline and indent
+M-g M-g         goto line
+
+* Mark
+
+key             binding
+---             -------
+
+C-SPC           mark line mode
+C-x SPC         mark rectangle
+C-S-n           mark from current position to next line
+C-S-p           mark from current position to prev line
+C-M-S-n         mark from current position to end of block
+C-M-S-p         mark from current position to beggining of block
+C-q             expand region
+C-M-<mouse-1>   add cursor on click
+
+-----------------
+IN MARKED REGION:
+-----------------
+
+key             binding
+---             -------
+
+a               mark all like this
+n               mark next like this
+p               mark prev like this
+e               add cursor to end of all marked
+m               mark more like this
+
+* Undo / redo
+
+key          binding
+---          -------
+
+C-_          undo
+M-_          redo
+C-x u        undo-tree
+
+* Settings
+
+key                   binding
+---                   -------
+
+C-c C-w               toggle whitespace
+C-c C-l               toggle line numbers
+
+* Org
+
+key         binding
+---         -------
+
+m           mark file
+u           unmark
+d           flag for delete
+D           delete on point
+x           delete marked files
+o           find file or dir in other window
+i           insert subdirectory
+R           rename a file or move marked files to dir
+C           copy files
+s           togge sorting by name/date
+SPC / DEL   move up and down by lines
+g           read directories again
+l           relist file at point
+* Ivy
+
+key               command
+---               -------
+
+M-x               run command
+C-x C-f           find file
+C-x C-r           recent files
+M-y               counsel-yank-pop
+C-M-m             execute command without closing minibuffer
+M-o i             insert command into buffer
+M-o h             open docs
+M-o d             goto source code
+C-c C-o           ivy occur: open matches in separate buffer
+* Magit
+
+key          command
+---          -------
+C            clone
+F            pull
+P            push
+S            stage modified
+U            unstage all 
+b            branch
+c            commit
+d            diff
+f            fetch
+g            refresh
+i            gitignore
+m            merge
+o            submodule
+r            rebase
+s            stage file
+u            unstage file
+
