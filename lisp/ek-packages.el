@@ -143,20 +143,8 @@
 (use-package org-bullets
   :straight t
   :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
-  (setq org-bullets-bullet-list '("◉" "○" "✸" "▷")))
-
-(use-package org-superstar
-  :straight t
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode)))
-  (setq org-superstar-item-bullet-alist '((42 . 8226) (43 . 43) (45 . 8211)))
-  (setq org-superstar-prettify-item-bullets t
-        org-superstar-remove-leading-stars t
-        org-superstar-headline-bullets-list '("◈" "◇" "◉" "○")))
-
-;; TODO:
-;; + AMX-mode
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
 
 (provide 'ek-packages)
 
+;;; ek-packages.el ends here

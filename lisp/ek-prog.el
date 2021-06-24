@@ -1,4 +1,4 @@
-;;; ek-base.el --- Common commands for my dotemacs -*- lexical-binding: t -*-
+;;; ek-prog.el --- Common commands for my dotemacs -*- lexical-binding: t -*-
 
 (use-package electric
   :init
@@ -18,7 +18,7 @@
 (use-package company
   :straight t
   :init
-  (setq company-idle-delay 0.0)
+  (setq company-idle-delay 0.1)
   (setq company-minimum-prefix-length 1)
   (setq company-selection-wrap-around t)
   (setq company-clang-executable 'clang++)
@@ -127,3 +127,4 @@
 
 (provide 'ek-prog)
 
+;;; ek-prog.el ends here
