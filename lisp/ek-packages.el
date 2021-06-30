@@ -95,20 +95,35 @@
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 ;; Theme setup
-(use-package modus-themes
+(use-package doom-themes
   :straight t
   :init
-  ;; Add all your customizations prior to loading the themes
-  (setq modus-themes-slanted-constructs t
-        modus-themes-bold-constructs nil
-        modus-themes-region 'no-extend)
-
-  ;; Load the theme files before enabling a theme
-  (modus-themes-load-themes)
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
   :config
-  ;; Load the theme of your choice:
-  (modus-themes-load-operandi) ;; OR (modus-themes-load-vivendi)
-  :bind ("<f5>" . modus-themes-toggle))
+  (defvar ek/dark-theme 'doom-material)
+  (defvar ek/light-theme 'doom-tomorrow-day)
+  (defvar ek/current-theme ek/dark-theme)
+
+  (defun ek/set-theme (theme)
+    (interactive)
+    (progn (load-theme theme t))
+    (setq ek/current-theme theme))
+
+  (defun ek/sync-theme ()
+    (interactive)
+    (setq hour (string-to-number
+                (substring (current-time-string) 11 13)))
+    (if (member hour (number-sequence 9 18))
+        (ek/set-theme ek/light-theme)
+      (ek/set-theme ek/dark-theme)))
+
+  (ek/sync-theme)
+
+  (defun ek/toggle-theme ()
+    (interactive)
+    (cond ((eq ek/current-theme ek/dark-theme)  (ek/set-theme ek/light-theme))
+          ((eq ek/current-theme ek/light-theme) (ek/set-theme ek/dark-theme)))))
 
 ;; Modeline
 (use-package time
@@ -121,6 +136,7 @@
   (display-time-mode 1))
 
 (use-package battery
+  :disabled
   :init
   (setq battery-mode-line-format " [%b%p%%]"
         battery-mode-line-limit 95
@@ -145,15 +161,6 @@
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
   (setq org-bullets-bullet-list '("◉" "○" "✸" "▷")))
-
-(use-package org-superstar
-  :straight t
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode)))
-  (setq org-superstar-item-bullet-alist '((42 . 8226) (43 . 43) (45 . 8211)))
-  (setq org-superstar-prettify-item-bullets t
-        org-superstar-remove-leading-stars t
-        org-superstar-headline-bullets-list '("◈" "◇" "◉" "○")))
 
 ;; TODO:
 ;; + AMX-mode

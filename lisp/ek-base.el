@@ -130,7 +130,25 @@ Disable backups and autosaves, deduce symlinks by default."
       (set-face-attribute 'fixed-pitch nil :font "Dejavu Sans Mono-12")
       (set-face-attribute 'variable-pitch nil :font "Liberation Serif-12"))))
 
-(add-hook 'emacs-startup-hook 'eg-base--set-font)
+;; (add-hook 'emacs-startup-hook 'eg-base--set-font)
+
+;;;###autoload
+(defun eg-base--setup-window-behaviour ()
+  "Set default window behaviour."
+  (setq window-combination-resize t
+        fit-window-to-buffer-horizontally t
+        even-window-sizes 'height-only
+        window-sides-vertical nil)
+  (setq display-buffer-alist
+        '(;; bottom side-window
+          ("\\*\\(\\*compilation\\*\\|EShell\\|\\*eshell\\*\\)\\*"
+           (display-buffer-in-side-window)
+           (window-height . 0.25)
+           (side . bottom)
+           (slot . 0))))
+  (global-set-key (kbd "<f4>") #'window-toggle-side-windows))
+
+(add-hook 'emacs-startup-hook 'eg-base--setup-window-behaviour)
 
 (provide 'ek-base)
 

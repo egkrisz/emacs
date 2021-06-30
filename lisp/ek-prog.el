@@ -114,7 +114,6 @@
 
 (use-package prog-mode
   :hook
-  (prog-mode     . display-fill-column-indicator-mode)
   (c-mode-hook   . (lambda () (c-toggle-comment-style 1)))
   (c-mode-hook   . (lambda () (require 'ppindent)))
   (c++-mode-hook . (lambda () (electric-indent-mode t)))
