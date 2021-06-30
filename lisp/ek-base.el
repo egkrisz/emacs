@@ -152,3 +152,4 @@ Disable backups and autosaves, deduce symlinks by default."
 
 (provide 'ek-base)
 
+;;; ek-base.el ends here
