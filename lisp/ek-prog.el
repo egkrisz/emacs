@@ -26,6 +26,28 @@
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
+(use-package treemacs
+  :straight t
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+        ("C-x t t"   . treemacs)
+        ("C-x t B"   . treemacs-bookmark)
+        ("C-x t C-t" . treemacs-find-file)
+        ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package treemacs-projectile
+  :after (treemacs projectile)
+  :straight t)
+
+(use-package lsp-treemacs
+  :after (treemacs lsp-mode)
+  :straight t
+  :commands lsp-treemacs-errors-list
+  :config
+  (lsp-treemacs-sync-mode 1))
+  
 (use-package lsp-mode
   :straight t
   :commands lsp
@@ -66,17 +88,10 @@
   :straight t
   :commands lsp-ivy-workspace-symbol)
   
-(use-package lsp-treemacs
-  :straight t
-  :commands lsp-treemacs-errors-list
-  :config
-  (lsp-treemacs-sync-mode 1))
-  
 (use-package ccls
   :disabled
   :hook ((c-mode c++-mode objc-mode cuda-mode) .
          (lambda () (require 'ccls) (lsp))))
-
 
 (use-package company-c-headers
   :straight t

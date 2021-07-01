@@ -77,6 +77,7 @@ Disable backups and autosaves, deduce symlinks by default."
 * Global visual mode;
 * Display line numbers in prog mode and text mode;
 * Default fill column is 80."
+  (delete-selection-mode 1) ;; delete selected text by typing
   (setq-default tab-always-indent 'complete)
   (setq-default tab-width 4)
   (setq-default indent-tabs-mode nil)
@@ -129,14 +130,29 @@ Disable backups and autosaves, deduce symlinks by default."
   (setq window-combination-resize t
         fit-window-to-buffer-horizontally t
         even-window-sizes 'height-only
-        window-sides-vertical nil)
-  (setq display-buffer-alist
-        '(;; bottom side-window
-          ("\\*\\(\\*compilation\\*\\|EShell\\|\\*eshell\\*\\)\\*"
-           (display-buffer-in-side-window)
-           (window-height . 0.25)
-           (side . bottom)
-           (slot . 0))))
+        window-sides-vertical nil
+        window-resize-pixelwise t)
+
+  (defvar ek/win-param
+    '(window-parameters . ((no-other-window . t)
+                           (no-delete-other-windows . t))))
+
+  (setq
+   display-buffer-alist
+   `(("\\*Buffer List\\*" display-buffer-in-side-window
+      (side . top) (slot . 0) (window-width . 0.25)
+      (preserve-size . (nil . t)) ,ek/win-param)
+     ("\\*Tags List\\*" display-buffer-in-side-window
+      (side . right) (slot . 0) (window-width . fit-window-to-buffer)
+      (preserve-size . (t . nil)) ,ek/win-param)
+     ("\\*\\(?:help\\|grep\\|Completions\\)\\*"
+      display-buffer-in-side-window
+      (side . bottom) (slot . -1) (preserve-size . (nil . t))
+      ,ek/win-param)
+     ("\\*\\(?:Eshell\\|Compilation\\)\\*" display-buffer-in-side-window
+      (side . bottom) (slot . 1) (window-height . 0.25)
+      ,ek/win-param)))
+  
   (global-set-key (kbd "<f4>") #'window-toggle-side-windows))
 
 (add-hook 'emacs-startup-hook 'eg-base--setup-window-behaviour)
