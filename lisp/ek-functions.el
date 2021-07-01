@@ -57,6 +57,13 @@
   (interactive)
   (previous-line 10))
 
+(defun ek/comment-or-uncomment-line-or-region ()
+  "Comments or uncomments the current line or region."
+  (interactive)
+  (if (region-active-p)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
+
 (use-package emacs
   :bind* (("C-j"         . ek/newline-below)
           ("C-o"         . ek/newline-above)
@@ -67,7 +74,11 @@
           ("C-S-w"       . kill-whole-line)
           ("C-M-w"       . ek/copy-current-line)
           ("C-c C-w"     . ek/toggle-whitespace)
-          ("C-c C-l"     . ek/toggle-line-numbers)))
+          ("C-c C-l"     . ek/toggle-line-numbers)
+          ("C-c C-c"     . ek/comment-or-uncomment-line-or-region)
+          ;; buffer and window navigation
+          ("s-n"         . next-buffer)
+          ("s-p"         . previous-buffer)))
 
 (provide 'ek-functions)
 

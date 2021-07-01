@@ -73,7 +73,7 @@
   (lsp-treemacs-sync-mode 1))
   
 (use-package ccls
-  :straight t
+  :disabled
   :hook ((c-mode c++-mode objc-mode cuda-mode) .
          (lambda () (require 'ccls) (lsp))))
 
@@ -118,7 +118,7 @@
   (c-mode-hook   . (lambda () (require 'ppindent)))
   (c++-mode-hook . (lambda () (electric-indent-mode t)))
   :config
-  (define-key prog-mode-map [remap comment-region] #'comment-or-uncomment-region)
+  ;;(define-key prog-mode-map (kbd "C-c C-c") #'comment-or-uncomment-region)
   (setq c-default-style "bsd")
   (setq-default c-basic-offset 4)
   (c-set-offset 'case-label '+)

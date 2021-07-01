@@ -113,24 +113,15 @@ Disable backups and autosaves, deduce symlinks by default."
 ;;;###autoload
 (defun eg-base--set-font ()
   "Set Iosevka-12 font."
-  (defconst apex/def-font-size "12")
-  (if (memq window-system '(w32))
-      (defconst apex/def-font "Consolas")
-    (defconst apex/def-font "Iosevka"))
-  (defconst apex/font (concat apex/def-font "-" apex/def-font-size))
+  (cond
+   ((find-font (font-spec :name "Iosevka"))
+    (set-frame-font "Iosevka-12"))
+   ((find-font (font-spec :name "DejaVu Sans Mono"))
+    (set-frame-font "DejaVu Sans Mono-12"))
+   ((find-font (font-spec :name "Consolas"))
+    (set-frame-font "Consolas-12"))))
 
-  (if (> (display-pixel-width) 1024)
-      (progn
-        (set-face-attribute 'default nil :font apex/font)
-        (set-face-attribute 'fixed-pitch nil :font apex/font)
-        (set-face-attribute 'variable-pitch nil :font apex/font)
-        (setq default-frame-alist '((font . "Iosevka-12"))))
-    (progn
-      (set-face-attribute 'default nil :font "Dejavu Sans Mono-12")
-      (set-face-attribute 'fixed-pitch nil :font "Dejavu Sans Mono-12")
-      (set-face-attribute 'variable-pitch nil :font "Liberation Serif-12"))))
-
-;; (add-hook 'emacs-startup-hook 'eg-base--set-font)
+(add-hook 'emacs-startup-hook 'eg-base--set-font)
 
 ;;;###autoload
 (defun eg-base--setup-window-behaviour ()

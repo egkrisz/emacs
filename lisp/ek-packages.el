@@ -159,15 +159,11 @@
 (use-package org-bullets
   :straight t
   :config
-<<<<<<< HEAD
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
   (setq org-bullets-bullet-list '("◉" "○" "✸" "▷")))
 
 ;; TODO:
 ;; + AMX-mode
-=======
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
->>>>>>> c85d4677eb97f86140610824b83dbac99c087e0c
 
 (provide 'ek-packages)
 
