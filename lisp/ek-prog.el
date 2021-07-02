@@ -68,7 +68,8 @@
         lsp-completion-show-detail nil         ;; detailed completion
         lsp-completion-show-kind nil           ;; show item type in compl
         lsp-idle-delay 0.1)                    ;; update intervals
-  )
+  :bind*
+  (:map c++-mode-map ("C-c C-c" . ek/comment-or-uncomment-line-or-region)))
 
 (use-package lsp-ui
   :straight t
@@ -133,11 +134,13 @@
   (c-mode-hook   . (lambda () (require 'ppindent)))
   (c++-mode-hook . (lambda () (electric-indent-mode t)))
   :config
-  ;;(define-key prog-mode-map (kbd "C-c C-c") #'comment-or-uncomment-region)
   (setq c-default-style "bsd")
   (setq-default c-basic-offset 4)
   (c-set-offset 'case-label '+)
-  :bind ("C-<tab>" . ff-find-other-file))
+  :bind (("C-<tab>" . ff-find-other-file)
+         ("C-, s"   . lsp-treemacs-symbols)
+         ("C-, e"   . lsp-treemacs-error-list)
+         ("C-c C-c" . ek/comment-or-uncomment-line-or-region)))
 
 (provide 'ek-prog)
 

@@ -75,7 +75,6 @@
           ("C-M-w"       . ek/copy-current-line)
           ("C-c C-w"     . ek/toggle-whitespace)
           ("C-c C-l"     . ek/toggle-line-numbers)
-          ("C-c C-c"     . ek/comment-or-uncomment-line-or-region)
           ;; buffer and window navigation
           ("s-n"         . next-buffer)
           ("s-p"         . previous-buffer)))

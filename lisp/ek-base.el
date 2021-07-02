@@ -96,6 +96,7 @@ Disable backups and autosaves, deduce symlinks by default."
 (defun eg-base--setup-mouse-behaviour ()
   "Setup ideal mouse behaviour."
   ;; Scroll settings.
+  (pixel-scroll-mode 1)
   (setq scroll-step 1)
   (setq scroll-conservatively 10000)
   (setq scroll-preserve-screen-position t)

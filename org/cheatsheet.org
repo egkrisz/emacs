@@ -97,6 +97,12 @@ C-_          undo
 M-_          redo
 C-x u        undo-tree
 
+* Find and replace
+
+key            command
+---            -------
+M-%            query-replace
+
 * Settings
 
 key                   binding
