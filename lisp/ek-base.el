@@ -115,7 +115,7 @@ Disable backups and autosaves, deduce symlinks by default."
 ;;;###autoload
 (defun eg-base--set-font ()
   "Set font if available."
-  (defvar ek/font "DejaVu Sans Mono")
+  (defvar ek/font "Default")
   (cond
    ((find-font (font-spec :name "Iosevka"))
     (setq ek/font "Iosevka"))
@@ -124,12 +124,14 @@ Disable backups and autosaves, deduce symlinks by default."
    ((find-font (font-spec :name "Consolas"))
     (setq ek/font "Consolas")))
 
-  (setq ek/font (concat ek/font "-11"))
-  (message "Using font: `%s'..." ek/font)
-
-  (set-face-font 'default ek/font)
-  (set-face-font 'fixed-pitch ek/font)
-  (set-face-font 'variable-pitch "Liberation Serif-13"))
+  (if (string-equal ek/font "Default")
+      (message "No installed fonts found. Using default font.")
+    (progn
+      (setq ek/font (concat ek/font "-11"))
+      (message "Using font: `%s'..." ek/font)
+      (set-face-font 'default ek/font)
+      (set-face-font 'fixed-pitch ek/font)
+      (set-face-font 'variable-pitch "Liberation Serif-13"))))
 
 (add-hook 'emacs-startup-hook 'eg-base--set-font)
 
