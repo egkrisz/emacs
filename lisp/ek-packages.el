@@ -14,7 +14,11 @@
 (use-package undo-tree
   :straight t
   :config
-  (global-undo-tree-mode))
+  (global-undo-tree-mode)
+  :bind
+  (:map undo-tree-map
+        ("C-z"    . undo-tree-undo)
+        ("C-S-z"  . undo-tree-redo)))
 
 (use-package expand-region
   :straight t
@@ -32,7 +36,7 @@
 
 (use-package goto-last-change
   :straight t
-  :bind ("C-z" . goto-last-change))
+  :bind ("C-_" . goto-last-change))
 
 (use-package ace-window
   :straight t
@@ -54,6 +58,7 @@
          ("C->"           . mc/mark-next-like-this)
          ("C-S-c C-S-a"   . mc/mark-all-like-this)
          ("C-M-<mouse-1>" . mc/add-cursor-on-click)
+         ("C-S-SPC"       . rectangle-mark-mode)
          :map region-bindings-mode-map
          ("a"             . mc/mark-all-like-this)
          ("p"             . mc/mark-previous-like-this)
@@ -107,9 +112,9 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
   :config
-  (defvar ek/dark-theme 'doom-material)
-  (defvar ek/light-theme 'doom-tomorrow-day)
-  (defvar ek/current-theme ek/dark-theme)
+  (defconst ek/dark-theme 'doom-material)
+  (defconst ek/light-theme 'doom-tomorrow-day)
+  (defvar   ek/current-theme ek/dark-theme)
 
   (defun ek/set-theme (theme)
     (interactive)

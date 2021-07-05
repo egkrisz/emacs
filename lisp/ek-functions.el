@@ -79,14 +79,15 @@
   (forward-line -1)
   (indent-according-to-mode))
 
+(global-set-key (kbd "C-z")   'undo)
 (global-set-key [(control shift up)]   'ek/move-line-up)
 (global-set-key [(control shift down)] 'ek/move-line-down)
 
-(use-package emacs
+(use-package emacs    
   :bind* (("C-j"         . ek/newline-below)
-          ("C-o"         . ek/newline-above)
+          ("C-o"         . ek/newline-above)    
           ("M-n"         . ek/forward-ten)
-          ("M-p"         . ek/backward-ten)
+          ("M-p"         . ek/backward-ten)        
           ("C-S-j"       . ek/yank-next-line)
           ("C-S-o"       . ek/yank-prev-line)
           ("C-S-w"       . kill-whole-line)
@@ -95,8 +96,8 @@
           ("C-c C-l"     . ek/toggle-line-numbers)
           ("C-/"         . ek/comment-or-uncomment-line-or-region)
           ;; buffer and window navigation
-          ("s-n"         . next-buffer)
-          ("s-p"         . previous-buffer)))
+          ("<mouse-9>"   . next-buffer)
+          ("<mouse-8>"   . previous-buffer)))
 
 (provide 'ek-functions)
 
