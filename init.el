@@ -17,9 +17,34 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;;; Setup straight.el
+;; Setup custom package management
+(defmacro ek-req (package &rest body)
+  "Set up builtin PACKAGE with rest BODY.
+PACKAGE is a quoted symbol, while BODY consists of balanced
+expressions."
+  (declare (indent 1))
+  `(progn
+     (unless (require ,package nil 'noerror)
+       (display-warning 'ek-emacs (format "Loading `%s' failed" ,package) :warning))
+     ,@body))
 
-(straight-use-package 'use-package)
+(defmacro ek-pkg (package &rest body)
+  "Set up PACKAGE from an Elisp archive with rest BODY.
+PACKAGE is a quoted symbol, while BODY consists of balanced
+expressions."
+  (declare (indent 1))
+  `(progn
+     (straight-use-package ,package)
+     (if (require ,package nil 'noerror)
+         (progn ,@body)
+       (display-warning 'ek-emacs (format "Loading `%s' failed" ,package) :warning))))
+
+;; Setup general.el tno deal with keybindings
+(ek-pkg 'general
+  (general-auto-unbind-keys)
+  (general-override-mode t))
+
+;; (straight-use-package 'use-package)
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
 ;;;;;

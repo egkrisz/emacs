@@ -1,117 +1,99 @@
 ;;; ek-packages.el --- Common commands for my dotemacs -*- lexical-binding: t -*-
 
-(use-package which-key
-  :straight t
-  :init
+;; Navigation related packages
+(ek-pkg 'which-key
   (setq which-key-idle-delay 0.2)
   (setq which-key-popup-type 'side-window)
   (setq which-key-side-window-location 'bottom)
   (setq which-key-side-window-max-height 0.25)
   (setq which-key-add-column-padding 1)
-  :config
   (which-key-mode))
 
-(use-package undo-tree
-  :straight t
-  :config
+(ek-pkg 'undo-tree
   (global-undo-tree-mode)
-  :bind
-  (:map undo-tree-map
-        ("C-z"    . undo-tree-undo)
-        ("C-S-z"  . undo-tree-redo)))
+  (general-define-key
+   :keymaps 'undo-tree-map
+   "C-z"    #'undo-tree-undo
+   "C-S-z"  #'undo-tree-redo))
 
-(use-package expand-region
-  :straight t
-  :bind ("C-q" . er/expand-region))
+(ek-pkg 'expand-region
+  (general-define-key
+   "C-q" #'er/expand-region))
 
-(use-package whole-line-or-region
-  :straight t
-  :config
+(ek-pkg 'whole-line-or-region
   (whole-line-or-region-global-mode))
 
-(use-package beginend
-  :straight t
-  :config
+(ek-pkg 'beginend
   (beginend-global-mode 1))
 
-(use-package goto-last-change
-  :straight t
-  :bind ("C-_" . goto-last-change))
+(ek-pkg 'goto-last-change
+  (general-define-key
+   "C-_" #'goto-last-change))
 
-(use-package ace-window
-  :straight t
-  :config
+(ek-pkg 'ace-window
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  :bind (("M-o" . ace-window)))
+  (general-define-key
+   "M-o" #'ace-window))
 
-(use-package region-bindings-mode
-  :straight t
-  :config
+(ek-pkg 'region-bindings-mode
   (region-bindings-mode-enable))
 
-(use-package multiple-cursors
-  :straight t
-  :bind (("C-S-c C-S-c"   . mc/edit-lines)
-         ("C-S-c C-S-p"   . mc/mark-previous-like-this-word)
-         ("C-S-c C-S-n"   . mc/mark-next-like-this-word)
-         ("C-<"           . mc/mark-previous-like-this)
-         ("C->"           . mc/mark-next-like-this)
-         ("C-S-c C-S-a"   . mc/mark-all-like-this)
-         ("C-M-<mouse-1>" . mc/add-cursor-on-click)
-         ("C-S-SPC"       . rectangle-mark-mode)
-         :map region-bindings-mode-map
-         ("a"             . mc/mark-all-like-this)
-         ("p"             . mc/mark-previous-like-this)
-         ("n"             . mc/mark-next-like-this)
-         ("e"             . mc/edit-lines)
-         ("m"             . mc/mark-more-like-this-extended)))
+(ek-pkg 'multiple-cursors
+  (general-define-key
+   "C-S-c C-S-c"   #' mc/edit-lines
+   "C-S-c C-S-p"   #'mc/mark-previous-like-this-word
+   "C-S-c C-S-n"   #'mc/mark-next-like-this-word
+   "C-<"           #'mc/mark-previous-like-this
+   "C->"           #'mc/mark-next-like-this
+   "C-S-c C-S-a"   #'mc/mark-all-like-this
+   "C-M-<mouse-1>" #'mc/add-cursor-on-click
+   "C-S-SPC"       #'rectangle-mark-mode
+   :keymaps 'region-bindings-mode-map
+   "a"             #'mc/mark-all-like-this
+   "p"             #'mc/mark-previous-like-this
+   "n"             #'mc/mark-next-like-this
+   "e"             #'mc/edit-lines
+   "m"             #'mc/mark-more-like-this-extended))
 	 
-(use-package ivy
-  :straight t
-  :init
+(ek-pkg 'ivy
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-height-alist '((t . 6)))
   (setq ivy-wrap t)
-  :config
   (ivy-mode 1)
-  :bind (("C-x b"   . ivy-switch-buffer)
-         ("C-c v"   . ivy-push-view)
-         ("C-c V"   . ivy-pop-view)))
+  (general-define-key
+   "C-x b"   #'ivy-switch-buffer
+   "C-c v"   #'ivy-push-view
+   "C-c V"   #'ivy-pop-view))
 
-(use-package counsel
-  :straight t
-  :after ivy
-  :config
+(ek-pkg 'counsel
   (setq counsel-yank-pop-preselect-last t)
   (setq counsel-yank-pop-separator "\n—————————\n")
-  :bind (("M-x"     . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-x C-r" . counsel-recentf)
-         ("M-y"     . counsel-yank-pop)
-         ("<f1> f"  . counsel-describe-function)
-         ("<f1> v"  . counsel-describe-variable)
-         ("<f1> l"  . counsel-find-library)
-         ("<f2> i"  . counsel-info-lookup-symbol)
-         ("<f2> u"  . counsel-unicode-char)
-         ("<f2> j"  . counsel-set-variable)))
+  (general-define-key
+   "M-x"      #'counsel-M-x
+   "C-x C-f"  #'counsel-find-file
+   "C-x C-r"  #'counsel-recentf
+   "M-y"      #'counsel-yank-pop
+   "<f1> f"   #'counsel-describe-function
+   "<f1> v"   #'counsel-describe-variable
+   "<f1> l"   #'counsel-find-library
+   "<f2> i"   #'counsel-info-lookup-symbol
+   "<f2> u"   #'counsel-unicode-char
+   "<f2> j"   #'counsel-set-variable))
 
-(use-package swiper
-  :straight t
-  :bind (("C-S-s" . swiper-isearch)))
+(ek-pkg 'swiper
+  (general-define-key
+   "C-S-s" #'swiper-isearch))
 
-(use-package ivy-xref
-  :straight t
-  :config
+(ek-pkg 'ivy-xref
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
+;; Appearance related packages
 ;; Theme setup
-(use-package doom-themes
-  :straight t
-  :init
+(ek-pkg 'doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  :config
+  
   (defconst ek/dark-theme 'doom-material)
   (defconst ek/light-theme 'doom-tomorrow-day)
   (defvar   ek/current-theme ek/dark-theme)
@@ -134,10 +116,13 @@
   (defun ek/toggle-theme ()
     (interactive)
     (cond ((eq ek/current-theme ek/dark-theme)  (ek/set-theme ek/light-theme))
-          ((eq ek/current-theme ek/light-theme) (ek/set-theme ek/dark-theme)))))
+          ((eq ek/current-theme ek/light-theme) (ek/set-theme ek/dark-theme))))
+
+  (general-define-key
+   "M-c t" #'ek/toggle-theme))
 
 ;; Modeline
-(use-package time
+(ek-req 'time
   :init
   (setq display-time-24hr-format t
         display-time-interval 60
@@ -146,35 +131,24 @@
   :config
   (display-time-mode 1))
 
-(use-package battery
-  :disabled
-  :init
-  (setq battery-mode-line-format " [%b%p%%]"
-        battery-mode-line-limit 95
-        battery-update-interval 180
-        battery-load-low 20
-        battery-load-critical 10)
-  :config
-  (display-battery-mode))
+;; (ek-req 'battery
+;;   (setq battery-mode-line-format " [%b%p%%]"
+;;         battery-mode-line-limit 95
+;;         battery-update-interval 180
+;;         battery-load-low 20
+;;         battery-load-critical 10)
+;;   (display-battery-mode))
 
-(use-package minions
-  :straight t
-  :init
+(ek-pkg 'minions
   (setq minions-mode-line-lighter "@")
   (setq minions-direct (list 'defining-kbd-macro
                              'flymake-mode
                              'prot-simple-monocle))
-  :config
   (minions-mode 1))
 
-(use-package org-bullets
-  :straight t
-  :config
+(ek-pkg 'org-bullets
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
   (setq org-bullets-bullet-list '("◉" "○" "✸" "▷")))
-
-;; TODO:
-;; + AMX-mode
 
 (provide 'ek-packages)
 
