@@ -55,11 +55,11 @@
          ("C-S-c C-S-a"   . mc/mark-all-like-this)
          ("C-M-<mouse-1>" . mc/add-cursor-on-click)
          :map region-bindings-mode-map
-         ("C-a"             . mc/mark-all-like-this)
-         ("C-p"             . mc/mark-previous-like-this)
-         ("C-n"             . mc/mark-next-like-this)
-         ("C-e"             . mc/edit-lines)
-         ("C-m"             . mc/mark-more-like-this-extended)))
+         ("a"             . mc/mark-all-like-this)
+         ("p"             . mc/mark-previous-like-this)
+         ("n"             . mc/mark-next-like-this)
+         ("e"             . mc/edit-lines)
+         ("m"             . mc/mark-more-like-this-extended)))
 	 
 (use-package ivy
   :straight t

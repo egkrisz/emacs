@@ -64,6 +64,24 @@
       (comment-or-uncomment-region (region-beginning) (region-end))
     (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
 
+(defun ek/move-line-up ()
+  "Move up the current line."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2)
+  (indent-according-to-mode))
+
+(defun ek/move-line-down ()
+  "Move down the current line."
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(global-set-key [(control shift up)]   'ek/move-line-up)
+(global-set-key [(control shift down)] 'ek/move-line-down)
+
 (use-package emacs
   :bind* (("C-j"         . ek/newline-below)
           ("C-o"         . ek/newline-above)
@@ -75,6 +93,7 @@
           ("C-M-w"       . ek/copy-current-line)
           ("C-c C-w"     . ek/toggle-whitespace)
           ("C-c C-l"     . ek/toggle-line-numbers)
+          ("C-/"         . ek/comment-or-uncomment-line-or-region)
           ;; buffer and window navigation
           ("s-n"         . next-buffer)
           ("s-p"         . previous-buffer)))

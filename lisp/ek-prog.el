@@ -139,8 +139,7 @@
   (c-set-offset 'case-label '+)
   :bind (("C-<tab>" . ff-find-other-file)
          ("C-, s"   . lsp-treemacs-symbols)
-         ("C-, e"   . lsp-treemacs-error-list)
-         ("C-c C-c" . ek/comment-or-uncomment-line-or-region)))
+         ("C-, e"   . lsp-treemacs-error-list)))
 
 (provide 'ek-prog)
 

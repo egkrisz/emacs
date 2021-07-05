@@ -77,7 +77,7 @@ Disable backups and autosaves, deduce symlinks by default."
 * Global visual mode;
 * Display line numbers in prog mode and text mode;
 * Default fill column is 80."
-  (delete-selection-mode 1) ;; delete selected text by typing
+  ;; (delete-selection-mode 1) ;; delete selected text by typing
   (setq-default tab-always-indent 'complete)
   (setq-default tab-width 4)
   (setq-default indent-tabs-mode nil)
@@ -114,14 +114,22 @@ Disable backups and autosaves, deduce symlinks by default."
 
 ;;;###autoload
 (defun eg-base--set-font ()
-  "Set Iosevka-12 font."
+  "Set font if available."
+  (defvar ek/font "DejaVu Sans Mono")
   (cond
    ((find-font (font-spec :name "Iosevka"))
-    (set-frame-font "Iosevka-12"))
+    (setq ek/font "Iosevka"))
    ((find-font (font-spec :name "DejaVu Sans Mono"))
-    (set-frame-font "DejaVu Sans Mono-12"))
+    (setq ek/font "DejaVu Sans Mono"))
    ((find-font (font-spec :name "Consolas"))
-    (set-frame-font "Consolas-12"))))
+    (setq ek/font "Consolas")))
+
+  (setq ek/font (concat ek/font "-11"))
+  (message "Using font: `%s'..." ek/font)
+
+  (set-face-font 'default ek/font)
+  (set-face-font 'fixed-pitch ek/font)
+  (set-face-font 'variable-pitch "Liberation Serif-13"))
 
 (add-hook 'emacs-startup-hook 'eg-base--set-font)
 
