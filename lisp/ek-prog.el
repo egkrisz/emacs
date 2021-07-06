@@ -22,6 +22,7 @@
   (add-hook 'after-init-hook 'global-company-mode))
 
 (ek-pkg 'treemacs
+  (setq treemacs-width 30)
   (general-define-key
    "M-0"       #'treemacs-select-window
    "C-x t 1"   #'treemacs-delete-other-windows
@@ -54,7 +55,10 @@
         lsp-idle-delay 0.1)                    ;; update intervals
   (general-define-key
    :keymaps '(prog-mode-map c++-mode-map c-mode-map python-mode-map)
-   "C-c C-c" #'ek/comment-or-uncomment-line-or-region))
+   "C-c C-c" #'ek/comment-or-uncomment-line-or-region)
+  (general-define-key
+   :keymaps '(prog-mode-map)
+   "C-," '(:keymap lsp-command-map)))
 
 (ek-pkg 'lsp-ui
   (setq lsp-ui-sideline-enable t

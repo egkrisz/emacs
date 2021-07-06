@@ -47,7 +47,8 @@
    "C->"           #'mc/mark-next-like-this
    "C-S-c C-S-a"   #'mc/mark-all-like-this
    "C-M-<mouse-1>" #'mc/add-cursor-on-click
-   "C-S-SPC"       #'rectangle-mark-mode
+   "C-S-SPC"       #'rectangle-mark-mode)
+  (general-define-key
    :keymaps 'region-bindings-mode-map
    "a"             #'mc/mark-all-like-this
    "p"             #'mc/mark-previous-like-this
