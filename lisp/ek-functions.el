@@ -84,9 +84,73 @@
   (interactive)
   (dired "~/.emacs.d/lisp/"))
 
-(global-set-key [(control shift up)]   'ek/move-line-up)
-(global-set-key [(control shift down)] 'ek/move-line-down)
-    
+(defun ek/kill-thing-at-point (thing)
+  "Kill the `thing-at-point' for the specified kind of THING."
+  (let ((bounds (bounds-of-thing-at-point thing)))
+    (if bounds
+        (kill-region (car bounds) (cdr bounds))
+      (error "No %s at point" thing))))
+
+(defun ek/kill-word-at-point ()
+  "Kill the word at point."
+  (interactive)
+  (ek/kill-thing-at-point 'word))
+
+(defun ek/kill-symbol-at-point ()
+  "Kill the symbol at point."
+  (interactive)
+  (ek/kill-thing-at-point 'symbol))
+
+(defun ek/copy-proto-to-header-file ()
+  (interactive)
+  (save-excursion
+    ;; c-mode's `beginning-of-defun' should be robust enough.
+    (beginning-of-defun)
+    (let ((l (point)))
+      (search-forward-regexp " *{")
+      (let ((proto (buffer-substring l (match-beginning 0))))
+        (ff-find-other-file)
+        ;; If other file is already open, we don't want to move point.
+        (save-excursion
+          (goto-char (point-max))
+          ;; Do some more movement here if you want.
+          (insert "\n" proto ";"))))))
+
+(defun ek/get-class-name ()
+  "Get the name of the current class."
+  (save-excursion
+    (call-interactively 'move-end-of-line)
+    (search-backward-regexp "^\\s-*\\(?:\\(?:abstract\\|final\\)\\s-+\\)?class\\s-+\\(\\(?:\\sw\\|\\\\\\|\\s_\\)+\\)")
+    (let ((ret (match-string 1)))
+      ret)))
+
+(defun ek/find-pattern-in-string (sig pattern)
+  "Gets the type of a function."
+  (defvar match "")
+  (save-match-data
+    (and (string-match pattern sig)
+         (setq match (match-string 0 sig))))
+  match)
+
+(defun ek/define-cpp-function-in-other-file ()
+  (interactive)
+  (let* ((sig (thing-at-point 'line t))
+         (type (ek/find-pattern-in-string sig "\\(?:const auto&\\|const auto\\|auto&\\|auto\\|void\\)"))
+         (class (ek/get-class-name))
+         (name (ek/find-pattern-in-string sig "\\(?:\\w*(.*)\\)"))
+         (ret (ek/find-pattern-in-string sig "-> [^;]"))
+         (final-sig (concat type " " class "::" name))
+         (skeleton (concat final-sig "\n{\n}"))
+         )
+    (ff-find-other-file)
+    (end-of-buffer)
+    (beginning-of-defun)
+    (message skeleton)
+    (forward-list)
+    (forward-list)
+    (insert "\n\n" skeleton)
+    ))
+
 (general-define-key
   "C-j"         #'ek/newline-below
   "C-o"         #'ek/newline-above    
@@ -94,13 +158,15 @@
   "M-p"         #'ek/backward-ten        
   "C-S-j"       #'ek/yank-next-line
   "C-S-o"       #'ek/yank-prev-line
-  "C-S-w"       #'kill-whole-line
+  "C-S-w"       #'ek/kill-word-at-point
   "C-M-w"       #'ek/copy-current-line
   "C-/"         #'ek/comment-or-uncomment-line-or-region
   "C-z"         #'undo
   ;; buffer and window navigation
   "<mouse-9>"   #'next-buffer
-  "<mouse-8>"   #'previous-buffer)
+  "<mouse-8>"   #'previous-buffer
+  "C-S-<up>"    #'ek/move-line-up
+  "C-S-<down>"  #'ek/move-line-down)
 
   (general-define-key
    :prefix "M-c"

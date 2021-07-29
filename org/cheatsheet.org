@@ -73,6 +73,7 @@ C-S-p           mark from current position to prev line
 C-M-S-n         mark from current position to end of block
 C-M-S-p         mark from current position to beggining of block
 C-q             expand region
+M-h             mark block
 C-M-<mouse-1>   add cursor on click
 
 -----------------

@@ -24,7 +24,11 @@
   (whole-line-or-region-global-mode))
 
 (ek-pkg 'beginend
-  (beginend-global-mode 1))
+  (beginend-global-mode 1)
+  (general-define-key
+   :prefix "M-c"
+   "b" #'beginning-of-buffer
+   "e" #'end-of-buffer))
 
 (ek-pkg 'goto-last-change
   (general-define-key
@@ -40,7 +44,7 @@
 
 (ek-pkg 'multiple-cursors
   (general-define-key
-   "C-S-c C-S-c"   #' mc/edit-lines
+   "C-S-c C-S-c"   #'mc/edit-lines
    "C-S-c C-S-p"   #'mc/mark-previous-like-this-word
    "C-S-c C-S-n"   #'mc/mark-next-like-this-word
    "C-<"           #'mc/mark-previous-like-this
@@ -90,6 +94,8 @@
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 ;; Appearance related packages
+(ek-pkg 'all-the-icons)
+
 ;; Theme setup
 (ek-pkg 'doom-themes
   (setq doom-themes-enable-bold t
@@ -150,6 +156,17 @@
 (ek-pkg 'org-bullets
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
   (setq org-bullets-bullet-list '("◉" "○" "✸" "▷")))
+
+;; Editing
+(ek-pkg 'crux
+  (general-define-key
+   "C-o" #'crux-smart-open-line-above
+   "C-j" #'cruk-smart-open-line)
+  (general-define-key
+   :prefix "C-c"
+   "i" #'crux-cleanup-buffer-or-region
+   "d" #'crux-duplicate-current-line-or-region
+   "r" #'crux-rename-file-and-buffer))
 
 (provide 'ek-packages)
 

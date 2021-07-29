@@ -130,8 +130,10 @@ Disable backups and autosaves, deduce symlinks by default."
       (setq ek/font (concat ek/font "-11"))
       (message "Using font: `%s'..." ek/font)
       (set-face-font 'default ek/font)
-      (set-face-font 'fixed-pitch ek/font)
-      (set-face-font 'variable-pitch "Liberation Serif-13"))))
+      (set-face-font 'fixed-pitch ek/font)))
+
+  (if (find-font (font-spec :name "Liberation Serif"))
+      (set-face-font 'variable-pitch "Liberation Serif-13")))
 
 (add-hook 'emacs-startup-hook 'eg-base--set-font)
 
@@ -150,15 +152,13 @@ Disable backups and autosaves, deduce symlinks by default."
 
   (setq
    display-buffer-alist
-   `(("\\*Buffer List\\*" display-buffer-in-side-window
-      (side . top) (slot . 0) (window-width . 0.25)
-      (preserve-size . (nil . t)) ,ek/win-param)
+   `(
      ("\\*Tags List\\*" display-buffer-in-side-window
       (side . right) (slot . 0) (window-width . fit-window-to-buffer)
       (preserve-size . (t . nil)) ,ek/win-param)
-     ("\\*\\(?:help\\|grep\\|Completions\\)\\*"
+     ("\\*\\(?:help\\|grep\\|Completions\\|Messages\\|Compile-Log\\|Warnings\\)\\*"
       display-buffer-in-side-window
-      (side . bottom) (slot . -1) (preserve-size . (nil . t))
+      (side . right) (slot . 0) (preserve-size . (nil . t))
       ,ek/win-param)
      ("\\*\\(?:Eshell\\|Compilation\\)\\*" display-buffer-in-side-window
       (side . bottom) (slot . 1) (window-height . 0.25)

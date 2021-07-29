@@ -1,0 +1,2169 @@
+;; Object semanticdb-project-database-file-1567e3e727ec
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file-1567e3e727ec"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table-1567e35408d8"
+      :major-mode c++-mode
+      :tags 
+        '( ("_STL_HEAP_H" variable (:constant-flag t) nil [2363 2374])
+            ("debug/debug.h" include (:system-flag t) nil [2378 2402])
+            ("bits/move.h" include (:system-flag t) nil [2403 2425])
+            ("bits/predefined_ops.h" include (:system-flag t) nil [2426 2458])
+            ("std" type
+               (:members 
+                  ( ("__is_heap_until" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Distance" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type ("_Distance" type (:type "class") nil nil)
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2766 2796])
+                            ("__n" variable (:type ("_Distance" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [2797 2811])
+                            ("__comp" variable
+                               (:reference 1
+                                :type ("_Compare" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [2818 2835]))                          )
+                        (reparse-symbol namespacesubparts) [2623 3080])
+                    ("__is_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Distance" type (:type "class") nil nil))                          
+                        :type "bool"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3336 3366])
+                            ("__n" variable (:type ("_Distance" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3367 3381]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [3220 3505])
+                    ("__is_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil)
+                            ("_Distance" type (:type "class") nil nil))                          
+                        :type "bool"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3648 3678])
+                            ("__comp" variable (:type ("_Compare" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3679 3695])
+                            ("__n" variable (:type ("_Distance" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3696 3710]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [3509 3900])
+                    ("__is_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil))                          
+                        :type "bool"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4000 4030])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4031 4060]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [3904 4132])
+                    ("__is_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type "bool"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4251 4281])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4282 4311])
+                            ("__comp" variable (:type ("_Compare" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4319 4335]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [4136 4447])
+                    ("__push_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Distance" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4720 4750])
+                            ("__holeIndex" variable (:type ("_Distance" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4753 4775])
+                            ("__topIndex" variable (:type ("_Distance" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4776 4797])
+                            ("__value" variable (:type ("_Tp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4798 4810])
+                            ("__comp" variable
+                               (:reference 1
+                                :type ("_Compare" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [4813 4830]))                          )
+                        (reparse-symbol namespacesubparts) [4572 5165])
+                    ("push_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5609 5639])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5640 5669]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [5513 6471])
+                    ("push_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7056 7086])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7087 7116])
+                            ("__comp" variable (:type ("_Compare" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7124 7140]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [6941 7952])
+                    ("__adjust_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Distance" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8106 8136])
+                            ("__holeIndex" variable (:type ("_Distance" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8137 8159])
+                            ("__len" variable (:type ("_Distance" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8164 8180])
+                            ("__value" variable (:type ("_Tp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8181 8193])
+                            ("__comp" variable (:type ("_Compare" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [8194 8210]))                          )
+                        (reparse-symbol namespacesubparts) [7956 9060])
+                    ("__pop_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [9180 9210])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [9211 9240])
+                            ("__result" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [9249 9280])
+                            ("__comp" variable
+                               (:reference 1
+                                :type ("_Compare" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [9281 9298]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [9064 9715])
+                    ("pop_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [10187 10217])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [10218 10247]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [10092 10882])
+                    ("pop_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [11421 11451])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [11458 11487])
+                            ("__comp" variable (:type ("_Compare" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [11488 11504]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [11307 12103])
+                    ("__make_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [12217 12247])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [12248 12277])
+                            ("__comp" variable
+                               (:reference 1
+                                :type ("_Compare" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [12280 12297]))                          )
+                        (reparse-symbol namespacesubparts) [12107 12864])
+                    ("make_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [13205 13235])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [13236 13265]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [13109 13745])
+                    ("make_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [14219 14249])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [14250 14279])
+                            ("__comp" variable (:type ("_Compare" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [14287 14303]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [14104 14733])
+                    ("__sort_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [14847 14877])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [14878 14907])
+                            ("__comp" variable
+                               (:reference 1
+                                :type ("_Compare" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [14910 14927]))                          )
+                        (reparse-symbol namespacesubparts) [14737 15046])
+                    ("sort_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [15367 15397])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [15398 15427]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [15271 15955])
+                    ("sort_heap" function
+                       (:template 
+                          ( ("_RandomAccessIterator" type (:type "class") nil nil)
+                            ("_Compare" type (:type "class") nil nil))                          
+                        :type "void"
+                        :arguments 
+                          ( ("__first" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [16411 16441])
+                            ("__last" variable (:type ("_RandomAccessIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [16442 16471])
+                            ("__comp" variable (:type ("_Compare" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [16479 16495]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [16296 16986]))                  
+                :type "namespace")
+                nil [2460 20717]))          
+      :file "stl_heap.h"
+      :pointmax 20757
+      :fsize 20756
+      :lastmodtime '(24733 12662 0 0)
+      :unmatched-syntax '((symbol 20707 . 20715))
+      :lexical-table 
+        '(("_STL_HEAP_H" . ((number "1" 2375 . 2376)))
+          )
+)
+    (semanticdb-table "semanticdb-table-1567e35440ec"
+      :major-mode c++-mode
+      :tags 
+        '( ("_STL_FUNCTION_H" variable (:constant-flag t) nil [2388 2403])
+            ("std" type
+               (:members 
+                  ( ("unary_function" type
+                       (:template 
+                          ( ("_Arg" type (:type "class") nil nil)
+                            ("_Result" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("argument_type" type
+                               (:typedef ("_Arg" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [4281 4309])
+                            ("result_type" type
+                               (:typedef ("_Result" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [4364 4393]))                          )
+                        (reparse-symbol namespacesubparts) [4146 4402])
+                    ("binary_function" type
+                       (:template 
+                          ( ("_Arg1" type (:type "class") nil nil)
+                            ("_Arg2" type (:type "class") nil nil)
+                            ("_Result" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("first_argument_type" type
+                               (:typedef ("_Arg1" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [4653 4688])
+                            ("second_argument_type" type
+                               (:typedef ("_Arg2" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [4766 4802])
+                            ("result_type" type
+                               (:typedef ("_Result" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [4854 4883]))                          )
+                        (reparse-symbol namespacesubparts) [4488 4890])
+                    ("plus" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [5862 5877])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [5878 5893]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [5841 5927]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [5723 5934])
+                    ("minus" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6144 6159])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6160 6175]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [6123 6209]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [6004 6216])
+                    ("multiplies" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6431 6446])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6447 6462]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [6410 6496]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [6286 6503])
+                    ("divides" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6715 6730])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6731 6746]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [6694 6780]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [6573 6787])
+                    ("modulus" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6999 7014])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [7015 7030]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [6978 7064]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [6857 7071])
+                    ("negate" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [7276 7291]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [7255 7320]))                          
+                        :superclasses 
+                          ( ("unary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [7141 7327])
+                    ("equal_to" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [10890 10905])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [10906 10921]))                                  
+                                :type "bool")
+                                (reparse-symbol classsubparts) [10868 10956]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [10745 10963])
+                    ("not_equal_to" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [11188 11203])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [11204 11219]))                                  
+                                :type "bool")
+                                (reparse-symbol classsubparts) [11166 11254]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [11039 11261])
+                    ("greater" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [11481 11496])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [11497 11512]))                                  
+                                :type "bool")
+                                (reparse-symbol classsubparts) [11459 11546]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [11337 11553])
+                    ("less" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [11770 11785])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [11786 11801]))                                  
+                                :type "bool")
+                                (reparse-symbol classsubparts) [11748 11835]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [11629 11842])
+                    ("greater_equal" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [12068 12083])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [12084 12099]))                                  
+                                :type "bool")
+                                (reparse-symbol classsubparts) [12046 12134]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [11918 12141])
+                    ("less_equal" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [12364 12379])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [12380 12395]))                                  
+                                :type "bool")
+                                (reparse-symbol classsubparts) [12342 12430]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [12217 12437])
+                    ("greater" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          
+                        :template-specifier 
+                          ( ("_Tp" type (:pointer 1) nil nil))                          )
+                        (reparse-symbol namespacesubparts) [12499 12962])
+                    ("less" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          
+                        :template-specifier 
+                          ( ("_Tp" type (:pointer 1) nil nil))                          )
+                        (reparse-symbol namespacesubparts) [13021 13481])
+                    ("greater_equal" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          
+                        :template-specifier 
+                          ( ("_Tp" type (:pointer 1) nil nil))                          )
+                        (reparse-symbol namespacesubparts) [13549 14021])
+                    ("less_equal" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          
+                        :template-specifier 
+                          ( ("_Tp" type (:pointer 1) nil nil))                          )
+                        (reparse-symbol namespacesubparts) [14086 14555])
+                    ("logical_and" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [24880 24895])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [24896 24911]))                                  
+                                :type "bool")
+                                (reparse-symbol classsubparts) [24858 24946]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [24732 24953])
+                    ("logical_or" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [25181 25196])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [25197 25212]))                                  
+                                :type "bool")
+                                (reparse-symbol classsubparts) [25159 25247]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [25034 25254])
+                    ("logical_not" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [25477 25492]))                                  
+                                :type "bool")
+                                (reparse-symbol classsubparts) [25455 25521]))                          
+                        :superclasses 
+                          ( ("unary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [25335 25528])
+                    ("bit_and" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [27402 27417])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [27418 27433]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [27381 27467]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [27260 27474])
+                    ("bit_or" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [27619 27634])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [27635 27650]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [27598 27684]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [27478 27691])
+                    ("bit_xor" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [27837 27852])
+                                    ("__y" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [27853 27868]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [27816 27902]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [27695 27909])
+                    ("bit_not" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [28047 28062]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [28026 28091]))                          
+                        :superclasses 
+                          ( ("unary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [27913 28098])
+                    ("not1" function
+                       (:template 
+                          ( ("_Predicate" type (:type "class") nil nil))                          
+                        :type ("unary_negate" type
+                             (:template-specifier 
+                                ( ("_Predicate" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments 
+                          ( ("__pred" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("_Predicate" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [31350 31375]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [31250 31424])
+                    ("not2" function
+                       (:template 
+                          ( ("_Predicate" type (:type "class") nil nil))                          
+                        :type ("binary_negate" type
+                             (:template-specifier 
+                                ( ("_Predicate" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments 
+                          ( ("__pred" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("_Predicate" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [32212 32237]))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [32111 32287])
+                    ("pointer_to_unary_function" type
+                       (:template 
+                          ( ("_Arg" type (:type "class") nil nil)
+                            ("_Result" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("protected" label nil (reparse-symbol classsubparts) [33610 33620])
+                            ("_M_ptr" function
+                               (:prototype-flag t
+                                :function-pointer t
+                                :arguments 
+                                  ( ("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [33645 33650]))                                  
+                                :type ("_Result" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [33627 33651])
+                            ("public" label nil (reparse-symbol classsubparts) [33657 33664])
+                            ("pointer_to_unary_function" function
+                               (:constructor-flag t
+                                :type ("pointer_to_unary_function" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [33671 33702])
+                            ("pointer_to_unary_function" function
+                               (:constructor-flag t
+                                :arguments 
+                                  ( ("__x" function
+                                       (:function-pointer t
+                                        :arguments 
+                                          ( ("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [33766 33771]))                                          
+                                        :type ("_Result" type (:type "class") nil nil))
+                                        nil nil))                                  
+                                :type ("pointer_to_unary_function" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [33725 33796])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [33829 33838]))                                  
+                                :type ("_Result" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [33804 33874]))                          
+                        :superclasses 
+                          ( ("unary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [33483 33881])
+                    ("ptr_fun" function
+                       (:template 
+                          ( ("_Arg" type (:type "class") nil nil)
+                            ("_Result" type (:type "class") nil nil))                          
+                        :type ("pointer_to_unary_function" type
+                             (:template-specifier 
+                                ( ("_Arg" type nil nil nil)
+                                  ("_Result" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments 
+                          ( ("__x" function
+                               (:function-pointer t
+                                :arguments 
+                                  ( ("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34086 34091]))                                  
+                                :type ("_Result" type (:type "class") nil nil))
+                                nil nil))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [33965 34154])
+                    ("pointer_to_binary_function" type
+                       (:template 
+                          ( ("_Arg1" type (:type "class") nil nil)
+                            ("_Arg2" type (:type "class") nil nil)
+                            ("_Result" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("protected" label nil (reparse-symbol classsubparts) [34396 34406])
+                            ("_M_ptr" function
+                               (:prototype-flag t
+                                :function-pointer t
+                                :arguments 
+                                  ( ("" variable (:type ("_Arg1" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34431 34437])
+                                    ("" variable (:type ("_Arg2" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34438 34444]))                                  
+                                :type ("_Result" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [34413 34445])
+                            ("public" label nil (reparse-symbol classsubparts) [34451 34458])
+                            ("pointer_to_binary_function" function
+                               (:constructor-flag t
+                                :type ("pointer_to_binary_function" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [34465 34497])
+                            ("pointer_to_binary_function" function
+                               (:constructor-flag t
+                                :arguments 
+                                  ( ("__x" function
+                                       (:function-pointer t
+                                        :arguments 
+                                          ( ("" variable (:type ("_Arg1" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34562 34568])
+                                            ("" variable (:type ("_Arg2" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34569 34575]))                                          
+                                        :type ("_Result" type (:type "class") nil nil))
+                                        nil nil))                                  
+                                :type ("pointer_to_binary_function" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [34520 34600])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable (:type ("_Arg1" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34633 34643])
+                                    ("__y" variable (:type ("_Arg2" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34644 34654]))                                  
+                                :type ("_Result" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [34608 34695]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [34238 34702])
+                    ("ptr_fun" function
+                       (:template 
+                          ( ("_Arg1" type (:type "class") nil nil)
+                            ("_Arg2" type (:type "class") nil nil)
+                            ("_Result" type (:type "class") nil nil))                          
+                        :type ("pointer_to_binary_function" type
+                             (:template-specifier 
+                                ( ("_Arg1" type nil nil nil)
+                                  ("_Arg2" type nil nil nil)
+                                  ("_Result" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments 
+                          ( ("__x" function
+                               (:function-pointer t
+                                :arguments 
+                                  ( ("" variable (:type ("_Arg1" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34933 34939])
+                                    ("" variable (:type ("_Arg2" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34940 34946]))                                  
+                                :type ("_Result" type (:type "class") nil nil))
+                                nil nil))                          
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [34786 35018])
+                    ("_Identity" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :members 
+                          ( ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [35151 35160]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [35129 35188])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :constant-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [35224 35239]))                                  
+                                :type ("_Tp" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [35196 35267]))                          
+                        :superclasses 
+                          ( ("unary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [35035 35274])
+                    ("_Identity" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil))                          
+                        :type "struct"
+                        :superclasses 
+                          ( ("_Identity" type
+                               (:protection "unspecified"
+                                :type "class")
+                                nil nil))                          
+                        :template-specifier 
+                          ( ("_Tp" type (:constant-flag t) nil nil))                          )
+                        (reparse-symbol namespacesubparts) [35358 35430])
+                    ("mem_fun_t" type
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("public" label nil (reparse-symbol classsubparts) [37255 37262])
+                            ("mem_fun_t" function
+                               (:constructor-flag t
+                                :arguments ((nil variable (:type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [37294 37314]))
+                                :type ("mem_fun_t" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [37284 37337])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__p" variable
+                                       (:pointer 1
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [37367 37376]))                                  
+                                :type ("_Ret" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [37345 37415])
+                            ("private" label nil (reparse-symbol classsubparts) [37421 37429])
+                            ("_Ret" function
+                               (:arguments 
+                                  ( ("" variable (:type ("_Tp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [37442 37446])
+                                    ("" variable (:type ("_M_f" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [37448 37453]))                                  
+                                :type "int")
+                                (reparse-symbol classsubparts) [37436 37455]))                          
+                        :superclasses 
+                          ( ("unary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [37151 37463])
+                    ("const_mem_fun_t" type
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("public" label nil (reparse-symbol classsubparts) [37666 37673])
+                            ("const_mem_fun_t" function
+                               (:constructor-flag t
+                                :arguments ((nil variable (:type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [37711 37736]))
+                                :type ("const_mem_fun_t" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [37695 37760])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__p" variable
+                                       (:pointer 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [37790 37805]))                                  
+                                :type ("_Ret" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [37768 37844])
+                            ("private" label nil (reparse-symbol classsubparts) [37850 37858])
+                            ("_Ret" function
+                               (:arguments 
+                                  ( ("" variable (:type ("_Tp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [37871 37875])
+                                    ("" variable (:type ("_M_f" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [37877 37882]))                                  
+                                :type "int")
+                                (reparse-symbol classsubparts) [37865 37884]))                          
+                        :superclasses 
+                          ( ("unary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [37550 37898])
+                    ("mem_fun_ref_t" type
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("public" label nil (reparse-symbol classsubparts) [38092 38099])
+                            ("mem_fun_ref_t" function
+                               (:constructor-flag t
+                                :arguments ((nil variable (:type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [38135 38155]))
+                                :type ("mem_fun_ref_t" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [38121 38178])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__r" variable
+                                       (:reference 1
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [38208 38217]))                                  
+                                :type ("_Ret" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [38186 38255])
+                            ("private" label nil (reparse-symbol classsubparts) [38261 38269])
+                            ("_Ret" function
+                               (:arguments 
+                                  ( ("" variable (:type ("_Tp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [38282 38286])
+                                    ("" variable (:type ("_M_f" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [38288 38293]))                                  
+                                :type "int")
+                                (reparse-symbol classsubparts) [38276 38295]))                          
+                        :superclasses 
+                          ( ("unary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [37985 38301])
+                    ("const_mem_fun_ref_t" type
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("public" label nil (reparse-symbol classsubparts) [38501 38508])
+                            ("const_mem_fun_ref_t" function
+                               (:constructor-flag t
+                                :arguments ((nil variable (:type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [38550 38575]))
+                                :type ("const_mem_fun_ref_t" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [38530 38599])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__r" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [38629 38644]))                                  
+                                :type ("_Ret" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [38607 38682])
+                            ("private" label nil (reparse-symbol classsubparts) [38688 38696])
+                            ("_Ret" function
+                               (:arguments 
+                                  ( ("" variable (:type ("_Tp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [38709 38713])
+                                    ("" variable (:type ("_M_f" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [38715 38720]))                                  
+                                :type "int")
+                                (reparse-symbol classsubparts) [38703 38722]))                          
+                        :superclasses 
+                          ( ("unary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [38388 38736])
+                    ("mem_fun1_t" type
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil)
+                            ("_Arg" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("public" label nil (reparse-symbol classsubparts) [38950 38957])
+                            ("mem_fun1_t" function
+                               (:constructor-flag t
+                                :arguments ((nil variable (:pointer (("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39008 39013])) :type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [38990 39014]))
+                                :type ("mem_fun1_t" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [38979 39037])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__p" variable
+                                       (:pointer 1
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [39067 39076])
+                                    ("__x" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39077 39086]))                                  
+                                :type ("_Ret" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [39045 39128])
+                            ("private" label nil (reparse-symbol classsubparts) [39134 39142])
+                            ("_Ret" function
+                               (:arguments 
+                                  ( ("" variable (:type ("_Tp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39155 39159])
+                                    ("" variable (:type ("_M_f" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39161 39166]))                                  
+                                :type "int")
+                                (reparse-symbol classsubparts) [39149 39172]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [38823 39180])
+                    ("const_mem_fun1_t" type
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil)
+                            ("_Arg" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("public" label nil (reparse-symbol classsubparts) [39406 39413])
+                            ("const_mem_fun1_t" function
+                               (:constructor-flag t
+                                :arguments ((nil variable (:pointer (("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39470 39475])) :type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39452 39481]))
+                                :type ("const_mem_fun1_t" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [39435 39505])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__p" variable
+                                       (:pointer 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [39535 39550])
+                                    ("__x" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39551 39560]))                                  
+                                :type ("_Ret" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [39513 39602])
+                            ("private" label nil (reparse-symbol classsubparts) [39608 39616])
+                            ("_Ret" function
+                               (:arguments 
+                                  ( ("" variable (:type ("_Tp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39629 39633])
+                                    ("" variable (:type ("_M_f" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39635 39640]))                                  
+                                :type "int")
+                                (reparse-symbol classsubparts) [39623 39646]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [39267 39660])
+                    ("mem_fun1_ref_t" type
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil)
+                            ("_Arg" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("public" label nil (reparse-symbol classsubparts) [39877 39884])
+                            ("mem_fun1_ref_t" function
+                               (:constructor-flag t
+                                :arguments ((nil variable (:pointer (("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39939 39944])) :type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [39921 39945]))
+                                :type ("mem_fun1_ref_t" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [39906 39968])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__r" variable
+                                       (:reference 1
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [39998 40007])
+                                    ("__x" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40008 40017]))                                  
+                                :type ("_Ret" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [39976 40058])
+                            ("private" label nil (reparse-symbol classsubparts) [40064 40072])
+                            ("_Ret" function
+                               (:arguments 
+                                  ( ("" variable (:type ("_Tp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40085 40089])
+                                    ("" variable (:type ("_M_f" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40091 40096]))                                  
+                                :type "int")
+                                (reparse-symbol classsubparts) [40079 40102]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [39747 40110])
+                    ("const_mem_fun1_ref_t" type
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil)
+                            ("_Arg" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("public" label nil (reparse-symbol classsubparts) [40333 40340])
+                            ("const_mem_fun1_ref_t" function
+                               (:constructor-flag t
+                                :arguments ((nil variable (:pointer (("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40401 40406])) :type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40383 40412]))
+                                :type ("const_mem_fun1_ref_t" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [40362 40436])
+                            ("()" function
+                               (:methodconst-flag t
+                                :operator-flag t
+                                :arguments 
+                                  ( ("__r" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Tp" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [40466 40481])
+                                    ("__x" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40482 40491]))                                  
+                                :type ("_Ret" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [40444 40532])
+                            ("private" label nil (reparse-symbol classsubparts) [40538 40546])
+                            ("_Ret" function
+                               (:arguments 
+                                  ( ("" variable (:type ("_Tp" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40559 40563])
+                                    ("" variable (:type ("_M_f" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40565 40570]))                                  
+                                :type "int")
+                                (reparse-symbol classsubparts) [40553 40576]))                          
+                        :superclasses 
+                          ( ("binary_function" type
+                               (:protection "public"
+                                :type "class")
+                                nil nil))                          )
+                        (reparse-symbol namespacesubparts) [40197 40590])
+                    ("mem_fun" function
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil))                          
+                        :type ("mem_fun_t" type
+                             (:template-specifier 
+                                ( ("_Ret" type nil nil nil)
+                                  ("_Tp" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments ((nil variable (:type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40766 40785]))
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [40684 40827])
+                    ("mem_fun" function
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil))                          
+                        :type ("const_mem_fun_t" type
+                             (:template-specifier 
+                                ( ("_Ret" type nil nil nil)
+                                  ("_Tp" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments ((nil variable (:type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [40919 40943]))
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [40831 40992])
+                    ("mem_fun_ref" function
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil))                          
+                        :type ("mem_fun_ref_t" type
+                             (:template-specifier 
+                                ( ("_Ret" type nil nil nil)
+                                  ("_Tp" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments ((nil variable (:type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [41086 41105]))
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [40996 41151])
+                    ("mem_fun_ref" function
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil))                          
+                        :type ("const_mem_fun_ref_t" type
+                             (:template-specifier 
+                                ( ("_Ret" type nil nil nil)
+                                  ("_Tp" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments ((nil variable (:type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [41251 41275]))
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [41155 41328])
+                    ("mem_fun" function
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil)
+                            ("_Arg" type (:type "class") nil nil))                          
+                        :type ("mem_fun1_t" type
+                             (:template-specifier 
+                                ( ("_Ret" type nil nil nil)
+                                  ("_Tp" type nil nil nil)
+                                  ("_Arg" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments ((nil variable (:pointer (("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [41453 41458])) :type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [41436 41459]))
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [41332 41508])
+                    ("mem_fun" function
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil)
+                            ("_Arg" type (:type "class") nil nil))                          
+                        :type ("const_mem_fun1_t" type
+                             (:template-specifier 
+                                ( ("_Ret" type nil nil nil)
+                                  ("_Tp" type nil nil nil)
+                                  ("_Arg" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments ((nil variable (:pointer (("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [41639 41644])) :type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [41622 41650]))
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [41512 41706])
+                    ("mem_fun_ref" function
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil)
+                            ("_Arg" type (:type "class") nil nil))                          
+                        :type ("mem_fun1_ref_t" type
+                             (:template-specifier 
+                                ( ("_Ret" type nil nil nil)
+                                  ("_Tp" type nil nil nil)
+                                  ("_Arg" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments ((nil variable (:pointer (("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [41839 41844])) :type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [41822 41845]))
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [41710 41898])
+                    ("mem_fun_ref" function
+                       (:template 
+                          ( ("_Ret" type (:type "class") nil nil)
+                            ("_Tp" type (:type "class") nil nil)
+                            ("_Arg" type (:type "class") nil nil))                          
+                        :type ("const_mem_fun1_ref_t" type
+                             (:template-specifier 
+                                ( ("_Ret" type nil nil nil)
+                                  ("_Tp" type nil nil nil)
+                                  ("_Arg" type nil nil nil))                                
+                              :type "class")
+                              nil nil)
+                        :arguments ((nil variable (:pointer (("" variable (:type ("_Arg" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [42037 42042])) :type ("_Ret" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [42020 42048]))
+                        :typemodifiers ("inline"))
+                        (reparse-symbol namespacesubparts) [41902 42108]))                  
+                :type "namespace")
+                nil [2464 42628]))          
+      :file "stl_function.h"
+      :pointmax 42766
+      :fsize 42765
+      :lastmodtime '(24733 12662 0 0)
+      :unmatched-syntax '((symbol 42618 . 42626) (CONST 42043 . 42048) (CONST 41645 . 41650) (CONST 41270 . 41275) (CONST 40938 . 40943) (punctuation 40582 . 40583) (CONST 40577 . 40582) (punctuation 40564 . 40565) (punctuation 40563 . 40564) (punctuation 40562 . 40563) (CONST 40407 . 40412) (EXPLICIT 40347 . 40355) (punctuation 40102 . 40103) (punctuation 40090 . 40091) (punctuation 40089 . 40090) (punctuation 40088 . 40089) (EXPLICIT 39891 . 39899) (punctuation 39652 . 39653) (CONST 39647 . 39652) (punctuation 39634 . 39635) (punctuation 39633 . 39634) (punctuation 39632 . 39633) (CONST 39476 . 39481) (EXPLICIT 39420 . 39428) (punctuation 39172 . 39173) (punctuation 39160 . 39161) (punctuation 39159 . 39160) (punctuation 39158 . 39159) (EXPLICIT 38964 . 38972) (punctuation 38728 . 38729) (CONST 38723 . 38728) (punctuation 38714 . 38715) (punctuation 38713 . 38714) (punctuation 38712 . 38713) (CONST 38570 . 38575) (EXPLICIT 38515 . 38523) (punctuation 38295 . 38296) (punctuation 38287 . 38288) (punctuation 38286 . 38287) (punctuation 38285 . 38286) (EXPLICIT 38106 . 38114) (punctuation 37890 . 37891) (CONST 37885 . 37890) (punctuation 37876 . 37877) (punctuation 37875 . 37876) (punctuation 37874 . 37875) (CONST 37731 . 37736) (EXPLICIT 37680 . 37688) (punctuation 37455 . 37456) (punctuation 37447 . 37448) (punctuation 37446 . 37447) (punctuation 37445 . 37446) (EXPLICIT 37269 . 37277) (punctuation 36422 . 36423) (semantic-list 36204 . 36422) (punctuation 36198 . 36199) (symbol 36187 . 36198) (punctuation 36186 . 36187) (punctuation 36185 . 36186) (symbol 36180 . 36185) (TYPENAME 36171 . 36179) (punctuation 36169 . 36170) (symbol 36164 . 36169) (punctuation 36163 . 36164) (symbol 36149 . 36163) (PUBLIC 36142 . 36148) (punctuation 36140 . 36141) (symbol 36125 . 36135) (STRUCT 36118 . 36124) (punctuation 36112 . 36113) (symbol 36107 . 36112) (TYPENAME 36098 . 36106) (punctuation 36097 . 36098) (TEMPLATE 36089 . 36097) (punctuation 36084 . 36085) (semantic-list 35548 . 36084) (punctuation 35542 . 35543) (symbol 35532 . 35542) (punctuation 35531 . 35532) (punctuation 35530 . 35531) (symbol 35525 . 35530) (TYPENAME 35516 . 35524) (punctuation 35514 . 35515) (symbol 35509 . 35514) (punctuation 35508 . 35509) (symbol 35494 . 35508) (PUBLIC 35487 . 35493) (punctuation 35485 . 35486) (symbol 35470 . 35480) (STRUCT 35463 . 35469) (punctuation 35457 . 35458) (symbol 35452 . 35457) (TYPENAME 35443 . 35451) (punctuation 35442 . 35443) (TEMPLATE 35434 . 35442) (EXPLICIT 34505 . 34513) (EXPLICIT 33710 . 33718) (punctuation 32047 . 32048) (semantic-list 31673 . 32047) (punctuation 31667 . 31668) (BOOL 31663 . 31667) (punctuation 31661 . 31662) (symbol 31641 . 31661) (punctuation 31640 . 31641) (punctuation 31639 . 31640) (symbol 31629 . 31639) (TYPENAME 31620 . 31628) (punctuation 31610 . 31611) (symbol 31591 . 31610) (punctuation 31590 . 31591) (punctuation 31589 . 31590) (symbol 31579 . 31589) (TYPENAME 31570 . 31578) (punctuation 31569 . 31570) (symbol 31554 . 31569) (PUBLIC 31547 . 31553) (punctuation 31545 . 31546) (symbol 31527 . 31540) (CLASS 31521 . 31526) (punctuation 31515 . 31516) (symbol 31505 . 31515) (TYPENAME 31496 . 31504) (punctuation 31495 . 31496) (TEMPLATE 31487 . 31495) (punctuation 31186 . 31187) (semantic-list 30881 . 31186) (punctuation 30875 . 30876) (BOOL 30871 . 30875) (punctuation 30869 . 30870) (symbol 30856 . 30869) (punctuation 30855 . 30856) (punctuation 30854 . 30855) (symbol 30844 . 30854) (TYPENAME 30835 . 30843) (punctuation 30834 . 30835) (symbol 30820 . 30834) (PUBLIC 30813 . 30819) (punctuation 30811 . 30812) (symbol 30794 . 30806) (CLASS 30788 . 30793) (punctuation 30782 . 30783) (symbol 30772 . 30782) (TYPENAME 30763 . 30771) (punctuation 30762 . 30763) (TEMPLATE 30754 . 30762) (semantic-list 14284 . 14548) (semantic-list "()" 14261 . 14277) (THROW "throw" 14261 . 14277) (CONST 14255 . 14260) (semantic-list 14234 . 14254) (semantic-list 14232 . 14234) (OPERATOR 14224 . 14232) (BOOL 14213 . 14217) (semantic-list 13750 . 14014) (semantic-list "()" 13727 . 13743) (THROW "throw" 13727 . 13743) (CONST 13721 . 13726) (semantic-list 13700 . 13720) (semantic-list 13698 . 13700) (OPERATOR 13690 . 13698) (BOOL 13679 . 13683) (semantic-list 13213 . 13474) (semantic-list "()" 13190 . 13206) (THROW "throw" 13190 . 13206) (CONST 13184 . 13189) (semantic-list 13163 . 13183) (semantic-list 13161 . 13163) (OPERATOR 13153 . 13161) (BOOL 13142 . 13146) (semantic-list 12694 . 12955) (semantic-list "()" 12671 . 12687) (THROW "throw" 12671 . 12687) (CONST 12665 . 12670) (semantic-list 12644 . 12664) (semantic-list 12642 . 12644) (OPERATOR 12634 . 12642) (BOOL 12623 . 12627))
+      :lexical-table 
+        '(("_STL_FUNCTION_H" . ((number "1" 2404 . 2405)))
+          )
+)
+    (semanticdb-table "semanticdb-table-1567e3544888"
+      :major-mode c++-mode
+      :tags 
+        '( ("_STL_QUEUE_H" variable (:constant-flag t) nil [2374 2386])
+            ("bits/concept_check.h" include (:system-flag t) nil [2390 2421])
+            ("debug/debug.h" include (:system-flag t) nil [2422 2446])
+            ("std" type
+               (:members 
+                  ( ("queue" type
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil)
+                            ("_Sequence" type (:type "class") nil nil))                          
+                        :type "class"
+                        :members 
+                          ( ("==" function
+                               (:template 
+                                  ( ("_Tp1" type (:type "class") nil nil)
+                                    ("_Seq1" type (:type "class") nil nil))                                  
+                                :type "bool"
+                                :arguments 
+                                  ( ("" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("queue" type
+                                             (:template-specifier 
+                                                ( ("_Tp1" type nil nil nil)
+                                                  ("_Seq1" type nil nil nil))                                                
+                                              :type "class")
+                                              nil nil))
+                                        (reparse-symbol arg-sub-list) [4360 4386])
+                                    ("" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("queue" type
+                                             (:template-specifier 
+                                                ( ("_Tp1" type nil nil nil)
+                                                  ("_Seq1" type nil nil nil))                                                
+                                              :type "class")
+                                              nil nil))
+                                        (reparse-symbol arg-sub-list) [4387 4413]))                                  
+                                :operator-flag t
+                                :prototype-flag t)
+                                (reparse-symbol classsubparts) [4295 4414])
+                            ("<" function
+                               (:template 
+                                  ( ("_Tp1" type (:type "class") nil nil)
+                                    ("_Seq1" type (:type "class") nil nil))                                  
+                                :type "bool"
+                                :arguments 
+                                  ( ("" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("queue" type
+                                             (:template-specifier 
+                                                ( ("_Tp1" type nil nil nil)
+                                                  ("_Seq1" type nil nil nil))                                                
+                                              :type "class")
+                                              nil nil))
+                                        (reparse-symbol arg-sub-list) [4486 4512])
+                                    ("" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("queue" type
+                                             (:template-specifier 
+                                                ( ("_Tp1" type nil nil nil)
+                                                  ("_Seq1" type nil nil nil))                                                
+                                              :type "class")
+                                              nil nil))
+                                        (reparse-symbol arg-sub-list) [4513 4539]))                                  
+                                :operator-flag t
+                                :prototype-flag t)
+                                (reparse-symbol classsubparts) [4422 4540])
+                            ("public" label nil (reparse-symbol classsubparts) [5228 5235])
+                            ("value_type" type
+                               (:typedef ("_Sequence::value_type" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [5242 5293])
+                            ("reference" type
+                               (:typedef ("_Sequence::reference" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [5300 5349])
+                            ("const_reference" type
+                               (:typedef ("_Sequence::const_reference" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [5356 5416])
+                            ("size_type" type
+                               (:typedef ("_Sequence::size_type" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [5423 5472])
+                            ("container_type" type
+                               (:typedef ("_Sequence" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [5479 5515])
+                            ("protected" label nil (reparse-symbol classsubparts) [5521 5531])
+                            ("c" variable (:type ("_Sequence" type (:type "class") nil nil)) (reparse-symbol classsubparts) [5960 5972])
+                            ("public" label nil (reparse-symbol classsubparts) [5978 5985])
+                            ("queue" function
+                               (:constructor-flag t
+                                :type ("queue" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [6316 6334])
+                            ("queue" function
+                               (:constructor-flag t
+                                :arguments 
+                                  ( ("__c" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Sequence" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6363 6384]))                                  
+                                :type ("queue" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [6357 6403])
+                            ("queue" function
+                               (:constructor-flag t
+                                :arguments 
+                                  ( ("" variable
+                                       (:reference 1
+                                        :type ("_Sequence" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6432 6443])
+                                    ("" variable (:type ("__c" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6444 6448]))                                  
+                                :type ("queue" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [6426 6478])
+                            ("queue" function
+                               (:constructor-flag t
+                                :arguments 
+                                  ( ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6565 6583]))                                  
+                                :type ("queue" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [6559 6597])
+                            ("queue" function
+                               (:template 
+                                  ( ("_Alloc" type (:type "class") nil nil)
+                                    ("_Requires" type (:type "class") nil nil))                                  
+                                :type ("queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("__c" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Sequence" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6674 6695])
+                                    ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6696 6714]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [6605 6733])
+                            ("queue" function
+                               (:template 
+                                  ( ("_Alloc" type (:type "class") nil nil)
+                                    ("_Requires" type (:type "class") nil nil))                                  
+                                :type ("queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("" variable
+                                       (:reference 1
+                                        :type ("_Sequence" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6810 6821])
+                                    ("" variable (:type ("__c" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6822 6826])
+                                    ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6827 6845]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [6741 6875])
+                            ("queue" function
+                               (:template 
+                                  ( ("_Alloc" type (:type "class") nil nil)
+                                    ("_Requires" type (:type "class") nil nil))                                  
+                                :type ("queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("__q" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("queue" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6952 6969])
+                                    ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [6970 6988]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [6883 7009])
+                            ("queue" function
+                               (:template 
+                                  ( ("_Alloc" type (:type "class") nil nil)
+                                    ("_Requires" type (:type "class") nil nil))                                  
+                                :type ("queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("" variable
+                                       (:reference 1
+                                        :type ("queue" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [7086 7093])
+                                    ("" variable (:type ("__q" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7094 7098])
+                                    ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [7099 7117]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [7017 7149])
+                            ("empty" function
+                               (:methodconst-flag t
+                                :type "bool")
+                                (reparse-symbol classsubparts) [7250 7302])
+                            ("size" function
+                               (:methodconst-flag t
+                                :type ("size_type" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [7371 7426])
+                            ("front" function (:type ("reference" type (:type "class") nil nil)) (reparse-symbol classsubparts) [7553 7643])
+                            ("front" function
+                               (:methodconst-flag t
+                                :type ("const_reference" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [7780 7882])
+                            ("back" function (:type ("reference" type (:type "class") nil nil)) (reparse-symbol classsubparts) [8008 8096])
+                            ("back" function
+                               (:methodconst-flag t
+                                :type ("const_reference" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [8232 8332])
+                            ("push" function
+                               (:arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("value_type" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [8721 8743]))                                  
+                                :type "void")
+                                (reparse-symbol classsubparts) [8705 8771])
+                            ("pop" function (:type "void") (reparse-symbol classsubparts) [9592 9672]))                          )
+                        (reparse-symbol namespacesubparts) [3756 10021])
+                    ("==" function
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil)
+                            ("_Seq" type (:type "class") nil nil))                          
+                        :type "bool"
+                        :arguments 
+                          ( ("__x" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [11029 11057])
+                            ("__y" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [11058 11086]))                          
+                        :typemodifiers ("inline")
+                        :operator-flag t)
+                        (reparse-symbol namespacesubparts) [10960 11117])
+                    ("<" function
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil)
+                            ("_Seq" type (:type "class") nil nil))                          
+                        :type "bool"
+                        :arguments 
+                          ( ("__x" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [11738 11766])
+                            ("__y" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [11767 11795]))                          
+                        :typemodifiers ("inline")
+                        :operator-flag t)
+                        (reparse-symbol namespacesubparts) [11670 11825])
+                    ("!=" function
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil)
+                            ("_Seq" type (:type "class") nil nil))                          
+                        :type "bool"
+                        :arguments 
+                          ( ("__x" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [11924 11952])
+                            ("__y" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [11953 11981]))                          
+                        :typemodifiers ("inline")
+                        :operator-flag t)
+                        (reparse-symbol namespacesubparts) [11855 12011])
+                    (">" function
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil)
+                            ("_Seq" type (:type "class") nil nil))                          
+                        :type "bool"
+                        :arguments 
+                          ( ("__x" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12108 12136])
+                            ("__y" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12137 12165]))                          
+                        :typemodifiers ("inline")
+                        :operator-flag t)
+                        (reparse-symbol namespacesubparts) [12040 12191])
+                    ("<=" function
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil)
+                            ("_Seq" type (:type "class") nil nil))                          
+                        :type "bool"
+                        :arguments 
+                          ( ("__x" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12289 12317])
+                            ("__y" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12318 12346]))                          
+                        :typemodifiers ("inline")
+                        :operator-flag t)
+                        (reparse-symbol namespacesubparts) [12220 12375])
+                    (">=" function
+                       (:template 
+                          ( ("_Tp" type (:type "class") nil nil)
+                            ("_Seq" type (:type "class") nil nil))                          
+                        :type "bool"
+                        :arguments 
+                          ( ("__x" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12473 12501])
+                            ("__y" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("queue" type
+                                     (:template-specifier 
+                                        ( ("_Tp" type nil nil nil)
+                                          ("_Seq" type nil nil nil))                                        
+                                      :type "class")
+                                      nil nil))
+                                (reparse-symbol arg-sub-list) [12502 12530]))                          
+                        :typemodifiers ("inline")
+                        :operator-flag t)
+                        (reparse-symbol namespacesubparts) [12404 12559])
+                    ("priority_queue" type
+                       (:members 
+                          ( ("public" label nil (reparse-symbol classsubparts) [16444 16451])
+                            ("value_type" type
+                               (:typedef ("_Sequence::value_type" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [16458 16509])
+                            ("reference" type
+                               (:typedef ("_Sequence::reference" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [16516 16565])
+                            ("const_reference" type
+                               (:typedef ("_Sequence::const_reference" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [16572 16632])
+                            ("size_type" type
+                               (:typedef ("_Sequence::size_type" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [16639 16688])
+                            ("container_type" type
+                               (:typedef ("_Sequence" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [16695 16731])
+                            ("value_compare" type
+                               (:typedef ("_Compare" type (:type "class") nil nil)
+                                :type "typedef")
+                                (reparse-symbol classsubparts) [16836 16877])
+                            ("protected" label nil (reparse-symbol classsubparts) [16883 16893])
+                            ("c" variable (:type ("_Sequence" type (:type "class") nil nil)) (reparse-symbol classsubparts) [16949 16962])
+                            ("comp" variable (:type ("_Compare" type (:type "class") nil nil)) (reparse-symbol classsubparts) [16969 16985])
+                            ("public" label nil (reparse-symbol classsubparts) [16991 16998])
+                            ("priority_queue" function
+                               (:constructor-flag t
+                                :type ("priority_queue" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [17486 17521])
+                            ("priority_queue" function
+                               (:constructor-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Compare" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [17559 17579])
+                                    ("__s" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Sequence" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [17580 17601]))                                  
+                                :type ("priority_queue" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [17544 17679])
+                            ("priority_queue" function
+                               (:constructor-flag t
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Compare" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [17717 17737])
+                                    ("" variable
+                                       (:reference 1
+                                        :type ("_Sequence" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [17738 17749])
+                                    ("" variable (:type ("__s" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [17750 17767]))                                  
+                                :type ("priority_queue" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [17702 17857])
+                            ("priority_queue" function
+                               (:constructor-flag t
+                                :arguments 
+                                  ( ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [17953 17971]))                                  
+                                :type ("priority_queue" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [17938 17993])
+                            ("priority_queue" function
+                               (:template 
+                                  ( ("_Alloc" type (:type "class") nil nil)
+                                    ("_Requires" type (:type "class") nil nil))                                  
+                                :type ("priority_queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Compare" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18079 18099])
+                                    ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18100 18118]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [18001 18143])
+                            ("priority_queue" function
+                               (:template 
+                                  ( ("_Alloc" type (:type "class") nil nil)
+                                    ("_Requires" type (:type "class") nil nil))                                  
+                                :type ("priority_queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Compare" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18341 18361])
+                                    ("__c" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Sequence" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18362 18383])
+                                    ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18393 18411]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [18263 18484])
+                            ("priority_queue" function
+                               (:template 
+                                  ( ("_Alloc" type (:type "class") nil nil)
+                                    ("_Requires" type (:type "class") nil nil))                                  
+                                :type ("priority_queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Compare" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18570 18590])
+                                    ("" variable
+                                       (:reference 1
+                                        :type ("_Sequence" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18591 18602])
+                                    ("" variable (:type ("__c" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [18603 18607])
+                                    ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18608 18626]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [18492 18710])
+                            ("priority_queue" function
+                               (:template 
+                                  ( ("_Alloc" type (:type "class") nil nil)
+                                    ("_Requires" type (:type "class") nil nil))                                  
+                                :type ("priority_queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("__q" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("priority_queue" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18796 18822])
+                                    ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18823 18841]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [18718 18878])
+                            ("priority_queue" function
+                               (:template 
+                                  ( ("_Alloc" type (:type "class") nil nil)
+                                    ("_Requires" type (:type "class") nil nil))                                  
+                                :type ("priority_queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("" variable
+                                       (:reference 1
+                                        :type ("priority_queue" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18964 18980])
+                                    ("" variable (:type ("__q" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [18981 18985])
+                                    ("__a" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Alloc" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [18986 19004]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [18886 19063])
+                            ("priority_queue" function
+                               (:template 
+                                  ( ("_InputIterator" type (:type "class") nil nil))                                  
+                                :type ("priority_queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("__first" variable (:type ("_InputIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [20155 20178])
+                                    ("__last" variable (:type ("_InputIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [20179 20201])
+                                    ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Compare" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [20211 20231])
+                                    ("__s" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("_Sequence" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [20241 20262]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [20105 20425])
+                            ("priority_queue" function
+                               (:template 
+                                  ( ("_InputIterator" type (:type "class") nil nil))                                  
+                                :type ("priority_queue" type (:type "class") nil nil)
+                                :arguments 
+                                  ( ("__first" variable (:type ("_InputIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [20483 20506])
+                                    ("__last" variable (:type ("_InputIterator" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [20507 20529])
+                                    ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :default-value "_Compare()"
+                                        :type ("_Compare" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [20539 20571])
+                                    ("" variable
+                                       (:reference 1
+                                        :type ("_Sequence" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [20582 20593])
+                                    ("" variable (:type ("__s" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [20594 20611]))                                  
+                                :constructor-flag t)
+                                (reparse-symbol classsubparts) [20433 20786])
+                            ("empty" function
+                               (:methodconst-flag t
+                                :type "bool")
+                                (reparse-symbol classsubparts) [20887 20939])
+                            ("size" function
+                               (:methodconst-flag t
+                                :type ("size_type" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [21008 21063])
+                            ("top" function
+                               (:methodconst-flag t
+                                :type ("const_reference" type (:type "class") nil nil))
+                                (reparse-symbol classsubparts) [21200 21300])
+                            ("push" function
+                               (:arguments 
+                                  ( ("__x" variable
+                                       (:reference 1
+                                        :constant-flag t
+                                        :type ("value_type" type (:type "class") nil nil))
+                                        (reparse-symbol arg-sub-list) [21575 21597]))                                  
+                                :type "void")
+                                (reparse-symbol classsubparts) [21559 21675])
+                            ("pop" function (:type "void") (reparse-symbol classsubparts) [22419 22540]))                          
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [15416 22963])
+                    ("priority_queue" variable (:type "int") (reparse-symbol namespacesubparts) [23717 23761]))                  
+                :type "namespace")
+                nil [2516 24996]))          
+      :file "stl_queue.h"
+      :pointmax 25037
+      :fsize 25036
+      :lastmodtime '(24733 12662 0 0)
+      :unmatched-syntax '((symbol 24986 . 24994) (punctuation 24106 . 24107) (punctuation 24105 . 24106) (symbol 24097 . 24105) (punctuation 24095 . 24096) (symbol 24085 . 24095) (punctuation 24083 . 24084) (symbol 24073 . 24083) (punctuation 24072 . 24073) (punctuation 24071 . 24072) (symbol 24061 . 24071) (TYPENAME 24052 . 24060) (punctuation 24051 . 24052) (symbol 24037 . 24051) (punctuation 24035 . 24036) (punctuation 24034 . 24035) (semantic-list 23995 . 24029) (symbol 23981 . 23995) (punctuation 23975 . 23976) (punctuation 23974 . 23975) (symbol 23964 . 23974) (punctuation 23963 . 23964) (symbol 23946 . 23963) (punctuation 23944 . 23945) (TYPENAME 23935 . 23943) (punctuation 23929 . 23930) (punctuation 23928 . 23929) (symbol 23918 . 23928) (punctuation 23917 . 23918) (symbol 23897 . 23917) (punctuation 23895 . 23896) (TYPENAME 23886 . 23894) (punctuation 23880 . 23881) (punctuation 23879 . 23880) (symbol 23871 . 23879) (punctuation 23870 . 23871) (symbol 23850 . 23870) (punctuation 23848 . 23849) (TYPENAME 23839 . 23847) (punctuation 23833 . 23834) (symbol 23823 . 23833) (TYPENAME 23814 . 23822) (punctuation 23812 . 23813) (symbol 23802 . 23812) (TYPENAME 23793 . 23801) (punctuation 23791 . 23792) (symbol 23783 . 23791) (TYPENAME 23774 . 23782) (punctuation 23773 . 23774) (TEMPLATE 23765 . 23773) (punctuation 23715 . 23716) (punctuation 23714 . 23715) (semantic-list 23622 . 23709) (symbol 23608 . 23622) (punctuation 23602 . 23603) (punctuation 23601 . 23602) (symbol 23591 . 23601) (punctuation 23590 . 23591) (symbol 23570 . 23590) (punctuation 23568 . 23569) (TYPENAME 23559 . 23567) (punctuation 23553 . 23554) (punctuation 23552 . 23553) (symbol 23544 . 23552) (punctuation 23543 . 23544) (symbol 23523 . 23543) (punctuation 23521 . 23522) (TYPENAME 23512 . 23520) (punctuation 23506 . 23507) (punctuation 23505 . 23506) (symbol 23491 . 23505) (punctuation 23490 . 23491) (symbol 23473 . 23490) (punctuation 23471 . 23472) (TYPENAME 23462 . 23470) (punctuation 23456 . 23457) (punctuation 23455 . 23456) (symbol 23450 . 23455) (punctuation 23449 . 23450) (symbol 23443 . 23449) (punctuation 23441 . 23442) (symbol 23430 . 23440) (TYPENAME 23421 . 23429) (punctuation 23415 . 23416) (punctuation 23414 . 23415) (symbol 23409 . 23414) (punctuation 23408 . 23409) (symbol 23404 . 23408) (punctuation 23402 . 23403) (symbol 23393 . 23401) (TYPENAME 23384 . 23392) (punctuation 23378 . 23379) (symbol 23368 . 23378) (punctuation 23367 . 23368) (punctuation 23366 . 23367) (punctuation 23365 . 23366) (symbol 23351 . 23365) (punctuation 23350 . 23351) (symbol 23335 . 23350) (TYPENAME 23326 . 23334) (punctuation 23324 . 23325) (symbol 23314 . 23319) (TYPENAME 23305 . 23313) (punctuation 23303 . 23304) (symbol 23289 . 23303) (TYPENAME 23280 . 23288) (punctuation 23279 . 23280) (TEMPLATE 23271 . 23279) (punctuation 23266 . 23267) (punctuation 23265 . 23266) (symbol 23257 . 23265) (punctuation 23255 . 23256) (symbol 23245 . 23255) (punctuation 23243 . 23244) (symbol 23233 . 23243) (punctuation 23232 . 23233) (punctuation 23231 . 23232) (symbol 23221 . 23231) (TYPENAME 23212 . 23220) (punctuation 23211 . 23212) (symbol 23197 . 23211) (punctuation 23195 . 23196) (punctuation 23194 . 23195) (semantic-list 23167 . 23189) (symbol 23153 . 23167) (punctuation 23147 . 23148) (punctuation 23146 . 23147) (symbol 23136 . 23146) (punctuation 23135 . 23136) (symbol 23115 . 23135) (punctuation 23113 . 23114) (TYPENAME 23104 . 23112) (punctuation 23098 . 23099) (punctuation 23097 . 23098) (symbol 23089 . 23097) (punctuation 23088 . 23089) (symbol 23068 . 23088) (punctuation 23066 . 23067) (TYPENAME 23057 . 23065) (punctuation 23051 . 23052) (symbol 23041 . 23051) (TYPENAME 23032 . 23040) (punctuation 23030 . 23031) (symbol 23022 . 23030) (TYPENAME 23013 . 23021) (punctuation 23012 . 23013) (TEMPLATE 23004 . 23012) (punctuation 20592 . 20593) (punctuation 18979 . 18980) (punctuation 18601 . 18602) (EXPLICIT 17928 . 17936) (punctuation 17925 . 17926) (punctuation 17924 . 17925) (symbol 17918 . 17924) (punctuation 17917 . 17918) (symbol 17912 . 17917) (punctuation 17910 . 17911) (symbol 17900 . 17909) (TYPENAME 17891 . 17899) (punctuation 17889 . 17890) (symbol 17883 . 17889) (TYPENAME 17874 . 17882) (punctuation 17873 . 17874) (TEMPLATE 17865 . 17873) (punctuation 17748 . 17749) (EXPLICIT 17687 . 17695) (EXPLICIT 17529 . 17537) (punctuation 17483 . 17484) (symbol 17479 . 17483) (punctuation 17478 . 17479) (punctuation 17477 . 17478) (punctuation 17476 . 17477) (symbol 17471 . 17476) (punctuation 17470 . 17471) (punctuation 17469 . 17470) (punctuation 17468 . 17469) (punctuation 17467 . 17468) (symbol 17463 . 17467) (punctuation 17462 . 17463) (symbol 17438 . 17462) (punctuation 17432 . 17433) (punctuation 17431 . 17432) (symbol 17423 . 17431) (punctuation 17422 . 17423) (symbol 17398 . 17422) (punctuation 17397 . 17398) (symbol 17391 . 17397) (punctuation 17390 . 17391) (symbol 17381 . 17390) (TYPENAME 17364 . 17372) (punctuation 17362 . 17363) (symbol 17352 . 17361) (TYPENAME 17343 . 17351) (punctuation 17341 . 17342) (symbol 17332 . 17341) (punctuation 17330 . 17331) (symbol 17325 . 17329) (TYPENAME 17316 . 17324) (punctuation 17315 . 17316) (TEMPLATE 17307 . 17315) (punctuation 15410 . 15411) (punctuation 15408 . 15409) (symbol 15398 . 15408) (punctuation 15397 . 15398) (punctuation 15396 . 15397) (symbol 15387 . 15396) (TYPENAME 15378 . 15386) (punctuation 15377 . 15378) (symbol 15373 . 15377) (punctuation 15371 . 15372) (symbol 15361 . 15369) (TYPENAME 15352 . 15360) (punctuation 15346 . 15347) (punctuation 15345 . 15346) (symbol 15342 . 15345) (punctuation 15341 . 15342) (symbol 15335 . 15341) (punctuation 15333 . 15334) (symbol 15323 . 15332) (TYPENAME 15314 . 15322) (punctuation 15312 . 15313) (symbol 15309 . 15312) (TYPENAME 15300 . 15308) (punctuation 15299 . 15300) (TEMPLATE 15291 . 15299) (punctuation 10458 . 10459) (punctuation 10457 . 10458) (symbol 10447 . 10457) (punctuation 10445 . 10446) (symbol 10435 . 10445) (punctuation 10434 . 10435) (punctuation 10433 . 10434) (symbol 10423 . 10433) (TYPENAME 10414 . 10422) (punctuation 10413 . 10414) (symbol 10408 . 10413) (punctuation 10406 . 10407) (punctuation 10405 . 10406) (semantic-list 10376 . 10400) (symbol 10371 . 10376) (punctuation 10365 . 10366) (punctuation 10364 . 10365) (symbol 10354 . 10364) (punctuation 10353 . 10354) (symbol 10336 . 10353) (punctuation 10334 . 10335) (TYPENAME 10325 . 10333) (punctuation 10319 . 10320) (punctuation 10318 . 10319) (symbol 10308 . 10318) (punctuation 10307 . 10308) (symbol 10287 . 10307) (punctuation 10285 . 10286) (TYPENAME 10276 . 10284) (punctuation 10270 . 10271) (symbol 10260 . 10270) (TYPENAME 10251 . 10259) (punctuation 10249 . 10250) (symbol 10239 . 10249) (TYPENAME 10230 . 10238) (punctuation 10229 . 10230) (TEMPLATE 10221 . 10229) (punctuation 10216 . 10217) (punctuation 10215 . 10216) (symbol 10205 . 10215) (punctuation 10203 . 10204) (symbol 10193 . 10203) (punctuation 10192 . 10193) (punctuation 10191 . 10192) (symbol 10181 . 10191) (TYPENAME 10172 . 10180) (punctuation 10171 . 10172) (symbol 10166 . 10171) (punctuation 10164 . 10165) (punctuation 10163 . 10164) (semantic-list 10150 . 10162) (symbol 10145 . 10150) (punctuation 10139 . 10140) (punctuation 10138 . 10139) (symbol 10128 . 10138) (punctuation 10127 . 10128) (symbol 10107 . 10127) (punctuation 10105 . 10106) (TYPENAME 10096 . 10104) (punctuation 10090 . 10091) (symbol 10080 . 10090) (TYPENAME 10071 . 10079) (punctuation 10070 . 10071) (TEMPLATE 10062 . 10070) (punctuation 7092 . 7093) (punctuation 6820 . 6821) (EXPLICIT 6549 . 6557) (punctuation 6546 . 6547) (punctuation 6545 . 6546) (symbol 6539 . 6545) (punctuation 6538 . 6539) (symbol 6533 . 6538) (punctuation 6531 . 6532) (symbol 6521 . 6530) (TYPENAME 6512 . 6520) (punctuation 6510 . 6511) (symbol 6504 . 6510) (TYPENAME 6495 . 6503) (punctuation 6494 . 6495) (TEMPLATE 6486 . 6494) (punctuation 6442 . 6443) (EXPLICIT 6411 . 6419) (EXPLICIT 6342 . 6350) (punctuation 6313 . 6314) (symbol 6309 . 6313) (punctuation 6308 . 6309) (punctuation 6307 . 6308) (punctuation 6306 . 6307) (symbol 6301 . 6306) (punctuation 6300 . 6301) (punctuation 6299 . 6300) (punctuation 6298 . 6299) (symbol 6294 . 6298) (punctuation 6293 . 6294) (symbol 6269 . 6293) (punctuation 6268 . 6269) (symbol 6259 . 6268) (TYPENAME 6242 . 6250) (punctuation 6240 . 6241) (symbol 6230 . 6239) (TYPENAME 6221 . 6229) (punctuation 6219 . 6220) (symbol 6210 . 6219) (punctuation 6208 . 6209) (symbol 6203 . 6207) (TYPENAME 6194 . 6202) (punctuation 6193 . 6194) (TEMPLATE 6185 . 6193) (punctuation 6240 . 6241) (symbol 6230 . 6239) (TYPENAME 6221 . 6229) (punctuation 6219 . 6220) (symbol 6210 . 6219) (punctuation 6208 . 6209) (symbol 6203 . 6207) (TYPENAME 6194 . 6202) (punctuation 6193 . 6194) (TEMPLATE 6185 . 6193))
+      :lexical-table 
+        '(("_STL_QUEUE_H" . ((number "1" 2387 . 2388)))
+          )
+)
+    (semanticdb-table "semanticdb-table-1567e395e7b0"
+      :file "stl_algobase.h"
+      :fsize 76230
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e399bc14"
+      :file "allocator.h"
+      :fsize 8984
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e39cb8a0"
+      :file "stl_construct.h"
+      :fsize 8521
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e3a296cc"
+      :file "stl_uninitialized.h"
+      :fsize 34013
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e3b2676c"
+      :file "stl_tempbuf.h"
+      :fsize 8655
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e3b2668c"
+      :file "stl_raw_storage_iter.h"
+      :fsize 3830
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e49e856c"
+      :file "atomic_base.h"
+      :fsize 58480
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e50fdb0c"
+      :file "std_thread.h"
+      :fsize 8460
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e50fdb2c"
+      :file "this_thread_sleep.h"
+      :fsize 3306
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e3b27404"
+      :file "stl_deque.h"
+      :fsize 76977
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e3b05204"
+      :file "range_access.h"
+      :fsize 10671
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e3b22280"
+      :file "deque.tcc"
+      :fsize 42284
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e3b24628"
+      :file "stl_vector.h"
+      :fsize 65919
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e3b35504"
+      :file "stl_bvector.h"
+      :fsize 35574
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e3b3520c"
+      :file "vector.tcc"
+      :fsize 30870
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e3b55398"
+      :file "move.h"
+      :fsize 6812
+      :lastmodtime '(24733 12662 0 0))
+    (semanticdb-table "semanticdb-table-1567e4fae5ac"
+      :file "predefined_ops.h"
+      :fsize 10177
+      :lastmodtime '(24733 12662 0 0)))
+  :file "!usr!include!c++!11.1.0!bits!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

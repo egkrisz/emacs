@@ -32,9 +32,6 @@
    "C-x t M-t" #'treemacs-find-tag))
 
 (ek-pkg 'treemacs-projectile)
-
-(ek-pkg 'lsp-treemacs
-  (lsp-treemacs-sync-mode 1))
   
 (ek-pkg 'lsp-mode
   (add-hook 'c++-mode-hook    'lsp)
@@ -72,11 +69,17 @@
   (define-key lsp-ui-mode-map [remap xref-find-references]  #'lsp-ui-peek-find-references))
 
 (ek-pkg 'lsp-ivy)
+
+(ek-pkg 'lsp-treemacs
+  (lsp-treemacs-sync-mode 1))
+
+(ek-pkg 'cmake-mode)
+(ek-pkg 'glsl-mode)
   
-;(use-package ccls
-;  :disabled
-;  :hook ((c-mode c++-mode objc-mode cuda-mode) .
-;         (lambda () (require 'ccls) (lsp))))
+(ek-pkg 'ccls
+  (add-hook 'c++-mode-hook '(lambda () (require 'ccls) (lsp)))
+  (add-hook 'c-mode-hook '(lambda () (require 'ccls) (lsp)))
+)
 
 (ek-pkg 'company-c-headers
   (add-to-list 'company-backends 'company-c-headers)
@@ -94,7 +97,7 @@
 
 (ek-pkg 'modern-cpp-font-lock
   (add-hook 'c++-mode 'modern-c++-font-lock-mode))
-  
+
 (ek-pkg 'ppindent)
 
 (ek-pkg 'projectile
@@ -116,9 +119,15 @@
   (setq-default c-basic-offset 4)
   (c-set-offset 'case-label '+)
   (general-define-key
-   "C-<tab>" #'ff-find-other-file
-   "C-, s"   #'lsp-treemacs-symbols
-   "C-, e"   #'lsp-treemacs-error-list))
+   "C-<tab>" #'ff-find-other-file)
+  (general-define-key
+   :prefix "C-,"
+   "s"   #'lsp-treemacs-symbols
+   "e"   #'lsp-treemacs-error-list
+   "n"   #'flymake-goto-next-error
+   "p"   #'flymake-goto-prev-error
+   "r d" #'ek/define-cpp-function-in-other-file))
+
 
 (provide 'ek-prog)
 
