@@ -84,6 +84,11 @@
   (interactive)
   (dired "~/.emacs.d/lisp/"))
 
+(defun ek/open-init-el ()
+  "Opens the init.el main configuration file."
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
 (defun ek/kill-thing-at-point (thing)
   "Kill the `thing-at-point' for the specified kind of THING."
   (let ((bounds (bounds-of-thing-at-point thing)))

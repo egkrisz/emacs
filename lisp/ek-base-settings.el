@@ -22,7 +22,6 @@ Disable startup messages and set desired splash screen look."
   (setq read-process-output-max (* 1024 1024))
   (message "Basic settings initialized"))
 
-(add-hook 'after-init-hook 'eg-base--setup-ui)
 
 ;;;###autoload
 (defun eg-base--setup-file-handling ()
@@ -33,8 +32,6 @@ Disable backups and autosaves, deduce symlinks by default."
   ;; Set symlink deducing behaviour.
   (setq find-file-visit-truename t
         vc-follow-symlinks t))
-
-(add-hook 'emacs-startup-hook 'eg-base--setup-file-handling)
 
 ;;;###autoload
 (defun eg-base--set-utf8-coding-system ()
@@ -48,8 +45,6 @@ Disable backups and autosaves, deduce symlinks by default."
                                  'utf-8))
   (prefer-coding-system 'utf-8))
 
-(add-hook 'emacs-startup-hook 'eg-base--set-utf8-coding-system)
-
 ;;;###autoload
 (defun eg-base--enable-window-divider-mode ()
   "Use build in window-divider-mode to draw vertical window borders differently."
@@ -58,15 +53,11 @@ Disable backups and autosaves, deduce symlinks by default."
   (setq window-divider-default-places 'right-only)
   (add-hook 'after-init-hook #'window-divider-mode))
 
-(add-hook 'emacs-startup-hook 'eg-base--enable-window-divider-mode)
-
 ;;;###autoload
 (defun eg-base--start-emacs-maximized ()
   "Start emacs maximized."
   (custom-set-variables
    '(initial-frame-alist (quote ((fullscreen . maximized))))))
-
-(add-hook 'emacs-startup-hook 'eg-base--start-emacs-maximized)
 
 ;;;###autoload
 (defun eg-base--set-text-editing-preferences ()
@@ -90,8 +81,6 @@ Disable backups and autosaves, deduce symlinks by default."
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (add-hook 'text-mode-hook 'display-line-numbers-mode))
 
-(add-hook 'emacs-startup-hook 'eg-base--set-text-editing-preferences)
-
 ;;;###autoload
 (defun eg-base--setup-mouse-behaviour ()
   "Setup ideal mouse behaviour."
@@ -109,8 +98,6 @@ Disable backups and autosaves, deduce symlinks by default."
   (line-number-mode t)
   (column-number-mode t)
   (mouse-wheel-mode 1))
-
-(add-hook 'emacs-startup-hook 'eg-base--setup-mouse-behaviour)
 
 ;;;###autoload
 (defun eg-base--set-font ()
@@ -134,8 +121,6 @@ Disable backups and autosaves, deduce symlinks by default."
 
   (if (find-font (font-spec :name "Liberation Serif"))
       (set-face-font 'variable-pitch "Liberation Serif-13")))
-
-(add-hook 'emacs-startup-hook 'eg-base--set-font)
 
 ;;;###autoload
 (defun eg-base--setup-window-behaviour ()
@@ -166,8 +151,6 @@ Disable backups and autosaves, deduce symlinks by default."
   
   (global-set-key (kbd "<f4>") #'window-toggle-side-windows))
 
-(add-hook 'emacs-startup-hook 'eg-base--setup-window-behaviour)
-
-(provide 'ek-base)
+(provide 'ek-base-settings)
 
 ;;; ek-base.el ends here
