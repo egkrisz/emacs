@@ -3,10 +3,17 @@
 ;;; Commentary:
 
 ;; This file sets up my personal Emacs configuration.
+;;
+;; It is structured in an org-mode like manner using code folding
+;; enabled by outline-mode in a combination with outshine-mode.
+;; A first level heading is declared with ";;;" followed by a space and the name of the heading.
+;; Every extra delimiter will increase heading levels accordingly.
+;; <Tab> can be used to toggle between hiding and showing a given heading block.
+;; S-<Tab> hides or shows all heading levels.
 
 ;;; Code:
 
-;;; Bootstrap straight.el
+;;;; Bootstrap straight.el
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -21,8 +28,9 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; Macro for loading builting packages with related configuration.
+;;;; Package management
 
+;; Macro for loading builting packages with related configuration.
 (defmacro ek-req (package &rest body)
   "Set up builtin PACKAGE with rest BODY.
 PACKAGE is a quoted symbol, while BODY consists of balanced
@@ -34,7 +42,6 @@ expressions."
      ,@body))
 
 ;; Macro for loading packages from Melpa via straight.el with related configuration.
-
 (defmacro ek-pkg (package &rest body)
   "Set up PACKAGE from an Elisp archive with rest BODY.
 PACKAGE is a quoted symbol, while BODY consists of balanced
@@ -54,7 +61,7 @@ expressions."
 ;; Auxiliary lisp files related to this config are stored in ~/.emacs.d/lisp which is added to the load-path.
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
-;;; Load the auxiliary configuration files:
+;;;; Load the auxiliary configuration files
 
 ;; This package contains the basic UI, input, display and window behaviour configurations.
 (require 'ek-base-settings)
@@ -121,7 +128,8 @@ expressions."
  "d"          #'dired
  )
 
-;;; Loading third party packages:
+;;;; Load third party packages
+;;;;; Navigation related packages
 
 ;; Which-key shows dynamic keybinding hints.
 (ek-pkg 'which-key
@@ -167,24 +175,6 @@ expressions."
 
 (ek-pkg 'region-bindings-mode
   (region-bindings-mode-enable))
-
-(ek-pkg 'multiple-cursors
-  (general-define-key
-   "C-S-c C-S-c"   #'mc/edit-lines
-   "C-S-c C-S-p"   #'mc/mark-previous-like-this-word
-   "C-S-c C-S-n"   #'mc/mark-next-like-this-word
-   "C-<"           #'mc/mark-previous-like-this
-   "C->"           #'mc/mark-next-like-this
-   "C-S-c C-S-a"   #'mc/mark-all-like-this
-   "C-M-<mouse-1>" #'mc/add-cursor-on-click
-   "C-S-SPC"       #'rectangle-mark-mode)
-  (general-define-key
-   :keymaps 'region-bindings-mode-map
-   "a"             #'mc/mark-all-like-this
-   "p"             #'mc/mark-previous-like-this
-   "n"             #'mc/mark-next-like-this
-   "e"             #'mc/edit-lines
-   "m"             #'mc/mark-more-like-this-extended))
 	 
 (ek-pkg 'ivy
   (setq ivy-use-virtual-buffers t)
@@ -219,7 +209,57 @@ expressions."
 (ek-pkg 'ivy-xref
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
-;;; Appearance related packages:
+;; Outshine-mode improves on outline-mode and enables an org-mode like folding behaviour in other major modes.
+;; It might be included in emacs-28 by default!!!
+(ek-pkg 'outshine
+  (add-hook 'emacs-lisp-mode-hook 'outshine-mode)
+  )
+
+;;;;; Editing related packages
+
+;; Improved editing.
+(ek-pkg 'crux
+  (general-define-key
+   "C-o" #'crux-smart-open-line-above
+   "C-j" #'cruk-smart-open-line)
+  (general-define-key
+   :prefix "C-c"
+   "i" #'crux-cleanup-buffer-or-region
+   "d" #'crux-duplicate-current-line-or-region
+   "r" #'crux-rename-file-and-buffer))
+
+(ek-pkg 'electric
+  (setq electric-pair-pairs '(
+                           (?\{ . ?\})
+                           (?\( . ?\))
+                           (?\[ . ?\])
+                           (?\" . ?\")))
+  (setq electric-pair-skip-self 'electric-pair-default-skip-self)
+  (setq electric-quote-context-sensitive t)
+  (setq electric-quote-paragraph t)
+  (setq electric-quote-string nil)
+  (electric-indent-mode 1)
+  (electric-pair-mode t))
+
+(ek-pkg 'multiple-cursors
+  (general-define-key
+   "C-S-c C-S-c"   #'mc/edit-lines
+   "C-S-c C-S-p"   #'mc/mark-previous-like-this-word
+   "C-S-c C-S-n"   #'mc/mark-next-like-this-word
+   "C-<"           #'mc/mark-previous-like-this
+   "C->"           #'mc/mark-next-like-this
+   "C-S-c C-S-a"   #'mc/mark-all-like-this
+   "C-M-<mouse-1>" #'mc/add-cursor-on-click
+   "C-S-SPC"       #'rectangle-mark-mode)
+  (general-define-key
+   :keymaps 'region-bindings-mode-map
+   "a"             #'mc/mark-all-like-this
+   "p"             #'mc/mark-previous-like-this
+   "n"             #'mc/mark-next-like-this
+   "e"             #'mc/edit-lines
+   "m"             #'mc/mark-more-like-this-extended))
+
+;;;;; Appearance related packages
 
 ;; Zoomer icons.
 (ek-pkg 'all-the-icons)
@@ -285,31 +325,7 @@ expressions."
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode)))
   (setq org-bullets-bullet-list '("◉" "○" "✸" "▷")))
 
-;; Improved editing.
-(ek-pkg 'crux
-  (general-define-key
-   "C-o" #'crux-smart-open-line-above
-   "C-j" #'cruk-smart-open-line)
-  (general-define-key
-   :prefix "C-c"
-   "i" #'crux-cleanup-buffer-or-region
-   "d" #'crux-duplicate-current-line-or-region
-   "r" #'crux-rename-file-and-buffer))
-
-(ek-pkg 'electric
-  (setq electric-pair-pairs '(
-                           (?\{ . ?\})
-                           (?\( . ?\))
-                           (?\[ . ?\])
-                           (?\" . ?\")))
-  (setq electric-pair-skip-self 'electric-pair-default-skip-self)
-  (setq electric-quote-context-sensitive t)
-  (setq electric-quote-paragraph t)
-  (setq electric-quote-string nil)
-  (electric-indent-mode 1)
-  (electric-pair-mode t))
-
-;;; Programming related packages:
+;;;;; Programming related packages
 
 (ek-pkg 'company
   (setq company-idle-delay 0.1)
