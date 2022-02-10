@@ -12,7 +12,6 @@
 ;; S-<Tab> hides or shows all heading levels.
 
 ;;; Code:
-
 ;;;; Bootstrap straight.el
 
 (defvar bootstrap-version)
@@ -58,10 +57,10 @@ expressions."
   (general-auto-unbind-keys)
   (general-override-mode t))
 
+;;;; Load the auxiliary configuration files
+
 ;; Auxiliary lisp files related to this config are stored in ~/.emacs.d/lisp which is added to the load-path.
 (add-to-list 'load-path "~/.emacs.d/lisp")
-
-;;;; Load the auxiliary configuration files
 
 ;; This package contains the basic UI, input, display and window behaviour configurations.
 (require 'ek-base-settings)
@@ -123,9 +122,11 @@ expressions."
  "c"          #'ek/open-init-el
  "w"          #'ek/toggle-whitespace
  "l"          #'ek/toggle-line-numbers
- "e"          #'eval-buffer
+ "C-e"        #'eval-buffer
+ "e"          #'eshell
  "m"          #'magit
  "d"          #'dired
+ "f"          #'counsel-fzf
  )
 
 ;;;; Load third party packages
@@ -158,11 +159,7 @@ expressions."
   (whole-line-or-region-global-mode))
 
 (ek-pkg 'beginend
-  (beginend-global-mode 1)
-  (general-define-key
-   :prefix "M-c"
-   "b" #'beginning-of-buffer
-   "e" #'end-of-buffer))
+  (beginend-global-mode 1))
 
 (ek-pkg 'goto-last-change
   (general-define-key
@@ -200,7 +197,9 @@ expressions."
    "<f1> l"   #'counsel-find-library
    "<f2> i"   #'counsel-info-lookup-symbol
    "<f2> u"   #'counsel-unicode-char
-   "<f2> j"   #'counsel-set-variable))
+   "<f2> j"   #'counsel-set-variable
+   "M-c s"    #'counsel-ag
+   "M-c g"    #'counsel-git-grep))
 
 (ek-pkg 'swiper
   (general-define-key
@@ -221,7 +220,7 @@ expressions."
 (ek-pkg 'crux
   (general-define-key
    "C-o" #'crux-smart-open-line-above
-   "C-j" #'cruk-smart-open-line)
+   "C-j" #'crux-smart-open-line)
   (general-define-key
    :prefix "C-c"
    "i" #'crux-cleanup-buffer-or-region
@@ -390,6 +389,7 @@ expressions."
 
 (ek-pkg 'cmake-mode)
 (ek-pkg 'glsl-mode)
+(ek-pkg 'jenkinsfile-mode)
 
 ;; (ek-pkg 'ccls
 ;;   (add-hook 'c++-mode-hook '(lambda () (require 'ccls) (lsp)))

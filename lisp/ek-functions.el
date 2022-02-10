@@ -159,8 +159,6 @@
 (general-define-key
   "C-j"         #'ek/newline-below
   "C-o"         #'ek/newline-above    
-  "M-n"         #'ek/forward-ten
-  "M-p"         #'ek/backward-ten        
   "C-S-j"       #'ek/yank-next-line
   "C-S-o"       #'ek/yank-prev-line
   "C-S-w"       #'ek/kill-word-at-point
