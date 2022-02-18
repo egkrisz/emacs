@@ -156,26 +156,10 @@
     (insert "\n\n" skeleton)
     ))
 
-(general-define-key
-  "C-j"         #'ek/newline-below
-  "C-o"         #'ek/newline-above    
-  "C-S-j"       #'ek/yank-next-line
-  "C-S-o"       #'ek/yank-prev-line
-  "C-S-w"       #'ek/kill-word-at-point
-  "C-M-w"       #'ek/copy-current-line
-  "C-/"         #'ek/comment-or-uncomment-line-or-region
-  "C-z"         #'undo
-  ;; buffer and window navigation
-  "<mouse-9>"   #'next-buffer
-  "<mouse-8>"   #'previous-buffer
-  "C-S-<up>"    #'ek/move-line-up
-  "C-S-<down>"  #'ek/move-line-down)
-
-  (general-define-key
-   :prefix "M-c"
-   "c"          #'ek/open-config-in-dired
-   "w"          #'ek/toggle-whitespace
-   "l"          #'ek/toggle-line-numbers)
+(defun ek/set-coding-style (style)
+  (interactive "sChoose C coding style: ")
+  (setq c-default-style style)
+  (message "Using C coding style: %s" c-default-style))
 
 (provide 'ek-functions)
 

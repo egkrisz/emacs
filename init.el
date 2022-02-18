@@ -117,17 +117,19 @@ expressions."
 
 ;; The 'M-c' prefix is "reserved" for personal keybindings.
 (general-define-key
- :prefix "M-c"
- "C"          #'ek/open-config-in-dired
- "c"          #'ek/open-init-el
- "w"          #'ek/toggle-whitespace
- "l"          #'ek/toggle-line-numbers
- "C-e"        #'eval-buffer
- "e"          #'eshell
- "m"          #'magit
- "d"          #'dired
- "f"          #'counsel-fzf
- )
+  :prefix "M-c"
+  "C"          #'ek/open-config-in-dired
+  "c"          #'ek/open-init-el
+  "w"          #'ek/toggle-whitespace
+  "l"          #'ek/toggle-line-numbers
+  "C-s"        #'ek/set-coding-style
+  ;;
+  "C-e"        #'eval-buffer
+  "e"          #'eshell
+  "m"          #'magit
+  "d"          #'dired
+  "f"          #'counsel-fzf
+  )
 
 ;;;; Load third party packages
 ;;;;; Navigation related packages
@@ -390,6 +392,7 @@ expressions."
 (ek-pkg 'cmake-mode)
 (ek-pkg 'glsl-mode)
 (ek-pkg 'jenkinsfile-mode)
+(ek-pkg 'adoc-mode)
 
 ;; (ek-pkg 'ccls
 ;;   (add-hook 'c++-mode-hook '(lambda () (require 'ccls) (lsp)))
