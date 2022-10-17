@@ -122,6 +122,7 @@ expressions."
   "c"          #'ek/open-init-el
   "w"          #'ek/toggle-whitespace
   "l"          #'ek/toggle-line-numbers
+  "M-w"        #'ek/copy-file-path
   "C-s"        #'ek/set-coding-style
   ;;
   "C-e"        #'eval-buffer
@@ -275,11 +276,13 @@ expressions."
   (defvar   ek/current-theme ek/dark-theme)
 
   (defun ek/set-theme (theme)
+    "Helper fn to set a certain theme interactively."
     (interactive)
     (progn (load-theme theme t))
     (setq ek/current-theme theme))
 
   (defun ek/sync-theme ()
+    "Set light or dark theme based on the current time of day."
     (interactive)
     (setq hour (string-to-number
                 (substring (current-time-string) 11 13)))
@@ -290,6 +293,7 @@ expressions."
   (ek/sync-theme)
 
   (defun ek/toggle-theme ()
+    "Toggles between light and dark themes."
     (interactive)
     (cond ((eq ek/current-theme ek/dark-theme)  (ek/set-theme ek/light-theme))
           ((eq ek/current-theme ek/light-theme) (ek/set-theme ek/dark-theme))))
@@ -448,3 +452,4 @@ expressions."
 
 ;;;;;
 
+(put 'narrow-to-region 'disabled nil)

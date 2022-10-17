@@ -114,13 +114,13 @@ Disable backups and autosaves, deduce symlinks by default."
   (if (string-equal ek/font "Default")
       (message "No installed fonts found. Using default font.")
     (progn
-      (setq ek/font (concat ek/font "-11"))
+      (setq ek/font (concat ek/font "-10"))
       (message "Using font: `%s'..." ek/font)
       (set-face-font 'default ek/font)
       (set-face-font 'fixed-pitch ek/font)))
 
   (if (find-font (font-spec :name "Liberation Serif"))
-      (set-face-font 'variable-pitch "Liberation Serif-13")))
+      (set-face-font 'variable-pitch "Liberation Serif-12")))
 
 ;;;###autoload
 (defun eg-base--setup-window-behaviour ()

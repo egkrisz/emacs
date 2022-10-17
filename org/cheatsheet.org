@@ -60,6 +60,9 @@ C-M-n           next-block
 C-M-p           prev-block
 C-j             newline and indent
 M-g M-g         goto line
+M-C-a           goto beggining of function
+M-C-e           goto end of function
+C-u C-SPACE     goto previous position
 
 * Mark
 
