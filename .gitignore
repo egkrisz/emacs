@@ -8,3 +8,4 @@
 /.mc-lists.el
 /.cache/
 session.*
+/undo/*

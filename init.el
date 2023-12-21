@@ -74,7 +74,7 @@ expressions."
 ;; eg-base--start-emacs-maximized         -- starts emacs maximized
 ;; eg-base--set-text-editing-preferences  -- basic editor settings
 ;; eg-base--setup-mouse-behaviour         -- sets desired mouse behaviour
-;; eg-base--set-font                      -- sets up the default font based on availablility 
+;; eg-base--set-font                      -- sets up the default font based on availablility
 ;; eg-base--setup-window-behaviour        -- sets up side-window behaviour
 
 ;; The commands are added to the after-init-hook and emacs-startup-hook.
@@ -91,12 +91,15 @@ expressions."
 ;; This package contains personal helper functions for text and workflow management.
 (require 'ek-functions)
 
+;; This package includes project navigation and search utils
+(require 'zo-proj)
+
 ;; The functions loaded from the included file are assigned to custom keybindings.
 (general-define-key
   "C-j"         #'ek/newline-below
-  "C-o"         #'ek/newline-above    
+  "C-o"         #'ek/newline-above
   "M-n"         #'ek/forward-ten
-  "M-p"         #'ek/backward-ten        
+  "M-p"         #'ek/backward-ten
   "C-S-j"       #'ek/yank-next-line
   "C-S-o"       #'ek/yank-prev-line
   "C-S-w"       #'ek/kill-word-at-point
@@ -150,7 +153,8 @@ expressions."
   (general-define-key
    :keymaps 'undo-tree-map
    "C-z"    #'undo-tree-undo
-   "C-S-z"  #'undo-tree-redo))
+   "C-S-z"  #'undo-tree-redo)
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
 ;; Automatically expands selection.
 (ek-pkg 'expand-region
@@ -166,7 +170,7 @@ expressions."
 
 (ek-pkg 'goto-last-change
   (general-define-key
-   "C-_" #'goto-last-change))
+   "C-l" #'goto-last-change))
 
 (ek-pkg 'ace-window
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
@@ -175,7 +179,7 @@ expressions."
 
 (ek-pkg 'region-bindings-mode
   (region-bindings-mode-enable))
-	 
+
 (ek-pkg 'ivy
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
@@ -201,12 +205,14 @@ expressions."
    "<f2> i"   #'counsel-info-lookup-symbol
    "<f2> u"   #'counsel-unicode-char
    "<f2> j"   #'counsel-set-variable
-   "M-c s"    #'counsel-ag
-   "M-c g"    #'counsel-git-grep))
+   ;; "M-c s"    #'counsel-ag
+   "M-c s"    #'zo/proj-ag-with-region-text
+  "M-c g"    #'counsel-git-grep))
 
 (ek-pkg 'swiper
   (general-define-key
-   "C-S-s" #'swiper-isearch))
+   "C-S-s" #'swiper-isearch-thing-at-point
+   "C-S-a" #'swiper-all-thing-at-point))
 
 (ek-pkg 'ivy-xref
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
@@ -263,14 +269,14 @@ expressions."
 
 ;;;;; Appearance related packages
 
-;; Zoomer icons.
+;; Zoomer icons. Need to run all-the-icons-install-fonts after fresh install
 (ek-pkg 'all-the-icons)
 
 ;; Setup light and dark theme based on the current time of day.
 (ek-pkg 'doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  
+
   (defconst ek/dark-theme 'doom-material)
   (defconst ek/light-theme 'doom-tomorrow-day)
   (defvar   ek/current-theme ek/dark-theme)
@@ -405,7 +411,7 @@ expressions."
 
 (ek-pkg 'company-c-headers
   (add-to-list 'company-backends 'company-c-headers)
-  
+
   (defun maybe-add-newline-at-buf-start ()
     (if (and (char-equal (char-after (point-min)) ?\n)
              (char-equal (char-after (1+ (point-min))) ?\n))
@@ -451,5 +457,3 @@ expressions."
    "r d" #'ek/define-cpp-function-in-other-file))
 
 ;;;;;
-
-(put 'narrow-to-region 'disabled nil)
