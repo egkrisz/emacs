@@ -87,6 +87,7 @@ expressions."
 (add-hook 'emacs-startup-hook 'eg-base--setup-mouse-behaviour)
 (add-hook 'emacs-startup-hook 'eg-base--set-font)
 (add-hook 'emacs-startup-hook 'eg-base--setup-window-behaviour)
+(add-hook 'emacs-startup-hook 'eg-base--set-exec-path-from-shell-PATH)
 
 ;; This package contains personal helper functions for text and workflow management.
 (require 'ek-functions)
@@ -207,10 +208,11 @@ expressions."
    "<f2> j"   #'counsel-set-variable
    ;; "M-c s"    #'counsel-ag
    "M-c s"    #'zo/proj-ag-with-region-text
-  "M-c g"    #'counsel-git-grep))
+   "M-c g"    #'counsel-git-grep))
 
 (ek-pkg 'swiper
   (general-define-key
+   "C-s"   #'swiper-isearch
    "C-S-s" #'swiper-isearch-thing-at-point
    "C-S-a" #'swiper-all-thing-at-point))
 
@@ -364,6 +366,7 @@ expressions."
   (add-hook 'c-mode-hook      'lsp)
   (add-hook 'python-mode-hook 'lsp)
   (add-hook 'lsp-mode-hook    'lsp-enable-which-key-integration)
+  ;; (add-hook 'go-mode-hook 'lsp-deferred)
   (defun project-root (project) (car (project-roots project)))
   (setq lsp-keymap-prefix "C-,"                ;; keymap prefix
         lsp-enable-on-type-formatting nil      ;; smth
@@ -439,6 +442,21 @@ expressions."
 
 (ek-pkg 'magit)
 
+(ek-pkg 'go-mode
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+  (add-hook 'go-mode-hook #'lsp-deferred)
+  (autoload 'go-mode "go-mode" nil t)
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+  (setq lsp-go-analyses '((shadow . t)
+                          (simplifycompositelit . :json-false))))
+
+(ek-pkg 'yaml-mode)
+
+(ek-pkg 'robot-mode)
+
 (ek-req 'prog-mode
   (add-hook 'c-mode-hook   '(lambda () (c-toggle-comment-style 1)))
   (add-hook 'c-mode-hook   '(lambda () (require 'ppindent)))
@@ -456,4 +474,10 @@ expressions."
    "p"   #'flymake-goto-prev-error
    "r d" #'ek/define-cpp-function-in-other-file))
 
+;; This is only needed in hyper-V
+;; TODO: make it not the def behaviour
+(setq x-select-enable-clipboard nil)
+(global-set-key (kbd "C-c y") 'clipboard-yank)
+(global-set-key (kbd "C-c w") 'clipboard-kill-ring-save)
+(global-set-key (kbd "C-c DEL") 'delete-trailing-whitespace)
 ;;;;;
