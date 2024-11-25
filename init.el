@@ -474,10 +474,4 @@ expressions."
    "p"   #'flymake-goto-prev-error
    "r d" #'ek/define-cpp-function-in-other-file))
 
-;; This is only needed in hyper-V
-;; TODO: make it not the def behaviour
-(setq x-select-enable-clipboard nil)
-(global-set-key (kbd "C-c y") 'clipboard-yank)
-(global-set-key (kbd "C-c w") 'clipboard-kill-ring-save)
-(global-set-key (kbd "C-c DEL") 'delete-trailing-whitespace)
 ;;;;;
