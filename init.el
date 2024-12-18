@@ -29,7 +29,7 @@
 
 ;;;; Package management
 
-;; Macro for loading builting packages with related configuration.
+;; Macro for loading builtin packages with related configuration.
 (defmacro ek-req (package &rest body)
   "Set up builtin PACKAGE with rest BODY.
 PACKAGE is a quoted symbol, while BODY consists of balanced
@@ -236,6 +236,7 @@ expressions."
    :prefix "C-c"
    "i" #'crux-cleanup-buffer-or-region
    "d" #'crux-duplicate-current-line-or-region
+   "D" #'crux-delete-file-and-buffer
    "r" #'crux-rename-file-and-buffer))
 
 (ek-pkg 'electric
@@ -345,6 +346,7 @@ expressions."
   (setq company-minimum-prefix-length 1)
   (setq company-selection-wrap-around t)
   (setq company-clang-executable 'clang++)
+  ;; (setq company-frontends '(company-preview-frontend))
   (setq lsp-prefer-capf t)
   (add-hook 'after-init-hook 'global-company-mode))
 
@@ -368,6 +370,7 @@ expressions."
   (add-hook 'lsp-mode-hook    'lsp-enable-which-key-integration)
   ;; (add-hook 'go-mode-hook 'lsp-deferred)
   (defun project-root (project) (car (project-roots project)))
+  (setq lsp-pylsp-plugins-flake8-ignore ["E231", "D100", "D101", "D102"])
   (setq lsp-keymap-prefix "C-,"                ;; keymap prefix
         lsp-enable-on-type-formatting nil      ;; smth
         lsp-completion-provider :capf          ;; uses capf automatically
@@ -406,6 +409,7 @@ expressions."
 (ek-pkg 'glsl-mode)
 (ek-pkg 'jenkinsfile-mode)
 (ek-pkg 'adoc-mode)
+(ek-pkg 'ztree)
 
 ;; (ek-pkg 'ccls
 ;;   (add-hook 'c++-mode-hook '(lambda () (require 'ccls) (lsp)))
@@ -474,4 +478,5 @@ expressions."
    "p"   #'flymake-goto-prev-error
    "r d" #'ek/define-cpp-function-in-other-file))
 
+(global-set-key (kbd "C-c DEL") 'delete-trailing-whitespace)
 ;;;;;
